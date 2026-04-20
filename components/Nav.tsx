@@ -1,12 +1,13 @@
+import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
   return (
     <nav className="nav">
-      <div className="nav-logo">
+      <Link href="/" className="nav-logo" aria-label="Sombra — home">
         <span className="nav-logo-mark" aria-hidden="true"></span>
         <span>Sombra</span>
-      </div>
+      </Link>
       <div className="nav-links">
         <a href="#product">Product</a>
         <a href="#privacy">Privacy</a>
