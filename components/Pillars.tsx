@@ -2,11 +2,51 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+const PILLAR_BEAT_MS = 2000;
+
+function usePillarBeat(periodMs: number = PILLAR_BEAT_MS) {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    setTick(Math.floor(performance.now() / periodMs));
+    const schedule = () => {
+      const now = performance.now();
+      const untilNextBeat = periodMs - (now % periodMs);
+      timeoutId = setTimeout(() => {
+        setTick(Math.floor(performance.now() / periodMs));
+        schedule();
+      }, untilNextBeat);
+    };
+    schedule();
+    return () => clearTimeout(timeoutId);
+  }, [periodMs]);
+  return tick;
+}
+
 function shieldHash(i: number, j: number) {
   return ((i * 73856093) ^ (j * 19349663)) >>> 0;
 }
 
 function PillarVisualShield() {
+  const tick = usePillarBeat();
+  const [flashing, setFlashing] = useState(false);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (reduced) return;
+    setFlashing(true);
+    const id = setTimeout(() => setFlashing(false), 240);
+    return () => clearTimeout(id);
+  }, [tick, reduced]);
+
   return (
     <svg viewBox="0 0 120 120" width="100%" height="160" style={{ maxWidth: 140 }}>
       <defs>
@@ -25,16 +65,7 @@ function PillarVisualShield() {
           const op = 1 - d * 0.7;
           const h = shieldHash(i, j);
           const flickers = h % 100 < 35;
-          const delay = ((h >>> 3) % 7000) / 1000;
-          const duration = 5 + ((h >>> 9) % 4000) / 1000;
-          const style: React.CSSProperties = flickers
-            ? ({
-                opacity: op,
-                animationDelay: `${delay}s`,
-                animationDuration: `${duration}s`,
-                ["--dot-op" as string]: op,
-              } as React.CSSProperties)
-            : { opacity: op };
+          const displayOpacity = flickers && flashing ? 0 : op;
           return (
             <circle
               key={`${i}-${j}`}
@@ -42,8 +73,10 @@ function PillarVisualShield() {
               cy={12 + j * 11}
               r={size}
               fill="var(--fg)"
-              className={flickers ? "shield-flicker" : undefined}
-              style={style}
+              opacity={displayOpacity}
+              style={{
+                transition: "opacity 180ms cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
             />
           );
         })
@@ -95,7 +128,7 @@ function FlipChar({ char }: { char: string }) {
 }
 
 function PillarVisualSwap() {
-  const [tick, setTick] = useState(0);
+  const tick = usePillarBeat();
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -106,14 +139,9 @@ function PillarVisualSwap() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  useEffect(() => {
-    if (reduced) return;
-    const id = setInterval(() => setTick((t) => t + 1), 1600);
-    return () => clearInterval(id);
-  }, [reduced]);
-
-  const amount = COST_AMOUNTS[tick % COST_AMOUNTS.length];
-  const time = COST_TIMES[tick % COST_TIMES.length];
+  const effectiveTick = reduced ? 0 : tick;
+  const amount = COST_AMOUNTS[effectiveTick % COST_AMOUNTS.length];
+  const time = COST_TIMES[effectiveTick % COST_TIMES.length];
 
   return (
     <div
@@ -154,7 +182,9 @@ const LATTICE_HOP_POINTS: Array<[number, number]> = Array.from(
 );
 
 function PillarVisualLattice() {
+  const tick = usePillarBeat();
   const idxRef = useRef(5);
+  const lastTickRef = useRef<number | null>(null);
   const [idx, setIdx] = useState(5);
   const [prevIdx, setPrevIdx] = useState<number | null>(null);
   const [hopCount, setHopCount] = useState(0);
@@ -171,30 +201,27 @@ function PillarVisualLattice() {
 
   useEffect(() => {
     if (reduced) return;
-    let fadeOut: ReturnType<typeof setTimeout>;
-    let hold: ReturnType<typeof setTimeout>;
-    const tick = () => {
-      setVisible(false);
-      fadeOut = setTimeout(() => {
-        const prev = idxRef.current;
-        let next = prev;
-        while (next === prev) {
-          next = Math.floor(Math.random() * LATTICE_HOP_POINTS.length);
-        }
-        idxRef.current = next;
-        setPrevIdx(prev);
-        setIdx(next);
-        setHopCount((h) => h + 1);
-        setVisible(true);
-        hold = setTimeout(tick, 1800);
-      }, 260);
-    };
-    hold = setTimeout(tick, 1800);
-    return () => {
-      clearTimeout(fadeOut);
-      clearTimeout(hold);
-    };
-  }, [reduced]);
+    if (lastTickRef.current === tick) return;
+    if (lastTickRef.current === null) {
+      lastTickRef.current = tick;
+      return;
+    }
+    lastTickRef.current = tick;
+    setVisible(false);
+    const fadeOut = setTimeout(() => {
+      const prev = idxRef.current;
+      let next = prev;
+      while (next === prev) {
+        next = Math.floor(Math.random() * LATTICE_HOP_POINTS.length);
+      }
+      idxRef.current = next;
+      setPrevIdx(prev);
+      setIdx(next);
+      setHopCount((h) => h + 1);
+      setVisible(true);
+    }, 260);
+    return () => clearTimeout(fadeOut);
+  }, [tick, reduced]);
 
   const [x, y] = LATTICE_HOP_POINTS[idx];
   const echo = prevIdx !== null ? LATTICE_HOP_POINTS[prevIdx] : null;
@@ -282,7 +309,7 @@ export function Pillars() {
       <div className="section-inner">
         <div className="section-kicker">What Sombra does</div>
         <h2 className="section-title">
-          A private wallet, <i>three</i> things right.
+          Private. Fast. <i>Future-proof.</i>
         </h2>
         <div className="pillars-grid">
           {data.map((p, i) => (

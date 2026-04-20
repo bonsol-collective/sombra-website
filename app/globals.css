@@ -297,18 +297,8 @@ html[data-theme="grid"] .hero-corona { display: none; }
   .flip-char-in { animation: none; }
   .flip-char-out { display: none; }
 }
-@keyframes shield-flicker {
-  0%, 46%, 54%, 100% { opacity: var(--dot-op, 1); }
-  48%, 52% { opacity: 0; }
-}
-.shield-flicker {
-  animation-name: shield-flicker;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
 @media (prefers-reduced-motion: reduce) {
   .lattice-echo { animation: none; opacity: 0; }
-  .shield-flicker { animation: none; }
 }
 .hero-meta {
   max-width: 360px;
