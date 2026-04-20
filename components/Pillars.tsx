@@ -63,23 +63,23 @@ function PillarVisualSwap() {
       />
       <text
         x="30"
-        y={44 + a * 20}
+        y={40 + a * 20}
         textAnchor="middle"
+        dominantBaseline="central"
         fontFamily="var(--mono)"
         fontSize="9"
         fill="var(--fg)"
-        dy="4"
       >
         SOL
       </text>
       <text
         x="130"
-        y={84 - a * 20}
+        y={80 - a * 20}
         textAnchor="middle"
+        dominantBaseline="central"
         fontFamily="var(--mono)"
         fontSize="9"
         fill="var(--fg)"
-        dy="4"
       >
         USDC
       </text>
