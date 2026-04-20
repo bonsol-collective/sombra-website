@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+function shieldHash(i: number, j: number) {
+  return ((i * 73856093) ^ (j * 19349663)) >>> 0;
+}
+
 function PillarVisualShield() {
   return (
     <svg viewBox="0 0 120 120" width="100%" height="160" style={{ maxWidth: 140 }}>
@@ -18,6 +22,19 @@ function PillarVisualShield() {
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d > 1) return null;
           const size = 1.2 + (1 - d) * 1.4;
+          const op = 1 - d * 0.7;
+          const h = shieldHash(i, j);
+          const flickers = h % 100 < 35;
+          const delay = ((h >>> 3) % 7000) / 1000;
+          const duration = 5 + ((h >>> 9) % 4000) / 1000;
+          const style: React.CSSProperties = flickers
+            ? ({
+                opacity: op,
+                animationDelay: `${delay}s`,
+                animationDuration: `${duration}s`,
+                ["--dot-op" as string]: op,
+              } as React.CSSProperties)
+            : { opacity: op };
           return (
             <circle
               key={`${i}-${j}`}
@@ -25,7 +42,8 @@ function PillarVisualShield() {
               cy={12 + j * 11}
               r={size}
               fill="var(--fg)"
-              opacity={1 - d * 0.7}
+              className={flickers ? "shield-flicker" : undefined}
+              style={style}
             />
           );
         })
@@ -35,25 +53,55 @@ function PillarVisualShield() {
   );
 }
 
-const SWAP_SOL_CX = 30;
-const SWAP_SOL_CY = 50;
-const SWAP_USDC_CX = 130;
-const SWAP_USDC_CY = 70;
-const SWAP_R = 18;
-const SWAP_P0X = SWAP_SOL_CX + SWAP_R;
-const SWAP_P0Y = SWAP_SOL_CY;
-const SWAP_P1X = 80;
-const SWAP_P1Y = 60;
-const SWAP_P2X = SWAP_USDC_CX - SWAP_R;
-const SWAP_P2Y = SWAP_USDC_CY;
+const GRAPH_NODES: ReadonlyArray<{ x: number; y: number }> = [
+  { x: 22, y: 50 },   // 0: SOL source
+  { x: 50, y: 22 },   // 1
+  { x: 50, y: 78 },   // 2
+  { x: 80, y: 12 },   // 3
+  { x: 80, y: 50 },   // 4
+  { x: 80, y: 88 },   // 5
+  { x: 110, y: 26 },  // 6
+  { x: 110, y: 74 },  // 7
+  { x: 134, y: 50 },  // 8: USDC dest
+];
 
-function swapBezier(u: number): [number, number] {
-  const iu = 1 - u;
-  return [
-    iu * iu * SWAP_P0X + 2 * iu * u * SWAP_P1X + u * u * SWAP_P2X,
-    iu * iu * SWAP_P0Y + 2 * iu * u * SWAP_P1Y + u * u * SWAP_P2Y,
-  ];
-}
+const GRAPH_EDGES: ReadonlyArray<readonly [number, number]> = [
+  [0, 1], [0, 2], [0, 4],
+  [1, 3], [1, 4], [2, 4], [2, 5],
+  [3, 6], [4, 6], [4, 7], [5, 7],
+  [6, 8], [7, 8], [4, 8],
+];
+
+const GRAPH_SOURCE = 0;
+const GRAPH_DEST = 8;
+
+const GRAPH_DEPTHS: ReadonlyArray<number> = (() => {
+  const d = new Array<number>(GRAPH_NODES.length).fill(Infinity);
+  const adj: number[][] = GRAPH_NODES.map(() => []);
+  for (const [u, v] of GRAPH_EDGES) {
+    adj[u].push(v);
+    adj[v].push(u);
+  }
+  d[GRAPH_SOURCE] = 0;
+  const queue: number[] = [GRAPH_SOURCE];
+  while (queue.length) {
+    const n = queue.shift()!;
+    for (const m of adj[n]) {
+      if (d[m] > d[n] + 1) {
+        d[m] = d[n] + 1;
+        queue.push(m);
+      }
+    }
+  }
+  return d;
+})();
+
+const GRAPH_MAX_DEPTH = Math.max(...GRAPH_DEPTHS);
+
+// Edges oriented outward from source that carry a propagating packet (one level → next level).
+const GRAPH_PROP_EDGES: ReadonlyArray<readonly [number, number]> = GRAPH_EDGES
+  .map(([u, v]) => (GRAPH_DEPTHS[u] < GRAPH_DEPTHS[v] ? ([u, v] as const) : ([v, u] as const)))
+  .filter(([u, v]) => GRAPH_DEPTHS[v] - GRAPH_DEPTHS[u] === 1);
 
 function PillarVisualSwap() {
   const [t, setT] = useState(0);
@@ -79,101 +127,153 @@ function PillarVisualSwap() {
     return () => cancelAnimationFrame(raf);
   }, [reduced]);
 
-  const CYCLE = 0.95;
-  const ZIP = 0.55;
-  const local = reduced ? 0 : t % CYCLE;
-  const raw = Math.min(1, local / ZIP);
-  const eased =
-    raw < 0.5 ? 2 * raw * raw : 1 - Math.pow(-2 * raw + 2, 2) / 2;
-  const [px, py] = swapBezier(eased);
-  const zipping = local < ZIP;
+  const STEP = 0.18;
+  const PULSE_DUR = 0.42;
+  const PROP_DONE = GRAPH_MAX_DEPTH * STEP;
+  const HOLD = 0.55;
+  const FADE = 0.32;
+  const CYCLE = PROP_DONE + HOLD + FADE;
 
-  const trail = [0.06, 0.12, 0.18].map((d) => {
-    const u = Math.max(0, eased - d);
-    const [x, y] = swapBezier(u);
-    return { x, y, u };
-  });
+  const local = reduced ? PROP_DONE : t % CYCLE;
+  const fadeAmt =
+    local > PROP_DONE + HOLD
+      ? Math.min(1, (local - PROP_DONE - HOLD) / FADE)
+      : 0;
+  const alpha = 1 - fadeAmt;
 
-  const pulsePhase = zipping ? 0 : Math.min(1, (local - ZIP) / (CYCLE - ZIP));
-  const pulseActive = !zipping && !reduced;
+  const easeInOut = (x: number) =>
+    x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+
+  const destActivation = GRAPH_DEPTHS[GRAPH_DEST] * STEP;
+  const destAge = local - destActivation;
+  const destRingActive = !reduced && destAge >= 0 && destAge < PULSE_DUR + HOLD;
+  const destRingPhase = destRingActive
+    ? Math.min(1, destAge / (PULSE_DUR + HOLD))
+    : 0;
 
   return (
     <svg viewBox="0 0 160 120" width="100%" height="160" style={{ maxWidth: 180 }}>
-      <path
-        d={`M ${SWAP_P0X} ${SWAP_P0Y} Q ${SWAP_P1X} ${SWAP_P1Y}, ${SWAP_P2X} ${SWAP_P2Y}`}
-        stroke="var(--line-2)"
-        strokeWidth="1"
-        strokeDasharray="2 3"
-        fill="none"
-      />
+      <g style={{ opacity: alpha }}>
+        {GRAPH_EDGES.map(([u, v], i) => (
+          <line
+            key={`e-${i}`}
+            x1={GRAPH_NODES[u].x}
+            y1={GRAPH_NODES[u].y}
+            x2={GRAPH_NODES[v].x}
+            y2={GRAPH_NODES[v].y}
+            stroke="var(--line-2)"
+            strokeWidth="0.6"
+          />
+        ))}
 
-      <g stroke="var(--fg)" strokeWidth="1" fill="none">
-        <circle cx={SWAP_SOL_CX} cy={SWAP_SOL_CY} r={SWAP_R} opacity="0.9" />
-        <circle cx={SWAP_USDC_CX} cy={SWAP_USDC_CY} r={SWAP_R} opacity="0.9" />
+        {!reduced &&
+          GRAPH_PROP_EDGES.map(([u, v], i) => {
+            const startTime = GRAPH_DEPTHS[u] * STEP;
+            if (local < startTime || local > startTime + STEP) return null;
+            const p = (local - startTime) / STEP;
+            const ep = easeInOut(p);
+            const x = GRAPH_NODES[u].x + (GRAPH_NODES[v].x - GRAPH_NODES[u].x) * ep;
+            const y = GRAPH_NODES[u].y + (GRAPH_NODES[v].y - GRAPH_NODES[u].y) * ep;
+            return (
+              <g key={`p-${i}`}>
+                <circle cx={x} cy={y} r="3" fill="var(--accent)" opacity="0.22" />
+                <circle cx={x} cy={y} r="1.4" fill="var(--accent)" />
+              </g>
+            );
+          })}
+
+        {GRAPH_NODES.map((n, i) => {
+          const act = GRAPH_DEPTHS[i] * STEP;
+          const age = local - act;
+          if (age < 0 || age > PULSE_DUR) return null;
+          const pp = age / PULSE_DUR;
+          const isEnd = i === GRAPH_SOURCE || i === GRAPH_DEST;
+          return (
+            <circle
+              key={`pulse-${i}`}
+              cx={n.x}
+              cy={n.y}
+              r={2 + pp * (isEnd ? 9 : 5)}
+              fill="none"
+              stroke="var(--accent)"
+              strokeWidth="0.8"
+              opacity={(1 - pp) * (isEnd ? 0.65 : 0.45)}
+            />
+          );
+        })}
+
+        {destRingActive && (
+          <circle
+            cx={GRAPH_NODES[GRAPH_DEST].x}
+            cy={GRAPH_NODES[GRAPH_DEST].y}
+            r={6 + destRingPhase * 10}
+            fill="none"
+            stroke="var(--accent)"
+            strokeWidth="0.8"
+            opacity={(1 - destRingPhase) * 0.4}
+          />
+        )}
+
+        {GRAPH_NODES.map((n, i) => {
+          const activated = local >= GRAPH_DEPTHS[i] * STEP;
+          const isSource = i === GRAPH_SOURCE;
+          const isDest = i === GRAPH_DEST;
+          if (isSource || isDest) {
+            return (
+              <g key={`n-${i}`}>
+                <circle
+                  cx={n.x}
+                  cy={n.y}
+                  r="5.5"
+                  fill="none"
+                  stroke={activated ? "var(--accent)" : "var(--fg-mute)"}
+                  strokeWidth="1"
+                  opacity={activated ? 0.85 : 0.6}
+                />
+                <circle
+                  cx={n.x}
+                  cy={n.y}
+                  r="2"
+                  fill={activated ? "var(--accent)" : "var(--fg-mute)"}
+                />
+              </g>
+            );
+          }
+          return (
+            <circle
+              key={`n-${i}`}
+              cx={n.x}
+              cy={n.y}
+              r="1.6"
+              fill={activated ? "var(--accent)" : "var(--fg-mute)"}
+              opacity={activated ? 1 : 0.55}
+            />
+          );
+        })}
+
+        <text
+          x={GRAPH_NODES[GRAPH_SOURCE].x}
+          y={68}
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontFamily="var(--mono)"
+          fontSize="8"
+          fill="var(--fg)"
+        >
+          SOL
+        </text>
+        <text
+          x={GRAPH_NODES[GRAPH_DEST].x}
+          y={68}
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontFamily="var(--mono)"
+          fontSize="8"
+          fill="var(--fg)"
+        >
+          USDC
+        </text>
       </g>
-
-      <text
-        x={SWAP_SOL_CX}
-        y={SWAP_SOL_CY}
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--mono)"
-        fontSize="9"
-        fill="var(--fg)"
-      >
-        SOL
-      </text>
-      <text
-        x={SWAP_USDC_CX}
-        y={SWAP_USDC_CY}
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--mono)"
-        fontSize="9"
-        fill="var(--fg)"
-      >
-        USDC
-      </text>
-
-      {pulseActive && (
-        <circle
-          cx={SWAP_USDC_CX}
-          cy={SWAP_USDC_CY}
-          r={SWAP_R + pulsePhase * 7}
-          fill="none"
-          stroke="var(--accent)"
-          strokeWidth="1"
-          opacity={(1 - pulsePhase) * 0.55}
-        />
-      )}
-
-      {!reduced && zipping && (
-        <>
-          {trail
-            .filter((d) => d.u > 0)
-            .map((d, i) => (
-              <circle
-                key={i}
-                cx={d.x}
-                cy={d.y}
-                r="1.4"
-                fill="var(--accent)"
-                opacity={0.5 - i * 0.15}
-              />
-            ))}
-          <circle cx={px} cy={py} r="3.5" fill="var(--accent)" opacity="0.3" />
-          <circle cx={px} cy={py} r="2" fill="var(--accent)" />
-        </>
-      )}
-
-      {reduced && (
-        <circle
-          cx={SWAP_USDC_CX - SWAP_R}
-          cy={SWAP_USDC_CY}
-          r="2"
-          fill="var(--accent)"
-        />
-      )}
     </svg>
   );
 }
