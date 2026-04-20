@@ -309,23 +309,33 @@ section { padding: 140px 36px; position: relative; }
 .privacy-toggle button.active { background: var(--fg); color: var(--bg); }
 .privacy-toggle button:nth-child(2) {
   color: color-mix(in oklab, var(--accent) 55%, var(--fg-dim));
-  box-shadow: 0 0 10px -4px color-mix(in oklab, var(--accent) 35%, transparent);
 }
-.privacy-toggle button:nth-child(2):hover {
+.privacy-toggle button:nth-child(2):not(.active) {
+  animation: shielded-beckon 2.6s ease-in-out infinite;
+}
+.privacy-toggle button:nth-child(2):not(.active):hover {
+  animation: none;
   color: var(--accent);
-  box-shadow: 0 0 14px -4px color-mix(in oklab, var(--accent) 55%, transparent);
+  box-shadow: 0 0 18px -4px color-mix(in oklab, var(--accent) 65%, transparent);
 }
 .privacy-toggle button:nth-child(2).active {
   background: color-mix(in oklab, var(--accent) 18%, transparent);
   color: var(--accent);
-  animation: shielded-glow 3.2s ease-in-out infinite;
+  animation: none;
+  box-shadow: none;
 }
-@keyframes shielded-glow {
-  0%, 100% { box-shadow: 0 0 14px -4px color-mix(in oklab, var(--accent) 45%, transparent); }
-  50%      { box-shadow: 0 0 22px -2px color-mix(in oklab, var(--accent) 70%, transparent); }
+@keyframes shielded-beckon {
+  0%, 100% {
+    box-shadow: 0 0 8px -4px color-mix(in oklab, var(--accent) 30%, transparent);
+    color: color-mix(in oklab, var(--accent) 50%, var(--fg-dim));
+  }
+  50% {
+    box-shadow: 0 0 18px -2px color-mix(in oklab, var(--accent) 60%, transparent);
+    color: color-mix(in oklab, var(--accent) 80%, var(--fg-dim));
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .privacy-toggle button:nth-child(2).active { animation: none; }
+  .privacy-toggle button:nth-child(2):not(.active) { animation: none; }
 }
 
 .ledger {
