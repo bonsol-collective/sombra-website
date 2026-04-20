@@ -3,7 +3,7 @@ export function Footer() {
     <footer>
       <div className="footer-brand">
         <div className="footer-attr">By Bonsol Labs</div>
-        <div>© 2026 Bonsol Labs · All shadows reserved</div>
+        <div>© 2026 Bonsol Labs · All rights reserved</div>
       </div>
       <div className="footer-links">
         <a href="#">Docs</a>
