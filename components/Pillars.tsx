@@ -95,8 +95,7 @@ function FlipChar({ char }: { char: string }) {
 }
 
 function PillarVisualSwap() {
-  const [feeTick, setFeeTick] = useState(0);
-  const [timeTick, setTimeTick] = useState(0);
+  const [tick, setTick] = useState(0);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -109,16 +108,12 @@ function PillarVisualSwap() {
 
   useEffect(() => {
     if (reduced) return;
-    const amountId = setInterval(() => setFeeTick((t) => t + 1), 1800);
-    const timeId = setInterval(() => setTimeTick((t) => t + 1), 1100);
-    return () => {
-      clearInterval(amountId);
-      clearInterval(timeId);
-    };
+    const id = setInterval(() => setTick((t) => t + 1), 1600);
+    return () => clearInterval(id);
   }, [reduced]);
 
-  const amount = COST_AMOUNTS[feeTick % COST_AMOUNTS.length];
-  const time = COST_TIMES[timeTick % COST_TIMES.length];
+  const amount = COST_AMOUNTS[tick % COST_AMOUNTS.length];
+  const time = COST_TIMES[tick % COST_TIMES.length];
 
   return (
     <div
