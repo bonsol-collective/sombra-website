@@ -53,13 +53,13 @@ function PillarVisualShield() {
   );
 }
 
-const COST_FEES = [
-  "0.000005 SOL",
-  "0.000008 SOL",
-  "0.000006 SOL",
-  "0.000012 SOL",
-  "0.000009 SOL",
-  "0.000014 SOL",
+const COST_AMOUNTS = [
+  "012.40 SOL",
+  "084.26 SOL",
+  "128.50 SOL",
+  "042.00 SOL",
+  "216.30 SOL",
+  "095.84 SOL",
 ];
 
 const COST_TIMES = ["412 ms", "389 ms", "428 ms", "398 ms", "451 ms", "407 ms"];
@@ -109,39 +109,41 @@ function PillarVisualSwap() {
 
   useEffect(() => {
     if (reduced) return;
-    const feeId = setInterval(() => setFeeTick((t) => t + 1), 1400);
+    const amountId = setInterval(() => setFeeTick((t) => t + 1), 1800);
     const timeId = setInterval(() => setTimeTick((t) => t + 1), 1100);
     return () => {
-      clearInterval(feeId);
+      clearInterval(amountId);
       clearInterval(timeId);
     };
   }, [reduced]);
 
-  const fee = COST_FEES[feeTick % COST_FEES.length];
+  const amount = COST_AMOUNTS[feeTick % COST_AMOUNTS.length];
   const time = COST_TIMES[timeTick % COST_TIMES.length];
 
   return (
     <div
       className="swap-visual"
       role="img"
-      aria-label={`Fee ${fee}, settle time ${time}`}
+      aria-label={`Transfer ${amount}, settles in ${time}`}
     >
       <div className="swap-counter">
-        <div className="swap-fee">
-          {[...fee].map((ch, i) => (
-            <FlipChar key={i} char={ch} />
-          ))}
+        <div className="swap-header">
+          <span>SOL</span>
+          <span className="swap-header-arrow" aria-hidden="true">→</span>
+          <span>USDC</span>
         </div>
-        <div className="swap-time">
-          {[...time].map((ch, i) => (
-            <FlipChar key={i} char={ch} />
-          ))}
+        <div className="swap-rows">
+          <div className="swap-amount">
+            {[...amount].map((ch, i) => (
+              <FlipChar key={i} char={ch} />
+            ))}
+          </div>
+          <div className="swap-time">
+            {[...time].map((ch, i) => (
+              <FlipChar key={i} char={ch} />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="swap-caption">
-        <span>SOL</span>
-        <span className="swap-caption-arrow" aria-hidden="true">→</span>
-        <span>USDC</span>
       </div>
     </div>
   );
