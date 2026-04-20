@@ -53,58 +53,20 @@ function PillarVisualShield() {
   );
 }
 
-const GRAPH_NODES: ReadonlyArray<{ x: number; y: number }> = [
-  { x: 22, y: 50 },   // 0: SOL source
-  { x: 50, y: 22 },   // 1
-  { x: 50, y: 78 },   // 2
-  { x: 80, y: 12 },   // 3
-  { x: 80, y: 50 },   // 4
-  { x: 80, y: 88 },   // 5
-  { x: 110, y: 26 },  // 6
-  { x: 110, y: 74 },  // 7
-  { x: 134, y: 50 },  // 8: USDC dest
+const COST_FEES = [
+  "0.000005 SOL",
+  "0.000008 SOL",
+  "0.000006 SOL",
+  "0.000011 SOL",
+  "0.000007 SOL",
+  "0.000009 SOL",
 ];
 
-const GRAPH_EDGES: ReadonlyArray<readonly [number, number]> = [
-  [0, 1], [0, 2], [0, 4],
-  [1, 3], [1, 4], [2, 4], [2, 5],
-  [3, 6], [4, 6], [4, 7], [5, 7],
-  [6, 8], [7, 8], [4, 8],
-];
-
-const GRAPH_SOURCE = 0;
-const GRAPH_DEST = 8;
-
-const GRAPH_DEPTHS: ReadonlyArray<number> = (() => {
-  const d = new Array<number>(GRAPH_NODES.length).fill(Infinity);
-  const adj: number[][] = GRAPH_NODES.map(() => []);
-  for (const [u, v] of GRAPH_EDGES) {
-    adj[u].push(v);
-    adj[v].push(u);
-  }
-  d[GRAPH_SOURCE] = 0;
-  const queue: number[] = [GRAPH_SOURCE];
-  while (queue.length) {
-    const n = queue.shift()!;
-    for (const m of adj[n]) {
-      if (d[m] > d[n] + 1) {
-        d[m] = d[n] + 1;
-        queue.push(m);
-      }
-    }
-  }
-  return d;
-})();
-
-const GRAPH_MAX_DEPTH = Math.max(...GRAPH_DEPTHS);
-
-// Edges oriented outward from source that carry a propagating packet (one level → next level).
-const GRAPH_PROP_EDGES: ReadonlyArray<readonly [number, number]> = GRAPH_EDGES
-  .map(([u, v]) => (GRAPH_DEPTHS[u] < GRAPH_DEPTHS[v] ? ([u, v] as const) : ([v, u] as const)))
-  .filter(([u, v]) => GRAPH_DEPTHS[v] - GRAPH_DEPTHS[u] === 1);
+const COST_TIMES = ["412 ms", "389 ms", "428 ms", "398 ms", "451 ms", "407 ms"];
 
 function PillarVisualSwap() {
-  const [t, setT] = useState(0);
+  const [feeTick, setFeeTick] = useState(0);
+  const [timeTick, setTimeTick] = useState(0);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -117,163 +79,87 @@ function PillarVisualSwap() {
 
   useEffect(() => {
     if (reduced) return;
-    let raf: number;
-    const start = performance.now();
-    const loop = (now: number) => {
-      setT((now - start) / 1000);
-      raf = requestAnimationFrame(loop);
+    const feeId = setInterval(() => setFeeTick((t) => t + 1), 1400);
+    const timeId = setInterval(() => setTimeTick((t) => t + 1), 1100);
+    return () => {
+      clearInterval(feeId);
+      clearInterval(timeId);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
   }, [reduced]);
 
-  const STEP = 0.18;
-  const PULSE_DUR = 0.42;
-  const PROP_DONE = GRAPH_MAX_DEPTH * STEP;
-  const HOLD = 0.55;
-  const FADE = 0.32;
-  const CYCLE = PROP_DONE + HOLD + FADE;
-
-  const local = reduced ? PROP_DONE : t % CYCLE;
-  const fadeAmt =
-    local > PROP_DONE + HOLD
-      ? Math.min(1, (local - PROP_DONE - HOLD) / FADE)
-      : 0;
-  const alpha = 1 - fadeAmt;
-
-  const easeInOut = (x: number) =>
-    x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
-
-  const destActivation = GRAPH_DEPTHS[GRAPH_DEST] * STEP;
-  const destAge = local - destActivation;
-  const destRingActive = !reduced && destAge >= 0 && destAge < PULSE_DUR + HOLD;
-  const destRingPhase = destRingActive
-    ? Math.min(1, destAge / (PULSE_DUR + HOLD))
-    : 0;
+  const fee = COST_FEES[feeTick % COST_FEES.length];
+  const time = COST_TIMES[timeTick % COST_TIMES.length];
 
   return (
     <svg viewBox="0 0 160 120" width="100%" height="160" style={{ maxWidth: 180 }}>
-      <g style={{ opacity: alpha }}>
-        {GRAPH_EDGES.map(([u, v], i) => (
-          <line
-            key={`e-${i}`}
-            x1={GRAPH_NODES[u].x}
-            y1={GRAPH_NODES[u].y}
-            x2={GRAPH_NODES[v].x}
-            y2={GRAPH_NODES[v].y}
-            stroke="var(--line-2)"
-            strokeWidth="0.6"
-          />
-        ))}
+      <text
+        key={`fee-${feeTick}`}
+        x="80"
+        y="36"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontFamily="var(--mono)"
+        fontSize="11"
+        fill="var(--fg)"
+        className={reduced ? undefined : "cost-tick"}
+      >
+        {fee}
+      </text>
+      <text
+        key={`time-${timeTick}`}
+        x="80"
+        y="54"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontFamily="var(--mono)"
+        fontSize="9"
+        fill="var(--fg-dim)"
+        className={reduced ? undefined : "cost-tick"}
+      >
+        {time}
+      </text>
 
-        {!reduced &&
-          GRAPH_PROP_EDGES.map(([u, v], i) => {
-            const startTime = GRAPH_DEPTHS[u] * STEP;
-            if (local < startTime || local > startTime + STEP) return null;
-            const p = (local - startTime) / STEP;
-            const ep = easeInOut(p);
-            const x = GRAPH_NODES[u].x + (GRAPH_NODES[v].x - GRAPH_NODES[u].x) * ep;
-            const y = GRAPH_NODES[u].y + (GRAPH_NODES[v].y - GRAPH_NODES[u].y) * ep;
-            return (
-              <g key={`p-${i}`}>
-                <circle cx={x} cy={y} r="3" fill="var(--accent)" opacity="0.22" />
-                <circle cx={x} cy={y} r="1.4" fill="var(--accent)" />
-              </g>
-            );
-          })}
+      <line
+        x1="36"
+        y1="80"
+        x2="124"
+        y2="80"
+        stroke="var(--line-2)"
+        strokeWidth="0.8"
+        strokeDasharray="1 3"
+      />
 
-        {GRAPH_NODES.map((n, i) => {
-          const act = GRAPH_DEPTHS[i] * STEP;
-          const age = local - act;
-          if (age < 0 || age > PULSE_DUR) return null;
-          const pp = age / PULSE_DUR;
-          const isEnd = i === GRAPH_SOURCE || i === GRAPH_DEST;
-          return (
-            <circle
-              key={`pulse-${i}`}
-              cx={n.x}
-              cy={n.y}
-              r={2 + pp * (isEnd ? 9 : 5)}
-              fill="none"
-              stroke="var(--accent)"
-              strokeWidth="0.8"
-              opacity={(1 - pp) * (isEnd ? 0.65 : 0.45)}
-            />
-          );
-        })}
-
-        {destRingActive && (
-          <circle
-            cx={GRAPH_NODES[GRAPH_DEST].x}
-            cy={GRAPH_NODES[GRAPH_DEST].y}
-            r={6 + destRingPhase * 10}
-            fill="none"
-            stroke="var(--accent)"
-            strokeWidth="0.8"
-            opacity={(1 - destRingPhase) * 0.4}
-          />
-        )}
-
-        {GRAPH_NODES.map((n, i) => {
-          const activated = local >= GRAPH_DEPTHS[i] * STEP;
-          const isSource = i === GRAPH_SOURCE;
-          const isDest = i === GRAPH_DEST;
-          if (isSource || isDest) {
-            return (
-              <g key={`n-${i}`}>
-                <circle
-                  cx={n.x}
-                  cy={n.y}
-                  r="5.5"
-                  fill="none"
-                  stroke={activated ? "var(--accent)" : "var(--fg-mute)"}
-                  strokeWidth="1"
-                  opacity={activated ? 0.85 : 0.6}
-                />
-                <circle
-                  cx={n.x}
-                  cy={n.y}
-                  r="2"
-                  fill={activated ? "var(--accent)" : "var(--fg-mute)"}
-                />
-              </g>
-            );
-          }
-          return (
-            <circle
-              key={`n-${i}`}
-              cx={n.x}
-              cy={n.y}
-              r="1.6"
-              fill={activated ? "var(--accent)" : "var(--fg-mute)"}
-              opacity={activated ? 1 : 0.55}
-            />
-          );
-        })}
-
-        <text
-          x={GRAPH_NODES[GRAPH_SOURCE].x}
-          y={68}
-          textAnchor="middle"
-          dominantBaseline="central"
-          fontFamily="var(--mono)"
-          fontSize="8"
-          fill="var(--fg)"
-        >
-          SOL
-        </text>
-        <text
-          x={GRAPH_NODES[GRAPH_DEST].x}
-          y={68}
-          textAnchor="middle"
-          dominantBaseline="central"
-          fontFamily="var(--mono)"
-          fontSize="8"
-          fill="var(--fg)"
-        >
-          USDC
-        </text>
+      <g>
+        <circle cx="28" cy="80" r="6" fill="none" stroke="var(--fg-dim)" strokeWidth="1" />
+        <circle cx="28" cy="80" r="2" fill="var(--fg)" />
       </g>
+      <g>
+        <circle cx="132" cy="80" r="6" fill="none" stroke="var(--fg-dim)" strokeWidth="1" />
+        <circle cx="132" cy="80" r="2" fill="var(--fg)" />
+      </g>
+
+      <text
+        x="28"
+        y="100"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontFamily="var(--mono)"
+        fontSize="8"
+        fill="var(--fg)"
+      >
+        SOL
+      </text>
+      <text
+        x="132"
+        y="100"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontFamily="var(--mono)"
+        fontSize="8"
+        fill="var(--fg)"
+      >
+        USDC
+      </text>
     </svg>
   );
 }
