@@ -7,16 +7,16 @@ export function Nav() {
       <Link href="/" className="nav-logo" aria-label="Sombra — home">
         <span className="nav-logo-mark" aria-hidden="true">
           <svg viewBox="0 0 32 32">
-            <mask id="nav-logo-mask">
-              <rect width="32" height="32" fill="black" />
-              <circle cx="16" cy="16" r="15" fill="white" />
-            </mask>
-            <circle cx="16" cy="16" r="15" fill="var(--fg)" />
-            <g mask="url(#nav-logo-mask)" fill="var(--bg)">
-              <path d="M 1 10.2 L 20 10.2 L 26 13 L 7 13 Z" />
-              <path d="M 6 19 L 25 19 L 31 21.8 L 12 21.8 Z" />
-            </g>
-            <circle cx="16" cy="16" r="2.6" fill="var(--accent)" />
+            <defs>
+              <radialGradient id="nav-corona" cx="50%" cy="50%" r="50%">
+                <stop offset="52%" stopColor="var(--accent)" stopOpacity="0" />
+                <stop offset="70%" stopColor="var(--accent)" stopOpacity="0.95" />
+                <stop offset="88%" stopColor="var(--accent)" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="16" cy="16" r="16" fill="url(#nav-corona)" />
+            <circle cx="16" cy="16" r="8.5" fill="var(--ink)" />
           </svg>
         </span>
         <span>Sombra</span>
