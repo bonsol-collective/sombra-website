@@ -6,6 +6,16 @@ import { useMouseParallax } from "@/hooks/useMouseParallax";
 
 function HeroEclipse({ scrollY, speed }: { scrollY: number; speed: number }) {
   const [t, setT] = useState(0);
+  const [isNarrow, setIsNarrow] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 900px)");
+    const sync = () => setIsNarrow(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   useEffect(() => {
     let raf: number;
     const start = performance.now();
@@ -18,11 +28,11 @@ function HeroEclipse({ scrollY, speed }: { scrollY: number; speed: number }) {
   }, []);
   const parallax = useMouseParallax(18);
 
-  const scrollNorm = Math.min(1, scrollY / 800);
-  const idleX = Math.sin(t * 0.3 * speed) * 18;
-  const idleY = Math.cos(t * 0.22 * speed) * 12;
-  const x = idleX + parallax.x - scrollNorm * 40;
-  const y = idleY + parallax.y * 0.5 + scrollNorm * 20;
+  const scrollNorm = isNarrow ? 0 : Math.min(1, scrollY / 800);
+  const idleX = isNarrow ? 0 : Math.sin(t * 0.3 * speed) * 18;
+  const idleY = isNarrow ? 0 : Math.cos(t * 0.22 * speed) * 12;
+  const x = idleX + (isNarrow ? 0 : parallax.x) - scrollNorm * 40;
+  const y = idleY + (isNarrow ? 0 : parallax.y * 0.5) + scrollNorm * 20;
   const scale = 1 + scrollNorm * 0.15;
 
   return (

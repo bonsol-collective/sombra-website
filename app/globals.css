@@ -566,8 +566,8 @@ footer .footer-links a:hover { color: var(--fg); }
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; }
   .hero-meta { max-width: 100%; }
-  .hero-canvas { align-items: flex-start; padding-top: 12vh; }
-  .hero-eclipse { width: min(60vw, 50vh); }
+  .hero-canvas { align-items: flex-start; padding-top: 8vh; }
+  .hero-eclipse { width: min(50vw, 40vh); }
   .pillars-grid { grid-template-columns: 1fr; }
   .pillar { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 0; }
   .privacy-grid, .quantum-grid { grid-template-columns: 1fr; gap: 48px; }
