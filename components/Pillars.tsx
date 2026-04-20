@@ -54,12 +54,12 @@ function PillarVisualShield() {
 }
 
 const COST_AMOUNTS = [
-  "012.40 SOL",
-  "084.26 SOL",
+  " 12.40 SOL",
+  " 84.26 SOL",
   "128.50 SOL",
-  "042.00 SOL",
+  " 42.00 SOL",
   "216.30 SOL",
-  "095.84 SOL",
+  " 95.84 SOL",
 ];
 
 const COST_TIMES = ["412 ms", "389 ms", "428 ms", "398 ms", "451 ms", "407 ms"];
