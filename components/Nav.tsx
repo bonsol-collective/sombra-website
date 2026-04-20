@@ -30,7 +30,8 @@ export function Nav() {
       <div className="nav-actions">
         <ThemeToggle />
         <a href="#waitlist" className="nav-cta">
-          Join waitlist →
+          <span className="nav-cta-full">Join waitlist →</span>
+          <span className="nav-cta-short">Join →</span>
         </a>
       </div>
     </nav>
