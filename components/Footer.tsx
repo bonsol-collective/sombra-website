@@ -1,7 +1,10 @@
 export function Footer() {
   return (
     <footer>
-      <div>© 2026 Sombra Labs · All shadows reserved</div>
+      <div className="footer-brand">
+        <div className="footer-attr">By Bonsol Labs</div>
+        <div>© 2026 Bonsol Labs · All shadows reserved</div>
+      </div>
       <div className="footer-links">
         <a href="#">Docs</a>
         <a href="#">Whitepaper</a>
