@@ -57,12 +57,42 @@ const COST_FEES = [
   "0.000005 SOL",
   "0.000008 SOL",
   "0.000006 SOL",
-  "0.000011 SOL",
-  "0.000007 SOL",
+  "0.000012 SOL",
   "0.000009 SOL",
+  "0.000014 SOL",
 ];
 
 const COST_TIMES = ["412 ms", "389 ms", "428 ms", "398 ms", "451 ms", "407 ms"];
+
+function FlipChar({ char }: { char: string }) {
+  const [current, setCurrent] = useState(char);
+  const [outgoing, setOutgoing] = useState<string | null>(null);
+  const prevRef = useRef(char);
+
+  useEffect(() => {
+    if (char === prevRef.current) return;
+    setOutgoing(prevRef.current);
+    setCurrent(char);
+    prevRef.current = char;
+    const id = setTimeout(() => setOutgoing(null), 440);
+    return () => clearTimeout(id);
+  }, [char]);
+
+  const render = (c: string) => (c === " " ? "\u00A0" : c);
+
+  return (
+    <span className="flip-char" aria-hidden="true">
+      <span key={current} className="flip-char-in">
+        {render(current)}
+      </span>
+      {outgoing !== null && (
+        <span key={outgoing} className="flip-char-out">
+          {render(outgoing)}
+        </span>
+      )}
+    </span>
+  );
+}
 
 function PillarVisualSwap() {
   const [feeTick, setFeeTick] = useState(0);
@@ -91,76 +121,29 @@ function PillarVisualSwap() {
   const time = COST_TIMES[timeTick % COST_TIMES.length];
 
   return (
-    <svg viewBox="0 0 160 120" width="100%" height="160" style={{ maxWidth: 180 }}>
-      <text
-        key={`fee-${feeTick}`}
-        x="80"
-        y="36"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--mono)"
-        fontSize="11"
-        fill="var(--fg)"
-        className={reduced ? undefined : "cost-tick"}
-      >
-        {fee}
-      </text>
-      <text
-        key={`time-${timeTick}`}
-        x="80"
-        y="54"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--mono)"
-        fontSize="9"
-        fill="var(--fg-dim)"
-        className={reduced ? undefined : "cost-tick"}
-      >
-        {time}
-      </text>
-
-      <line
-        x1="36"
-        y1="80"
-        x2="124"
-        y2="80"
-        stroke="var(--line-2)"
-        strokeWidth="0.8"
-        strokeDasharray="1 3"
-      />
-
-      <g>
-        <circle cx="28" cy="80" r="6" fill="none" stroke="var(--fg-dim)" strokeWidth="1" />
-        <circle cx="28" cy="80" r="2" fill="var(--fg)" />
-      </g>
-      <g>
-        <circle cx="132" cy="80" r="6" fill="none" stroke="var(--fg-dim)" strokeWidth="1" />
-        <circle cx="132" cy="80" r="2" fill="var(--fg)" />
-      </g>
-
-      <text
-        x="28"
-        y="100"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--mono)"
-        fontSize="8"
-        fill="var(--fg)"
-      >
-        SOL
-      </text>
-      <text
-        x="132"
-        y="100"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--mono)"
-        fontSize="8"
-        fill="var(--fg)"
-      >
-        USDC
-      </text>
-    </svg>
+    <div
+      className="swap-visual"
+      role="img"
+      aria-label={`Fee ${fee}, settle time ${time}`}
+    >
+      <div className="swap-counter">
+        <div className="swap-fee">
+          {[...fee].map((ch, i) => (
+            <FlipChar key={i} char={ch} />
+          ))}
+        </div>
+        <div className="swap-time">
+          {[...time].map((ch, i) => (
+            <FlipChar key={i} char={ch} />
+          ))}
+        </div>
+      </div>
+      <div className="swap-caption">
+        <span>SOL</span>
+        <span className="swap-caption-arrow" aria-hidden="true">→</span>
+        <span>USDC</span>
+      </div>
+    </div>
   );
 }
 
