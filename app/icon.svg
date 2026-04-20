@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <mask id="disc-mask">
+    <rect width="32" height="32" fill="black"/>
+    <circle cx="16" cy="16" r="15" fill="white"/>
+  </mask>
+  <circle cx="16" cy="16" r="15" fill="#f4ede3"/>
+  <g mask="url(#disc-mask)" fill="#0a0908">
+    <path d="M 1 10.2 L 20 10.2 L 26 13 L 7 13 Z"/>
+    <path d="M 6 19 L 25 19 L 31 21.8 L 12 21.8 Z"/>
+  </g>
+  <circle cx="16" cy="16" r="2.6" fill="#e8a056"/>
+</svg>
