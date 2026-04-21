@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ComparisonTable } from "./ComparisonTable";
+import { CryptoTerm } from "./CryptoTerm";
 
 function QuantumVisual() {
   const [t, setT] = useState(0);
@@ -39,7 +41,7 @@ function QuantumVisual() {
             if (d > 170) return null;
             const theta = Math.atan2(dy, dx);
             const diff = Math.abs(
-              ((theta - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI
+              ((theta - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI,
             );
             const near = 1 - Math.min(1, diff / 0.35);
             return (
@@ -52,7 +54,7 @@ function QuantumVisual() {
                 opacity={0.35 + near * 0.5}
               />
             );
-          })
+          }),
         )}
         <line
           x1={cx}
@@ -127,7 +129,7 @@ export function Quantum() {
               <i>Harvest now,</i> decrypt later.
             </h2>
             <p>
-              Quantum computers capable of breaking today’s elliptic-curve
+              Quantum computers capable of breaking today&rsquo;s elliptic-curve
               signatures are a when, not an if. Adversaries are already storing
               encrypted traffic — waiting. Sombra encrypts every shielded
               transfer with NIST-standardized lattice cryptography, so your
@@ -137,13 +139,21 @@ export function Quantum() {
               <div className="quantum-stat">
                 <div className="quantum-stat-label">Key exchange</div>
                 <div className="quantum-stat-value">
-                  ML-KEM<small>768</small>
+                  <CryptoTerm term="ML-KEM-768" variant="bare">
+                    <>
+                      ML-KEM<small>768</small>
+                    </>
+                  </CryptoTerm>
                 </div>
               </div>
               <div className="quantum-stat">
                 <div className="quantum-stat-label">Signatures</div>
                 <div className="quantum-stat-value">
-                  ML-DSA<small>65</small>
+                  <CryptoTerm term="ML-DSA-65" variant="bare">
+                    <>
+                      ML-DSA<small>65</small>
+                    </>
+                  </CryptoTerm>
                 </div>
               </div>
               <div className="quantum-stat">
@@ -161,6 +171,7 @@ export function Quantum() {
             </div>
           </div>
         </div>
+        <ComparisonTable />
       </div>
     </section>
   );

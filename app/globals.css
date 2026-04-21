@@ -1,3 +1,34 @@
+/**
+ * Tailwind v4 — theme + utilities only; preflight deliberately skipped.
+ * Sombra has its own reset (line ~76), and preflight's heading-weight
+ * reset (h1–h6 → inherit) was stripping the browser default bold on
+ * .pillar-title and other headings without explicit weight.
+ */
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+
+/**
+ * Map Sombra's vanilla-CSS tokens into Tailwind v4's theme so utilities
+ * like `text-accent`, `bg-bg-2`, `font-serif` resolve to our existing
+ * design tokens. Vanilla-CSS rules below continue to own layout and
+ * component styling — Tailwind is an additive escape hatch.
+ */
+@theme {
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-fg: var(--fg);
+  --color-fg-dim: var(--fg-dim);
+  --color-fg-mute: var(--fg-mute);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+}
+
 :root {
   --serif: var(--font-instrument-serif), 'Times New Roman', serif;
   --sans: var(--font-geist), system-ui, -apple-system, sans-serif;
@@ -337,6 +368,52 @@ section { padding: 140px 36px; position: relative; }
 }
 .section-title i { font-style: italic; color: var(--accent); }
 
+/* ============ PROOF BAND ============ */
+.proof-band {
+  padding: 20px 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.proof-band-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 20px;
+  row-gap: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.proof-band-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+.proof-band-label {
+  color: var(--fg-dim);
+}
+.proof-band-label--accent {
+  color: var(--accent);
+}
+.proof-band-sep {
+  color: var(--fg-mute);
+}
+@media (max-width: 700px) {
+  .proof-band {
+    padding: 16px 24px;
+  }
+  .proof-band-inner {
+    column-gap: 14px;
+    font-size: 11px;
+  }
+  .proof-band-item {
+    gap: 14px;
+  }
+}
+
 /* ============ PILLARS ============ */
 .pillars {
   border-top: 1px solid var(--line);
@@ -369,6 +446,91 @@ section { padding: 140px 36px; position: relative; }
   margin-bottom: 16px; letter-spacing: -0.01em;
 }
 .pillar-body { color: var(--fg-dim); font-size: 15px; max-width: 38ch; }
+
+/* ============ FLOW (How it works) ============ */
+.flow {
+  border-top: 1px solid var(--line);
+}
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 80px;
+  list-style: none;
+  padding: 0;
+}
+.flow-station {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.flow-station.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-station {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+.flow-marker {
+  width: 10px;
+  height: 10px;
+  display: block;
+  border: 1px solid var(--line-2);
+  background: var(--bg);
+}
+.flow-station--leading .flow-marker {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.flow-index {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.flow-station--leading .flow-index {
+  color: var(--accent);
+}
+.flow-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  color: var(--fg);
+  margin: 0;
+}
+.flow-primitive {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--fg-dim);
+  max-width: 38ch;
+}
+.flow-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-dim);
+  max-width: 42ch;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .flow-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
 
 /* ============ PRIVACY DEMO ============ */
 .privacy {
@@ -497,6 +659,75 @@ section { padding: 140px 36px; position: relative; }
   margin-top: 24px; color: var(--fg-dim); font-size: 17px; line-height: 1.6; max-width: 52ch;
 }
 
+/* ============ COMPARE (table) ============ */
+.compare-wrap {
+  margin-top: 64px;
+  width: 100%;
+}
+/*
+ * Only apply horizontal scroll below the breakpoint where the table's
+ * min-width (560px) no longer fits. Unconditional `overflow-x: auto`
+ * triggers a CSS spec quirk that promotes implicit overflow-y to auto,
+ * producing a phantom vertical scrollbar on desktop.
+ */
+@media (max-width: 680px) {
+  .compare-wrap { overflow-x: auto; }
+}
+.compare {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.compare thead th {
+  text-align: left;
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid var(--line-2);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.compare-h-property {
+  color: var(--fg-mute);
+}
+.compare-h-sombra {
+  color: var(--accent);
+  padding-left: 16px !important;
+}
+.compare-h-other {
+  color: var(--fg-mute);
+  padding-left: 16px !important;
+}
+.compare tbody tr:last-child td,
+.compare tbody tr:last-child th {
+  border-bottom: none;
+}
+.compare tbody th {
+  text-align: left;
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--fg);
+}
+.compare tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.compare-cell--pos {
+  color: var(--fg);
+}
+.compare-cell--neg {
+  color: var(--fg-mute);
+}
+.compare-cell--muted {
+  color: var(--fg-dim);
+}
+
 /* ============ WAITLIST ============ */
 .waitlist {
   padding: 200px 36px;
@@ -577,6 +808,59 @@ footer .footer-links a { transition: color 0.2s; }
 footer .footer-links a:hover { color: var(--fg); }
 
 .nav-cta-short { display: none; }
+
+/* ============ CRYPTO-TERM ============ */
+.crypto-term {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+  outline: none;
+}
+.crypto-term--inline {
+  text-decoration: underline dotted var(--fg-mute);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.crypto-term:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 3px;
+}
+.crypto-term__panel {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  z-index: 60;
+  min-width: 260px;
+  max-width: 320px;
+  padding: 12px 14px;
+  background: var(--bg-2);
+  color: var(--fg-dim);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.crypto-term__panel[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .crypto-term__panel {
+    transition: opacity 80ms linear;
+    transform: none;
+  }
+}
 
 /* ============ UTIL ============ */
 .fade-in {

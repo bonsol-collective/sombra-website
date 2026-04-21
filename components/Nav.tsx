@@ -23,6 +23,7 @@ export function Nav() {
       </Link>
       <div className="nav-links">
         <a href="#product">Product</a>
+        <a href="#flow">Flow</a>
         <a href="#privacy">Privacy</a>
         <a href="#quantum">Quantum</a>
         <a href="#waitlist">Waitlist</a>

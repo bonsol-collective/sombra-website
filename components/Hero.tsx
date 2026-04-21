@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useScrollY } from "@/hooks/useScrollY";
 import { useMouseParallax } from "@/hooks/useMouseParallax";
+import { CryptoTerm } from "./CryptoTerm";
 
 function HeroEclipse({ scrollY, speed }: { scrollY: number; speed: number }) {
   const [t, setT] = useState(0);
@@ -74,8 +75,12 @@ export function Hero({
           </h1>
         </div>
         <div className="hero-meta">
-          <strong>Sombra</strong> brings quantum-safe privacy to Solana. Private
-          trading and transfers, built for the quantum era.
+          <strong>Sombra</strong> brings{" "}
+          <CryptoTerm term="Kyber-768" variant="inline">
+            quantum-safe
+          </CryptoTerm>{" "}
+          privacy to Solana. Private trading and transfers, built for the
+          quantum era.
         </div>
       </div>
       <div className="hero-footer">

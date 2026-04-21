@@ -1,6 +1,8 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
+import { ProofBand } from "@/components/ProofBand";
 import { Pillars } from "@/components/Pillars";
+import { HowItWorks } from "@/components/HowItWorks";
 import { PrivacyDemo } from "@/components/PrivacyDemo";
 import { Quantum } from "@/components/Quantum";
 import { Waitlist } from "@/components/Waitlist";
@@ -11,7 +13,9 @@ export default function Page() {
     <>
       <Nav />
       <Hero />
+      <ProofBand />
       <Pillars />
+      <HowItWorks />
       <PrivacyDemo />
       <Quantum />
       <Waitlist />
