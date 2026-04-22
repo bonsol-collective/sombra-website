@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useScrollY } from "@/hooks/useScrollY";
 import { useMouseParallax } from "@/hooks/useMouseParallax";
+import { CryptoTerm } from "./CryptoTerm";
 
 function HeroEclipse({ scrollY, speed }: { scrollY: number; speed: number }) {
   const [t, setT] = useState(0);
@@ -72,10 +73,17 @@ export function Hero({
           <h1 className="hero-title">
             Trade in the <i>shadow.</i>
           </h1>
+          <h2 className="hero-deck">
+            Private trades. Post-quantum. Solana-native.
+          </h2>
         </div>
         <div className="hero-meta">
-          <strong>Sombra</strong> brings quantum-safe privacy to Solana. Private
-          trading and transfers, built for the quantum era.
+          <strong>Sombra</strong> brings{" "}
+          <CryptoTerm term="Kyber-768" variant="inline">
+            quantum-safe
+          </CryptoTerm>{" "}
+          privacy to Solana — private UTXO transfers and shielded trading,
+          built for the quantum era.
         </div>
       </div>
       <div className="hero-footer">
@@ -83,7 +91,7 @@ export function Hero({
           <span className="hero-footer-dot"></span> Mainnet beta · Q2 2026
         </div>
         <div></div>
-        <div>scroll to reveal ↓</div>
+        <div className="hero-footer-scroll">scroll to reveal ↓</div>
       </div>
     </header>
   );

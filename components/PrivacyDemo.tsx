@@ -73,14 +73,20 @@ function LedgerRow({
   });
   const amtScram = useScramble(
     shielded ? "•••••• " + row.amount.split(" ")[1] : row.amount,
-    { duration: 600, active }
+    { duration: 600, active },
   );
   return (
     <div className="ledger-row">
       <div className="ledger-time">{row.time}</div>
-      <div className={"ledger-addr" + (shielded ? " hidden" : "")}>{fromScram}</div>
-      <div className={"ledger-addr" + (shielded ? " hidden" : "")}>{toScram}</div>
-      <div className={"ledger-amount" + (shielded ? " hidden" : "")}>{amtScram}</div>
+      <div className={"ledger-addr" + (shielded ? " redacted" : "")}>
+        {fromScram}
+      </div>
+      <div className={"ledger-addr" + (shielded ? " redacted" : "")}>
+        {toScram}
+      </div>
+      <div className={"ledger-amount" + (shielded ? " redacted" : "")}>
+        {amtScram}
+      </div>
       <div className="ledger-status">{shielded ? "Shielded" : row.status}</div>
     </div>
   );
@@ -108,22 +114,46 @@ export function PrivacyDemo() {
               sees that something happened, but not what, not how much, and
               not between whom.
             </p>
-            <div className="privacy-toggle" role="tablist">
+            <div
+              className="privacy-toggle"
+              role="tablist"
+              aria-label="Ledger view mode"
+            >
               <button
+                type="button"
+                role="tab"
+                id="privacy-tab-public"
+                aria-selected={!shielded}
+                aria-controls="privacy-tabpanel"
+                tabIndex={!shielded ? 0 : -1}
                 className={!shielded ? "active" : ""}
                 onClick={() => setMode("public")}
               >
                 Public chain
               </button>
               <button
+                type="button"
+                role="tab"
+                id="privacy-tab-shielded"
+                aria-selected={shielded}
+                aria-controls="privacy-tabpanel"
+                tabIndex={shielded ? 0 : -1}
                 className={shielded ? "active" : ""}
                 onClick={() => setMode("shielded")}
               >
-                Sombra shielded
+                Shielded
               </button>
             </div>
           </div>
-          <div className="ledger" aria-label="Transaction ledger demo">
+          <div
+            className="ledger"
+            id="privacy-tabpanel"
+            role="tabpanel"
+            aria-labelledby={
+              shielded ? "privacy-tab-shielded" : "privacy-tab-public"
+            }
+            aria-label="Transaction ledger demo"
+          >
             <div className="ledger-head">
               <div>Time</div>
               <div>From</div>

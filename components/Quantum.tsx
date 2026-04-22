@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ComparisonTable } from "./ComparisonTable";
+import { CryptoTerm } from "./CryptoTerm";
 
 function QuantumVisual() {
   const [t, setT] = useState(0);
@@ -39,7 +41,7 @@ function QuantumVisual() {
             if (d > 170) return null;
             const theta = Math.atan2(dy, dx);
             const diff = Math.abs(
-              ((theta - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI
+              ((theta - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI,
             );
             const near = 1 - Math.min(1, diff / 0.35);
             return (
@@ -52,7 +54,7 @@ function QuantumVisual() {
                 opacity={0.35 + near * 0.5}
               />
             );
-          })
+          }),
         )}
         <line
           x1={cx}
@@ -127,40 +129,62 @@ export function Quantum() {
               <i>Harvest now,</i> decrypt later.
             </h2>
             <p>
-              Quantum computers capable of breaking today’s elliptic-curve
-              signatures are a when, not an if. Adversaries are already storing
-              encrypted traffic — waiting. Sombra encrypts every shielded
-              transfer with NIST-standardized lattice cryptography, so your
-              history stays private through the transition and beyond.
+              Adversaries are harvesting encrypted traffic today, waiting for
+              tomorrow’s quantum computers to run Shor’s algorithm and break
+              elliptic-curve keys. Sombra ships NIST-standardized lattice
+              cryptography right now
+              —{" "}
+              <CryptoTerm term="Kyber-768" variant="inline">
+                Kyber-768
+              </CryptoTerm>{" "}
+              for key exchange,{" "}
+              <CryptoTerm term="RISC0 STARK" variant="inline">
+                RISC0 STARKs
+              </CryptoTerm>{" "}
+              for ownership proofs. No elliptic curves to break, no signatures
+              to forge.
             </p>
             <div className="quantum-stats">
               <div className="quantum-stat">
                 <div className="quantum-stat-label">Key exchange</div>
                 <div className="quantum-stat-value">
-                  ML-KEM<small>768</small>
+                  <CryptoTerm term="ML-KEM-768" variant="bare">
+                    <>
+                      ML-KEM<small>768</small>
+                    </>
+                  </CryptoTerm>
                 </div>
               </div>
               <div className="quantum-stat">
-                <div className="quantum-stat-label">Signatures</div>
+                <div className="quantum-stat-label">Encryption</div>
                 <div className="quantum-stat-value">
-                  ML-DSA<small>65</small>
+                  <CryptoTerm term="ChaCha20-Poly1305" variant="bare">
+                    <>
+                      ChaCha20<small>Poly1305</small>
+                    </>
+                  </CryptoTerm>
                 </div>
               </div>
               <div className="quantum-stat">
-                <div className="quantum-stat-label">Settle time</div>
+                <div className="quantum-stat-label">Proof system</div>
                 <div className="quantum-stat-value">
-                  412<small>ms avg</small>
+                  <CryptoTerm term="RISC0 STARK" variant="bare">
+                    <>
+                      RISC0<small>STARK</small>
+                    </>
+                  </CryptoTerm>
                 </div>
               </div>
               <div className="quantum-stat">
-                <div className="quantum-stat-label">Proof size</div>
+                <div className="quantum-stat-label">GPU proof time</div>
                 <div className="quantum-stat-value">
-                  2.1<small>kb</small>
+                  ~2<small>s · RTX 3090</small>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <ComparisonTable />
       </div>
     </section>
   );

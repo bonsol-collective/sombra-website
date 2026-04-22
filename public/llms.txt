@@ -1,0 +1,37 @@
+# Sombra
+
+> Post-quantum private UTXO transfers on Solana. Signature-free ownership
+> proofs via Kyber-768 and RISC0 STARKs. Built by Bonsol Labs.
+
+Sombra is a privacy layer for Solana that ships quantum-safe cryptography from
+day one. Transactions are signature-free - ownership is proven via zero-knowledge
+proofs of knowledge, not digital signatures. Amount privacy is per-UTXO, distinct
+from the shielded-pool model used by Zcash.
+
+## Core docs
+- [Whitepaper](https://sombra.tech/whitepaper.pdf): Full protocol specification (PDF)
+- [Homepage](https://sombra.tech): Product overview, how it works, waitlist
+- [Full content index](https://sombra.tech/llms-full.txt): Plain-text version of site content for LLM ingestion
+
+## Key facts
+- Network: Solana
+- Launch: Mainnet beta, Q2 2026
+- Post-quantum KEM: Kyber-768 (NIST ML-KEM-768 standard)
+- AEAD encryption: ChaCha20-Poly1305
+- Proof system: RISC0 STARKs (zero-knowledge, quantum-resistant)
+- Transaction model: UTXO with per-UTXO amount privacy
+- Ownership model: Signature-free (ZK proof of knowledge of Kyber secret key)
+- GPU proof time: ~2 seconds on RTX 3090
+
+## Differentiators
+- Only post-quantum privacy protocol on Solana
+- Per-UTXO amount privacy, not a shielded pool
+- Signature-free ownership proofs
+- Solana-native - no bridges, no wrapped tokens
+
+## Parent organization
+- [Bonsol Labs](https://bonsol.org): Zero-knowledge infrastructure for Solana. Publishes Sombra and the Bonsol ZK coprocessor.
+
+## Contact
+- [Twitter/X](https://x.com/bonsol_labs)
+- [Telegram](https://t.me/+l2s8ejQ170U2ZDUx)
