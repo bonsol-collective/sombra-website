@@ -25,9 +25,36 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sombra.tech"),
   title: "Sombra — post-quantum privacy on Solana",
   description:
     "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
+  openGraph: {
+    title: "Sombra — post-quantum privacy on Solana",
+    description:
+      "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
+    url: "https://sombra.tech",
+    siteName: "Sombra",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Sombra — trade in the shadow",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sombra — post-quantum privacy on Solana",
+    description:
+      "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
+    images: ["/og.png"],
+    creator: "@bonsol_labs",
+    site: "@bonsol_labs",
+  },
 };
 
 export default function RootLayout({
