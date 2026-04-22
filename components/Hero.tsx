@@ -73,14 +73,17 @@ export function Hero({
           <h1 className="hero-title">
             Trade in the <i>shadow.</i>
           </h1>
+          <h2 className="hero-deck">
+            Private trades. Post-quantum. Solana-native.
+          </h2>
         </div>
         <div className="hero-meta">
           <strong>Sombra</strong> brings{" "}
           <CryptoTerm term="Kyber-768" variant="inline">
             quantum-safe
           </CryptoTerm>{" "}
-          privacy to Solana. Private trading and transfers, built for the
-          quantum era.
+          privacy to Solana - private UTXO transfers and shielded trading,
+          built for the quantum era.
         </div>
       </div>
       <div className="hero-footer">

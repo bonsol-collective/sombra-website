@@ -6,23 +6,23 @@ export function Footer() {
         <div>© 2026 Bonsol Labs · All rights reserved</div>
       </div>
       <div className="footer-links">
-        <a href="https://docs.sombra.tech" target="_blank" rel="noreferrer">
+        <a href="https://docs.sombra.tech" target="_blank" rel="noopener noreferrer">
           Docs
         </a>
-        <a href="/whitepaper.pdf" target="_blank" rel="noreferrer">
+        <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">
           Whitepaper
         </a>
         <a
           href="https://x.com/bonsol_labs"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           X / Twitter
         </a>
         <a
           href="https://t.me/+l2s8ejQ170U2ZDUx"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           Telegram
         </a>

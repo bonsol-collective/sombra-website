@@ -1,12 +1,12 @@
 "use client";
 
 /**
- * CryptoTerm — wraps a cryptographic term with a quiet tooltip that reveals
+ * CryptoTerm - wraps a cryptographic term with a quiet tooltip that reveals
  * a one-line plain-language definition. Respects hover-capable vs touch,
  * focus, keyboard (Enter toggles, Escape closes), and
  * `prefers-reduced-motion` (via the panel's CSS transition).
  *
- * Not a CSS `title` attribute — that's native tooltip chrome. This renders
+ * Not a CSS `title` attribute - that's native tooltip chrome. This renders
  * its own panel so it theme-adapts across Eclipse / Dusk / Grid.
  */
 
@@ -52,6 +52,14 @@ const GLOSSARY: Record<string, string> = {
     "Key-encapsulation mechanism. Exchanges a symmetric key under asymmetric cryptography.",
   AEAD:
     "Authenticated encryption with associated data. Encrypts and authenticates in one pass.",
+  SNARK:
+    "Succinct Non-interactive Argument of Knowledge. Smaller and faster than STARKs, but relies on elliptic-curve cryptography - broken by quantum attack.",
+  "Signature-free":
+    "Sombra uses zero-knowledge proofs instead of digital signatures. You prove you own the inputs without signing - the proof is the authorization.",
+  "No nullifiers":
+    "Sombra doesn't use a global nullifier set to mark spent notes. UTXOs chain per-vault via ZK proof of inclusion - no growing public accumulator to leak timing metadata.",
+  "attestation quorum":
+    "A minimum number of prover nodes must independently verify the ZK proof before a UTXO is finalized. Quorum distributes trust across validators, not a single prover.",
 };
 
 type Variant = "inline" | "bare";

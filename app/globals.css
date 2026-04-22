@@ -1,7 +1,7 @@
 /**
- * Tailwind v4 — theme + utilities only; preflight deliberately skipped.
+ * Tailwind v4 - theme + utilities only; preflight deliberately skipped.
  * Sombra has its own reset (line ~76), and preflight's heading-weight
- * reset (h1–h6 → inherit) was stripping the browser default bold on
+ * reset (h1-h6 → inherit) was stripping the browser default bold on
  * .pillar-title and other headings without explicit weight.
  */
 @import "tailwindcss/theme";
@@ -11,7 +11,7 @@
  * Map Sombra's vanilla-CSS tokens into Tailwind v4's theme so utilities
  * like `text-accent`, `bg-bg-2`, `font-serif` resolve to our existing
  * design tokens. Vanilla-CSS rules below continue to own layout and
- * component styling — Tailwind is an additive escape hatch.
+ * component styling - Tailwind is an additive escape hatch.
  */
 @theme {
   --font-sans: var(--font-geist);
@@ -35,7 +35,7 @@
   --mono: var(--font-jetbrains-mono), 'SF Mono', monospace;
 }
 
-/* ECLIPSE — dark, cinematic */
+/* ECLIPSE - dark, cinematic */
 html[data-theme="eclipse"] {
   --bg: #0a0908;
   --bg-2: #141210;
@@ -50,7 +50,7 @@ html[data-theme="eclipse"] {
   --card: rgba(244, 237, 227, 0.03);
 }
 
-/* DUSK — warm, soft */
+/* DUSK - warm, soft */
 html[data-theme="dusk"] {
   --bg: #f4ebe0;
   --bg-2: #eadcc9;
@@ -65,7 +65,7 @@ html[data-theme="dusk"] {
   --card: rgba(42, 29, 20, 0.03);
 }
 
-/* GRID — brutal, technical */
+/* GRID - brutal, technical */
 html[data-theme="grid"] {
   --bg: #f0ede4;
   --bg-2: #e6e2d4;
@@ -86,9 +86,12 @@ body {
   font-family: var(--sans);
   font-weight: 400;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   transition: background 0.4s ease, color 0.4s ease;
+}
+html[data-theme="eclipse"] body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
@@ -211,6 +214,20 @@ html[data-theme="grid"] .hero-corona { display: none; }
 }
 .hero-title i { font-style: italic; color: var(--accent); }
 .hero-title .scramble { display: inline-block; }
+.hero-deck {
+  font-family: var(--sans);
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--fg-dim);
+  margin-top: 28px;
+  max-width: 620px;
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
 .hero-tagline {
   font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--fg-dim); margin-bottom: 20px;
@@ -227,7 +244,7 @@ html[data-theme="grid"] .hero-corona { display: none; }
   100% { r: 16; opacity: 0;    stroke-width: 0.6; }
 }
 .lattice-echo { animation: lattice-echo 540ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-/* ============ SOLANA PILLAR — FLIP COUNTER ============ */
+/* ============ SOLANA PILLAR - FLIP COUNTER ============ */
 .swap-visual {
   display: flex;
   flex-direction: column;
@@ -427,11 +444,9 @@ section { padding: 140px 36px; position: relative; }
   padding: 40px 40px;
   border-right: 1px solid var(--line);
   position: relative;
-  transition: background 0.3s;
 }
 .pillar:first-child { padding-left: 0; }
 .pillar:last-child { padding-right: 0; border-right: none; }
-.pillar:hover { background: var(--card); }
 .pillar-num {
   font-family: var(--mono); font-size: 11px; color: var(--fg-mute);
   letter-spacing: 0.1em;
@@ -606,6 +621,20 @@ section { padding: 140px 36px; position: relative; }
   align-items: center;
   transition: background 0.3s;
 }
+/* Per-character morph animation for From / To / Amount cells only.
+   React key-per-shielded-state remounts each span on toggle; animation
+   replays with a staggered delay so chars wave in left-to-right. */
+.cell-char {
+  display: inline-block;
+  animation: cell-char-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cell-char-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cell-char { animation: none; }
+}
 .ledger-row:last-child { border-bottom: none; }
 .ledger-row:hover { background: var(--card); }
 .ledger-time { color: var(--fg-mute); font-size: 11px; }
@@ -614,9 +643,17 @@ section { padding: 140px 36px; position: relative; }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   padding-right: 16px;
 }
-.ledger-addr.hidden { color: var(--fg-mute); letter-spacing: 0.1em; }
+.ledger-addr.redacted {
+  color: var(--fg-dim);
+  letter-spacing: 0.1em;
+  overflow: visible;
+  text-overflow: unset;
+}
 .ledger-amount { color: var(--fg); text-align: right; font-variant-numeric: tabular-nums; }
-.ledger-amount.hidden { color: var(--fg-mute); letter-spacing: 0.15em; }
+.ledger-amount.redacted {
+  color: var(--fg-dim);
+  letter-spacing: 0.1em;
+}
 .ledger-status {
   font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
   text-align: right; color: var(--accent);
@@ -743,8 +780,14 @@ section { padding: 140px 36px; position: relative; }
   z-index: 0; pointer-events: none;
 }
 .waitlist-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.waitlist-kicker {
+  font-family: var(--serif); font-style: italic;
+  font-size: 20px; color: var(--fg-dim);
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+}
 .waitlist h2 {
-  font-family: var(--serif); font-size: clamp(48px, 7vw, 96px);
+  font-family: var(--serif); font-size: clamp(44px, 6.5vw, 88px);
   line-height: 1; letter-spacing: -0.02em; font-weight: 400;
 }
 .waitlist h2 i { font-style: italic; color: var(--accent); }
@@ -758,6 +801,9 @@ section { padding: 140px 36px; position: relative; }
   padding: 6px;
   background: var(--bg-2);
   transition: border-color 0.2s;
+  /* Clip children to the pill curve - the input's autofill box-shadow
+     fills its rectangular box, which otherwise spikes past the curve. */
+  overflow: hidden;
 }
 .waitlist-form:focus-within { border-color: color-mix(in oklab, var(--accent) 50%, var(--line-2)); }
 .waitlist-form input {
@@ -768,6 +814,24 @@ section { padding: 140px 36px; position: relative; }
 }
 .waitlist-form input::placeholder { color: var(--fg-mute); }
 .waitlist-form input:disabled { cursor: not-allowed; }
+/*
+ * Override Chrome/Edge autofill - by default the browser forces a
+ * light-blue/cream background on recognised email inputs, which clashes
+ * with all three themes (especially Eclipse). The 1000px inset box-shadow
+ * paints over the autofill background; -webkit-text-fill-color keeps
+ * text in the theme foreground; the 9999s transition defers the browser's
+ * color change effectively forever.
+ */
+.waitlist-form input:-webkit-autofill,
+.waitlist-form input:-webkit-autofill:hover,
+.waitlist-form input:-webkit-autofill:focus,
+.waitlist-form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-2) inset;
+  box-shadow: 0 0 0 1000px var(--bg-2) inset;
+  -webkit-text-fill-color: var(--fg);
+  caret-color: var(--fg);
+  transition: background-color 9999s ease-in-out 0s;
+}
 .waitlist-form button {
   padding: 14px 28px; border-radius: 999px;
   background: var(--accent); color: var(--bg);

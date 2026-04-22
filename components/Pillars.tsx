@@ -294,14 +294,14 @@ export function Pillars() {
     {
       num: "02 / Solana",
       visual: <PillarVisualSwap />,
-      title: "Sub-second, sub-cent.",
-      body: "Settle privately in under seconds with fees measured in fractions. Private doesn\u2019t have to mean slow or expensive.",
+      title: "Solana native.",
+      body: "Private transfers settle in seconds. No bridges to trust, no wrapped tokens to hold - Sombra is just Solana with a privacy layer.",
     },
     {
       num: "03 / Post-quantum",
       visual: <PillarVisualLattice />,
       title: "Built for the next era.",
-      body: "Lattice-based ML-KEM and ML-DSA protect every shield, today \u2014 against the cryptanalysis of tomorrow.",
+      body: "Lattices, not elliptic curves. Hard to break - today and after.",
     },
   ];
   return (

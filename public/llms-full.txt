@@ -1,0 +1,147 @@
+# Sombra
+
+Post-quantum privacy on Solana. Private trading and transfers, built for the
+quantum era.
+
+Sombra brings quantum-safe privacy to Solana - private UTXO transfers and
+shielded trading. Ownership is proven via zero-knowledge proofs of knowledge,
+not digital signatures. Transactions are signature-free.
+
+- Website: https://sombra.tech
+- Whitepaper: https://sombra.tech/whitepaper.pdf
+- Publisher: Bonsol Labs (https://bonsol.org)
+- Launch: Mainnet beta, Q2 2026
+- Twitter/X: https://x.com/bonsol_labs
+- Telegram: https://t.me/+l2s8ejQ170U2ZDUx
+
+---
+
+## What Sombra does
+
+### 01 / Privacy - Your positions, unseen.
+
+Shielded balances and transfers. Front-running bots, on-chain sleuths, and
+strangers all see the same thing: nothing.
+
+### 02 / Solana - Solana native.
+
+Private transfers settle in seconds. No bridges to trust, no wrapped tokens to
+hold - Sombra is just Solana with a privacy layer.
+
+### 03 / Post-quantum - Built for the next era.
+
+Lattices, not elliptic curves. Hard to break - today and after.
+
+---
+
+## How it works - One UTXO. Three moments.
+
+### 01. Encrypt (ChaCha20-Poly1305 / Kyber-768)
+
+Your payload is wrapped in authenticated encryption, keyed by a Kyber-768
+shared secret. One-time use, per UTXO. Only the receiver can read it.
+
+### 02. Prove (RISC0 STARK, ~1.8-2s on RTX 3090)
+
+A RISC0 zkVM proves you own the inputs and the values balance - without
+revealing them. STARKs are hash-based, so the proof itself stays hard under
+quantum attack.
+
+### 03. Transact (Solana L1, attestation quorum)
+
+The proof and ciphertext land on Solana. Attesting nodes verify and commit a
+finalization vote. Ownership is never signed - only proven.
+
+---
+
+## Harvest now, decrypt later
+
+Adversaries are harvesting encrypted traffic today, waiting for tomorrow's
+quantum computers to run Shor's algorithm and break elliptic-curve keys.
+Sombra ships NIST-standardized lattice cryptography right now - Kyber-768 for
+key exchange, RISC0 STARKs for ownership proofs. No elliptic curves to break,
+no signatures to forge.
+
+### Cryptographic stack
+
+- Key exchange: ML-KEM-768 (NIST-standardized Kyber-768)
+- Encryption: ChaCha20-Poly1305
+- Proof system: RISC0 STARK
+- GPU proof time: ~2 seconds on RTX 3090
+
+---
+
+## Comparison: Sombra vs Tornado vs Zcash
+
+| Property          | Sombra              | Tornado             | Zcash                 |
+|-------------------|---------------------|---------------------|-----------------------|
+| Quantum-safe      | Kyber-768           | No - ECC            | No - ECC              |
+| No nullifiers     | Yes                 | No                  | No                    |
+| Signature-free    | Yes                 | No                  | No                    |
+| Proof system      | STARK               | SNARK (ECC)         | SNARK (ECC)           |
+| Multi-token       | Any SPL token       | Fixed denominations | ZEC only              |
+| Amount privacy    | Yes - per-UTXO      | Fixed only          | Yes - shielded pool   |
+
+Key differentiators:
+
+- Sombra is the only post-quantum privacy protocol on Solana
+- Sombra uses per-UTXO amount privacy, distinct from Zcash's shielded pool
+- Sombra's ownership is proven via ZK, not signed - removes an entire attack class
+- Sombra has no nullifier set, avoiding the scaling and privacy issues of
+  nullifier-based schemes
+
+---
+
+## Glossary
+
+- **Kyber-768** - NIST-standardized post-quantum key encapsulation mechanism.
+  1184-byte public keys, 1088-byte ciphertexts. Used by Sombra to derive a
+  shared secret with the receiver.
+- **ML-KEM** - Module Lattice-based Key Encapsulation Mechanism. The NIST FIPS
+  203 standard name for the algorithm standardized from Kyber.
+- **ChaCha20-Poly1305** - Authenticated encryption with associated data
+  (AEAD). Used to encrypt the UTXO payload after Kyber KEM derives a key.
+- **RISC0 STARK** - Zero-knowledge proof system that runs a RISC-V virtual
+  machine inside a STARK prover. Hash-based, so quantum-resistant. Sombra uses
+  RISC0 to prove transaction validity without revealing inputs.
+- **STARK** - Scalable Transparent ARgument of Knowledge. A zero-knowledge
+  proof system based on hash functions (no trusted setup, no elliptic curves).
+- **UTXO** - Unspent Transaction Output. Sombra uses a UTXO model (like
+  Bitcoin) rather than account balances (like Ethereum) to enable per-output
+  privacy.
+- **Signature-free** - Sombra transactions prove ownership via a
+  zero-knowledge proof of knowledge of a Kyber secret key, rather than by
+  signing with a private key. This removes classical signature attack surfaces
+  and is quantum-resistant.
+- **No nullifiers** - Sombra does not use a nullifier set to prevent
+  double-spending. Instead, UTXO chain validity is enforced by the ZK proof
+  itself. This avoids the storage and privacy tradeoffs of nullifier-based
+  schemes.
+- **Attestation quorum** - A threshold of registered Sombra nodes that verify
+  the STARK proof off-chain and submit an attestation vote on-chain. The
+  Solana program finalizes the transaction once quorum is reached.
+
+---
+
+## About Bonsol Labs
+
+Bonsol Labs is a zero-knowledge company building post-quantum privacy
+infrastructure. Sombra is its flagship privacy protocol. Bonsol also publishes
+the Bonsol ZK coprocessor, a general-purpose proving infrastructure for
+Solana.
+
+- Website: https://bonsol.org
+- Twitter/X: https://x.com/bonsol_labs
+- Telegram: https://t.me/+l2s8ejQ170U2ZDUx
+
+---
+
+## Key constants (for technical integrators)
+
+- Kyber public key: 1184 bytes
+- Kyber ciphertext: 1088 bytes
+- AEAD nonce: 12 bytes
+- Max UTXO payload: 2048 bytes
+- Max tokens per UTXO: 50
+- Proof system: RISC0 zkVM 3.0.4
+- Target chain: Solana mainnet (Q2 2026 beta)

@@ -4,7 +4,7 @@ import { ThemeToggle } from "./ThemeToggle";
 export function Nav() {
   return (
     <nav className="nav">
-      <Link href="/" className="nav-logo" aria-label="Sombra — home">
+      <Link href="/" className="nav-logo" aria-label="Sombra - home">
         <span className="nav-logo-mark" aria-hidden="true">
           <svg viewBox="0 0 32 32">
             <defs>

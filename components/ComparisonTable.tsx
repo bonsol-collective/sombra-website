@@ -1,9 +1,9 @@
 import { CryptoTerm } from "./CryptoTerm";
 
 /**
- * ComparisonTable — Sombra vs Tornado vs Zcash.
+ * ComparisonTable - Sombra vs Tornado vs Zcash.
  *
- * Rendered as a real <table> for accessibility. A disciplined ruled grid —
+ * Rendered as a real <table> for accessibility. A disciplined ruled grid -
  * no card wrapper, no zebra-stripe. Sombra column header in accent.
  *
  * Positive cells do NOT render in accent (the Sombra column header already
@@ -18,6 +18,8 @@ type Cell = { text: string; tone: Tone; term?: string };
 
 interface Row {
   label: string;
+  /** When set, the row label itself gets a CryptoTerm tooltip for readers who don't know the term. */
+  labelTerm?: string;
   sombra: Cell;
   tornado: Cell;
   zcash: Cell;
@@ -27,14 +29,28 @@ const ROWS: Row[] = [
   {
     label: "Quantum-safe",
     sombra: { text: "Kyber-768", tone: "pos", term: "Kyber-768" },
-    tornado: { text: "No — ECC", tone: "neg", term: "ECC" },
-    zcash: { text: "No — ECC", tone: "neg", term: "ECC" },
+    tornado: { text: "No - ECC", tone: "neg", term: "ECC" },
+    zcash: { text: "No - ECC", tone: "neg", term: "ECC" },
   },
   {
-    label: "Signature-free",
+    label: "No nullifiers",
+    labelTerm: "No nullifiers",
     sombra: { text: "Yes", tone: "pos" },
     tornado: { text: "No", tone: "neg" },
     zcash: { text: "No", tone: "neg" },
+  },
+  {
+    label: "Signature-free",
+    labelTerm: "Signature-free",
+    sombra: { text: "Yes", tone: "pos" },
+    tornado: { text: "No", tone: "neg" },
+    zcash: { text: "No", tone: "neg" },
+  },
+  {
+    label: "Proof system",
+    sombra: { text: "STARK", tone: "pos", term: "STARK" },
+    tornado: { text: "SNARK (ECC)", tone: "muted", term: "SNARK" },
+    zcash: { text: "SNARK (ECC)", tone: "muted", term: "SNARK" },
   },
   {
     label: "Multi-token",
@@ -44,21 +60,9 @@ const ROWS: Row[] = [
   },
   {
     label: "Amount privacy",
-    sombra: { text: "Yes", tone: "pos" },
+    sombra: { text: "Yes - per-UTXO", tone: "pos" },
     tornado: { text: "Fixed only", tone: "muted" },
-    zcash: { text: "Yes", tone: "pos" },
-  },
-  {
-    label: "No nullifiers",
-    sombra: { text: "Yes", tone: "pos" },
-    tornado: { text: "No", tone: "neg" },
-    zcash: { text: "No", tone: "neg" },
-  },
-  {
-    label: "Proof system",
-    sombra: { text: "STARK", tone: "pos", term: "STARK" },
-    tornado: { text: "SNARK (ECC)", tone: "muted" },
-    zcash: { text: "SNARK (ECC)", tone: "muted" },
+    zcash: { text: "Yes - shielded pool", tone: "muted" },
   },
 ];
 
@@ -97,7 +101,13 @@ export function ComparisonTable() {
           {ROWS.map((row) => (
             <tr key={row.label}>
               <th scope="row" className="compare-row-label">
-                {row.label}
+                {row.labelTerm ? (
+                  <CryptoTerm term={row.labelTerm} variant="bare">
+                    {row.label}
+                  </CryptoTerm>
+                ) : (
+                  row.label
+                )}
               </th>
               <td>{renderCell(row.sombra)}</td>
               <td>{renderCell(row.tornado)}</td>

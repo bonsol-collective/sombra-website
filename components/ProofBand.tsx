@@ -1,7 +1,7 @@
 import { CryptoTerm } from "./CryptoTerm";
 
 /**
- * ProofBand — one hairline mono line naming the primitives that make Sombra
+ * ProofBand - one hairline mono line naming the primitives that make Sombra
  * quantum-safe. Sits below Hero, above Pillars. Catches skim-readers in 2 s.
  *
  * Accent colour is reserved for the two primitives that carry the quantum-safe
@@ -20,7 +20,7 @@ const ITEMS: BandItem[] = [
   { label: "RISC0 STARK", term: "RISC0 STARK", accent: true },
   { label: "ChaCha20-Poly1305", term: "ChaCha20-Poly1305" },
   { label: "Solana L1", term: "Solana L1" },
-  { label: "~1.8–2 s proof (RTX 3090)" },
+  { label: "~1.8-2 s proof (RTX 3090)" },
 ];
 
 export function ProofBand() {
@@ -30,9 +30,9 @@ export function ProofBand() {
       aria-label="Cryptographic primitives"
       className="proof-band"
     >
-      <div className="proof-band-inner">
+      <div className="proof-band-inner" role="list">
         {ITEMS.map((item, i) => (
-          <span className="proof-band-item" key={item.label}>
+          <span className="proof-band-item" role="listitem" key={item.label}>
             {item.term ? (
               <CryptoTerm term={item.term} variant="bare">
                 <span

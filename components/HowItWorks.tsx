@@ -5,7 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { CryptoTerm } from "./CryptoTerm";
 
 /**
- * HowItWorks — three stations explaining Sombra's UTXO lifecycle:
+ * HowItWorks - three stations explaining Sombra's UTXO lifecycle:
  * Encrypt → Prove → Transact. Sits between Pillars and PrivacyDemo.
  *
  * Station markers: a 10px square; first filled accent, others outlined.
@@ -59,12 +59,12 @@ const STEPS: Step[] = [
         <CryptoTerm term="RISC0 STARK" variant="bare">
           RISC0 STARK
         </CryptoTerm>{" "}
-        · ~1.8–2&nbsp;s on RTX&nbsp;3090
+        · ~1.8-2&nbsp;s on RTX&nbsp;3090
       </>
     ),
     body: (
       <>
-        A RISC0 zkVM proves you own the inputs and the values balance —
+        A RISC0 zkVM proves you own the inputs and the values balance -
         without revealing them.{" "}
         <CryptoTerm term="STARK" variant="inline">
           STARKs
@@ -82,7 +82,10 @@ const STEPS: Step[] = [
         <CryptoTerm term="Solana L1" variant="bare">
           Solana L1
         </CryptoTerm>{" "}
-        · attestation quorum
+        ·{" "}
+        <CryptoTerm term="attestation quorum" variant="bare">
+          attestation quorum
+        </CryptoTerm>
       </>
     ),
     body: (
@@ -92,7 +95,7 @@ const STEPS: Step[] = [
           Solana
         </CryptoTerm>
         . Attesting nodes verify and commit a finalization vote. Ownership is
-        never signed — only proven.
+        never signed - only proven.
       </>
     ),
   },

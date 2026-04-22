@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useInView } from "@/hooks/useInView";
-import { useScramble } from "@/hooks/useScramble";
 
 type Row = {
   time: string;
@@ -50,37 +49,54 @@ const LEDGER_ROWS: Row[] = [
   },
 ];
 
-function hide(str: string, char = "•") {
-  return char.repeat(Math.min(22, str.length));
+const SHIELDED_BULLETS = "•".repeat(22);
+const SHIELDED_AMOUNT = "•".repeat(8);
+
+function AnimatedChars({
+  text,
+  stateKey,
+}: {
+  text: string;
+  stateKey: string;
+}) {
+  return (
+    <>
+      {Array.from(text).map((ch, i) => (
+        <span
+          key={`${stateKey}-${i}`}
+          className="cell-char"
+          style={{ animationDelay: `${i * 20}ms` }}
+        >
+          {ch === " " ? " " : ch}
+        </span>
+      ))}
+    </>
+  );
 }
 
-function LedgerRow({
-  row,
-  shielded,
-  active,
-}: {
-  row: Row;
-  shielded: boolean;
-  active: boolean;
-}) {
-  const fromScram = useScramble(shielded ? hide(row.from) : row.from, {
-    duration: 700,
-    active,
-  });
-  const toScram = useScramble(shielded ? hide(row.to) : row.to, {
-    duration: 700,
-    active,
-  });
-  const amtScram = useScramble(
-    shielded ? "•••••• " + row.amount.split(" ")[1] : row.amount,
-    { duration: 600, active }
-  );
+function LedgerRow({ row, shielded }: { row: Row; shielded: boolean }) {
+  const stateKey = shielded ? "s" : "p";
   return (
     <div className="ledger-row">
       <div className="ledger-time">{row.time}</div>
-      <div className={"ledger-addr" + (shielded ? " hidden" : "")}>{fromScram}</div>
-      <div className={"ledger-addr" + (shielded ? " hidden" : "")}>{toScram}</div>
-      <div className={"ledger-amount" + (shielded ? " hidden" : "")}>{amtScram}</div>
+      <div className={"ledger-addr" + (shielded ? " redacted" : "")}>
+        <AnimatedChars
+          text={shielded ? SHIELDED_BULLETS : row.from}
+          stateKey={`f-${stateKey}`}
+        />
+      </div>
+      <div className={"ledger-addr" + (shielded ? " redacted" : "")}>
+        <AnimatedChars
+          text={shielded ? SHIELDED_BULLETS : row.to}
+          stateKey={`t-${stateKey}`}
+        />
+      </div>
+      <div className={"ledger-amount" + (shielded ? " redacted" : "")}>
+        <AnimatedChars
+          text={shielded ? SHIELDED_AMOUNT : row.amount}
+          stateKey={`a-${stateKey}`}
+        />
+      </div>
       <div className="ledger-status">{shielded ? "Shielded" : row.status}</div>
     </div>
   );
@@ -89,7 +105,7 @@ function LedgerRow({
 export function PrivacyDemo() {
   const [mode, setMode] = useState<"public" | "shielded">("public");
   const shielded = mode === "shielded";
-  const [ref, inView] = useInView<HTMLElement>();
+  const [ref] = useInView<HTMLElement>();
 
   return (
     <section id="privacy" className="privacy" ref={ref}>
@@ -102,20 +118,36 @@ export function PrivacyDemo() {
               <i>Different</i> visibility.
             </h2>
             <p>
-              Solana is fast and cheap — and radically transparent. Every
+              Solana is fast and cheap - and radically transparent. Every
               transfer, every wallet, every position, visible forever. Sombra
               wraps your activity in a zero-knowledge envelope, so the chain
               sees that something happened, but not what, not how much, and
               not between whom.
             </p>
-            <div className="privacy-toggle" role="tablist">
+            <div
+              className="privacy-toggle"
+              role="tablist"
+              aria-label="Ledger view mode"
+            >
               <button
+                type="button"
+                role="tab"
+                id="privacy-tab-public"
+                aria-selected={!shielded}
+                aria-controls="privacy-tabpanel"
+                tabIndex={!shielded ? 0 : -1}
                 className={!shielded ? "active" : ""}
                 onClick={() => setMode("public")}
               >
                 Public chain
               </button>
               <button
+                type="button"
+                role="tab"
+                id="privacy-tab-shielded"
+                aria-selected={shielded}
+                aria-controls="privacy-tabpanel"
+                tabIndex={shielded ? 0 : -1}
                 className={shielded ? "active" : ""}
                 onClick={() => setMode("shielded")}
               >
@@ -123,7 +155,15 @@ export function PrivacyDemo() {
               </button>
             </div>
           </div>
-          <div className="ledger" aria-label="Transaction ledger demo">
+          <div
+            className="ledger"
+            id="privacy-tabpanel"
+            role="tabpanel"
+            aria-labelledby={
+              shielded ? "privacy-tab-shielded" : "privacy-tab-public"
+            }
+            aria-label="Transaction ledger demo"
+          >
             <div className="ledger-head">
               <div>Time</div>
               <div>From</div>
@@ -132,7 +172,7 @@ export function PrivacyDemo() {
               <div style={{ textAlign: "right" }}>Status</div>
             </div>
             {LEDGER_ROWS.map((r, i) => (
-              <LedgerRow key={i} row={r} shielded={shielded} active={inView} />
+              <LedgerRow key={i} row={r} shielded={shielded} />
             ))}
           </div>
         </div>

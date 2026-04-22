@@ -9,13 +9,11 @@ export function Waitlist() {
   return (
     <section id="waitlist" className="waitlist">
       <div className="waitlist-inner">
+        <div className="waitlist-kicker">Step into the shadow.</div>
         <h2>
-          Step into the <i>shadow.</i>
+          The beta. <i>Q2 2026.</i>
         </h2>
-        <p>
-          Private, post-quantum beta opens Q2 2026. Limited to the first 500
-          wallets.
-        </p>
+        <p>Early access to the shadow.</p>
         <form
           className={"waitlist-form" + (done ? " submitted" : "")}
           onSubmit={handleSubmit}
@@ -30,10 +28,10 @@ export function Waitlist() {
           />
           <button type="submit" disabled={done || state.submitting}>
             {done
-              ? "✓ On the list"
+              ? "✓ You're in"
               : state.submitting
-                ? "Joining…"
-                : "Join waitlist"}
+                ? "Sending…"
+                : "Get the invite →"}
           </button>
         </form>
         <ValidationError
@@ -45,11 +43,6 @@ export function Waitlist() {
           errors={state.errors}
           className="waitlist-form-error"
         />
-        <div className="waitlist-meta">
-          <span>No wallet required</span>
-          <span>·</span>
-          <span>Unsubscribe anytime</span>
-        </div>
       </div>
     </section>
   );
