@@ -26,11 +26,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sombra.tech"),
-  title: "Sombra — post-quantum privacy on Solana",
+  title: "Post-quantum privacy on Solana",
   description:
     "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
   openGraph: {
-    title: "Sombra — post-quantum privacy on Solana",
+    title: "Post-quantum privacy on Solana",
     description:
       "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
     url: "https://sombra.tech",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sombra — post-quantum privacy on Solana",
+    title: "Post-quantum privacy on Solana",
     description:
       "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
     images: ["/og.png"],
