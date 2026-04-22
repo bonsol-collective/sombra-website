@@ -8,6 +8,5 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: "*", allow: "/" }],
     sitemap: "https://sombra.tech/sitemap.xml",
-    host: "https://sombra.tech",
   };
 }

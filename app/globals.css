@@ -621,20 +621,6 @@ section { padding: 140px 36px; position: relative; }
   align-items: center;
   transition: background 0.3s;
 }
-/* Per-character morph animation for From / To / Amount cells only.
-   React key-per-shielded-state remounts each span on toggle; animation
-   replays with a staggered delay so chars wave in left-to-right. */
-.cell-char {
-  display: inline-block;
-  animation: cell-char-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@keyframes cell-char-in {
-  from { opacity: 0; transform: translateY(-3px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cell-char { animation: none; }
-}
 .ledger-row:last-child { border-bottom: none; }
 .ledger-row:hover { background: var(--card); }
 .ledger-time { color: var(--fg-mute); font-size: 11px; }

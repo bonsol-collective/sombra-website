@@ -157,7 +157,7 @@ export const CryptoTerm = forwardRef<HTMLSpanElement, CryptoTermProps>(
     return (
       <span
         ref={setRefs}
-        tabIndex={variant === "inline" ? 0 : -1}
+        tabIndex={0}
         aria-describedby={tooltipId}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}

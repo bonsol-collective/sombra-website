@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import { useScramble } from "@/hooks/useScramble";
 
 type Row = {
   time: string;
@@ -49,53 +50,42 @@ const LEDGER_ROWS: Row[] = [
   },
 ];
 
-const SHIELDED_BULLETS = "•".repeat(22);
-const SHIELDED_AMOUNT = "•".repeat(8);
-
-function AnimatedChars({
-  text,
-  stateKey,
-}: {
-  text: string;
-  stateKey: string;
-}) {
-  return (
-    <>
-      {Array.from(text).map((ch, i) => (
-        <span
-          key={`${stateKey}-${i}`}
-          className="cell-char"
-          style={{ animationDelay: `${i * 20}ms` }}
-        >
-          {ch === " " ? " " : ch}
-        </span>
-      ))}
-    </>
-  );
+function hide(str: string, char = "•") {
+  return char.repeat(Math.min(22, str.length));
 }
 
-function LedgerRow({ row, shielded }: { row: Row; shielded: boolean }) {
-  const stateKey = shielded ? "s" : "p";
+function LedgerRow({
+  row,
+  shielded,
+  active,
+}: {
+  row: Row;
+  shielded: boolean;
+  active: boolean;
+}) {
+  const fromScram = useScramble(shielded ? hide(row.from) : row.from, {
+    duration: 700,
+    active,
+  });
+  const toScram = useScramble(shielded ? hide(row.to) : row.to, {
+    duration: 700,
+    active,
+  });
+  const amtScram = useScramble(
+    shielded ? "•••••• " + row.amount.split(" ")[1] : row.amount,
+    { duration: 600, active },
+  );
   return (
     <div className="ledger-row">
       <div className="ledger-time">{row.time}</div>
       <div className={"ledger-addr" + (shielded ? " redacted" : "")}>
-        <AnimatedChars
-          text={shielded ? SHIELDED_BULLETS : row.from}
-          stateKey={`f-${stateKey}`}
-        />
+        {fromScram}
       </div>
       <div className={"ledger-addr" + (shielded ? " redacted" : "")}>
-        <AnimatedChars
-          text={shielded ? SHIELDED_BULLETS : row.to}
-          stateKey={`t-${stateKey}`}
-        />
+        {toScram}
       </div>
       <div className={"ledger-amount" + (shielded ? " redacted" : "")}>
-        <AnimatedChars
-          text={shielded ? SHIELDED_AMOUNT : row.amount}
-          stateKey={`a-${stateKey}`}
-        />
+        {amtScram}
       </div>
       <div className="ledger-status">{shielded ? "Shielded" : row.status}</div>
     </div>
@@ -105,7 +95,7 @@ function LedgerRow({ row, shielded }: { row: Row; shielded: boolean }) {
 export function PrivacyDemo() {
   const [mode, setMode] = useState<"public" | "shielded">("public");
   const shielded = mode === "shielded";
-  const [ref] = useInView<HTMLElement>();
+  const [ref, inView] = useInView<HTMLElement>();
 
   return (
     <section id="privacy" className="privacy" ref={ref}>
@@ -151,7 +141,7 @@ export function PrivacyDemo() {
                 className={shielded ? "active" : ""}
                 onClick={() => setMode("shielded")}
               >
-                Sombra shielded
+                Shielded
               </button>
             </div>
           </div>
@@ -172,7 +162,7 @@ export function PrivacyDemo() {
               <div style={{ textAlign: "right" }}>Status</div>
             </div>
             {LEDGER_ROWS.map((r, i) => (
-              <LedgerRow key={i} row={r} shielded={shielded} />
+              <LedgerRow key={i} row={r} shielded={shielded} active={inView} />
             ))}
           </div>
         </div>
