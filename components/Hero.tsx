@@ -91,7 +91,7 @@ export function Hero({
           <span className="hero-footer-dot"></span> Mainnet beta · Q2 2026
         </div>
         <div></div>
-        <div>scroll to reveal ↓</div>
+        <div className="hero-footer-scroll">scroll to reveal ↓</div>
       </div>
     </header>
   );

@@ -805,7 +805,16 @@ section { padding: 140px 36px; position: relative; }
      fills its rectangular box, which otherwise spikes past the curve. */
   overflow: hidden;
 }
-.waitlist-form:focus-within { border-color: color-mix(in oklab, var(--accent) 50%, var(--line-2)); }
+/* Focus indicator lives on the form wrapper because `overflow: hidden`
+   above clips any focus ring on the input or button. The outer ring is
+   painted outside the form's border-box, so the wrapper's own overflow
+   does not clip it. */
+.waitlist-form:focus-within {
+  border-color: color-mix(in oklab, var(--accent) 50%, var(--line-2));
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 35%, transparent);
+}
+.waitlist-form button:focus { outline: none; }
+.waitlist-form button:focus-visible { outline: none; }
 .waitlist-form input {
   flex: 1; min-width: 0;
   background: none; border: none; outline: none;
@@ -1079,5 +1088,5 @@ footer .footer-links a:hover { color: var(--fg); }
   }
   .quantum-stats { grid-template-columns: 1fr; }
   .hero-footer { padding: 16px 24px; }
-  .hero-footer > div:last-child { display: none; }
+  .hero-footer-scroll { display: none; }
 }
