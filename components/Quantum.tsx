@@ -130,10 +130,10 @@ export function Quantum() {
             </h2>
             <p>
               Adversaries are harvesting encrypted traffic today, waiting for
-              tomorrow&rsquo;s quantum computers to run Shor&rsquo;s algorithm
-              and break elliptic-curve keys. Sombra ships NIST-standardized
-              lattice cryptography right now
-              -{" "}
+              tomorrow’s quantum computers to run Shor’s algorithm and break
+              elliptic-curve keys. Sombra ships NIST-standardized lattice
+              cryptography right now
+              —{" "}
               <CryptoTerm term="Kyber-768" variant="inline">
                 Kyber-768
               </CryptoTerm>{" "}

@@ -64,7 +64,7 @@ const STEPS: Step[] = [
     ),
     body: (
       <>
-        A RISC0 zkVM proves you own the inputs and the values balance -
+        A RISC0 zkVM proves you own the inputs and the values balance —
         without revealing them.{" "}
         <CryptoTerm term="STARK" variant="inline">
           STARKs
@@ -95,7 +95,7 @@ const STEPS: Step[] = [
           Solana
         </CryptoTerm>
         . Attesting nodes verify and commit a finalization vote. Ownership is
-        never signed - only proven.
+        never signed — only proven.
       </>
     ),
   },

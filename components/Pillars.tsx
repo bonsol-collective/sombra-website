@@ -295,13 +295,13 @@ export function Pillars() {
       num: "02 / Solana",
       visual: <PillarVisualSwap />,
       title: "Solana native.",
-      body: "Private transfers settle in seconds. No bridges to trust, no wrapped tokens to hold - Sombra is just Solana with a privacy layer.",
+      body: "Private transfers settle in seconds. No bridges to trust, no wrapped tokens to hold — Sombra is just Solana with a privacy layer.",
     },
     {
       num: "03 / Post-quantum",
       visual: <PillarVisualLattice />,
       title: "Built for the next era.",
-      body: "Lattices, not elliptic curves. Hard to break - today and after.",
+      body: "Lattices, not elliptic curves. Hard to break — today and after.",
     },
   ];
   return (

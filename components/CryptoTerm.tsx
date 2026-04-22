@@ -45,7 +45,7 @@ const GLOSSARY: Record<string, string> = {
   "Solana L1":
     "The base Solana blockchain. Proofs and ciphertexts are submitted and verified here.",
   ECDSA:
-    "Elliptic-curve signature scheme. Broken by Shor's algorithm on a working quantum computer.",
+    "Elliptic-curve signature scheme. Broken by Shor’s algorithm on a working quantum computer.",
   ECC:
     "Elliptic-curve cryptography. The basis of ECDSA and most current blockchains. Broken by quantum attack.",
   KEM:
@@ -53,11 +53,11 @@ const GLOSSARY: Record<string, string> = {
   AEAD:
     "Authenticated encryption with associated data. Encrypts and authenticates in one pass.",
   SNARK:
-    "Succinct Non-interactive Argument of Knowledge. Smaller and faster than STARKs, but relies on elliptic-curve cryptography - broken by quantum attack.",
+    "Succinct Non-interactive Argument of Knowledge. Smaller and faster than STARKs, but relies on elliptic-curve cryptography — broken by quantum attack.",
   "Signature-free":
-    "Sombra uses zero-knowledge proofs instead of digital signatures. You prove you own the inputs without signing - the proof is the authorization.",
+    "Sombra uses zero-knowledge proofs instead of digital signatures. You prove you own the inputs without signing — the proof is the authorization.",
   "No nullifiers":
-    "Sombra doesn't use a global nullifier set to mark spent notes. UTXOs chain per-vault via ZK proof of inclusion - no growing public accumulator to leak timing metadata.",
+    "Sombra doesn’t use a global nullifier set to mark spent notes. UTXOs chain per-vault via ZK proof of inclusion — no growing public accumulator to leak timing metadata.",
   "attestation quorum":
     "A minimum number of prover nodes must independently verify the ZK proof before a UTXO is finalized. Quorum distributes trust across validators, not a single prover.",
 };

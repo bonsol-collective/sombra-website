@@ -108,7 +108,7 @@ export function PrivacyDemo() {
               <i>Different</i> visibility.
             </h2>
             <p>
-              Solana is fast and cheap - and radically transparent. Every
+              Solana is fast and cheap — and radically transparent. Every
               transfer, every wallet, every position, visible forever. Sombra
               wraps your activity in a zero-knowledge envelope, so the chain
               sees that something happened, but not what, not how much, and

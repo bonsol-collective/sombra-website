@@ -82,7 +82,7 @@ export function Hero({
           <CryptoTerm term="Kyber-768" variant="inline">
             quantum-safe
           </CryptoTerm>{" "}
-          privacy to Solana - private UTXO transfers and shielded trading,
+          privacy to Solana — private UTXO transfers and shielded trading,
           built for the quantum era.
         </div>
       </div>

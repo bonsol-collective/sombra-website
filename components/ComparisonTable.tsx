@@ -29,8 +29,8 @@ const ROWS: Row[] = [
   {
     label: "Quantum-safe",
     sombra: { text: "Kyber-768", tone: "pos", term: "Kyber-768" },
-    tornado: { text: "No - ECC", tone: "neg", term: "ECC" },
-    zcash: { text: "No - ECC", tone: "neg", term: "ECC" },
+    tornado: { text: "No — ECC", tone: "neg", term: "ECC" },
+    zcash: { text: "No — ECC", tone: "neg", term: "ECC" },
   },
   {
     label: "No nullifiers",
@@ -60,9 +60,9 @@ const ROWS: Row[] = [
   },
   {
     label: "Amount privacy",
-    sombra: { text: "Yes - per-UTXO", tone: "pos" },
+    sombra: { text: "Yes — per-UTXO", tone: "pos" },
     tornado: { text: "Fixed only", tone: "muted" },
-    zcash: { text: "Yes - shielded pool", tone: "muted" },
+    zcash: { text: "Yes — shielded pool", tone: "muted" },
   },
 ];
 
