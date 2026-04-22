@@ -44,3 +44,21 @@ vercel --prod
 ```
 
 The `sombra.tech` domain is aliased to the production deployment.
+
+## Social preview image
+
+The OpenGraph image at `public/og.png` is captured from the hidden `/og-preview` route and must be regenerated after any design change that affects it. Dev mode overlays a Next.js indicator on the page, so regeneration uses a production build.
+
+```bash
+npm run build
+PORT=3100 npm run start &
+npx playwright install chromium  # first time only
+npx playwright screenshot \
+  --viewport-size=1200,630 \
+  --wait-for-timeout=3000 \
+  http://localhost:3100/og-preview \
+  public/og.png
+kill %1
+```
+
+Commit the regenerated `public/og.png`.
