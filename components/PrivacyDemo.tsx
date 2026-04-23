@@ -72,7 +72,7 @@ function LedgerRow({
     active,
   });
   const amtScram = useScramble(
-    shielded ? "•••••• " + row.amount.split(" ")[1] : row.amount,
+    shielded ? "••••••" : row.amount,
     { duration: 600, active },
   );
   return (
