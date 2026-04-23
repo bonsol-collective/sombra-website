@@ -153,6 +153,7 @@ export function PrivacyDemo() {
               shielded ? "privacy-tab-shielded" : "privacy-tab-public"
             }
             aria-label="Transaction ledger demo"
+            tabIndex={0}
           >
             <div className="ledger-head">
               <div>Time</div>
