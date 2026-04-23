@@ -72,7 +72,7 @@ function LedgerRow({
     active,
   });
   const amtScram = useScramble(
-    shielded ? "•••••• " + row.amount.split(" ")[1] : row.amount,
+    shielded ? "••••••" : row.amount,
     { duration: 600, active },
   );
   return (
@@ -153,6 +153,7 @@ export function PrivacyDemo() {
               shielded ? "privacy-tab-shielded" : "privacy-tab-public"
             }
             aria-label="Transaction ledger demo"
+            tabIndex={0}
           >
             <div className="ledger-head">
               <div>Time</div>
