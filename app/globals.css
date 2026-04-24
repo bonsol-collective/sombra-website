@@ -50,12 +50,16 @@ html[data-theme="grid"] {
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: var(--bg); color: var(--fg); }
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+  width: 100%;
+}
 body {
   font-family: var(--sans);
   font-weight: 400;
   line-height: 1.5;
-  overflow-x: hidden;
   transition: background 0.4s ease, color 0.4s ease;
 }
 html[data-theme="eclipse"] body {
@@ -606,8 +610,6 @@ section { padding: 140px 36px; position: relative; }
 .ledger-addr.redacted {
   color: var(--fg-dim);
   letter-spacing: 0.1em;
-  overflow: visible;
-  text-overflow: unset;
 }
 .ledger-amount { color: var(--fg); text-align: right; font-variant-numeric: tabular-nums; }
 .ledger-amount.redacted {
