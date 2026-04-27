@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import { useScramble } from "@/hooks/useScramble";
 
@@ -50,27 +50,29 @@ const LEDGER_ROWS: Row[] = [
   },
 ];
 
-function hide(str: string, char = "•") {
-  return char.repeat(Math.min(22, str.length));
+function hide(str: string, count: number, char = "•") {
+  return char.repeat(Math.min(count, str.length));
 }
 
 function LedgerRow({
   row,
   shielded,
   active,
+  bulletCount,
 }: {
   row: Row;
   shielded: boolean;
   active: boolean;
+  bulletCount: number;
 }) {
-  const fromScram = useScramble(shielded ? hide(row.from) : row.from, {
-    duration: 700,
-    active,
-  });
-  const toScram = useScramble(shielded ? hide(row.to) : row.to, {
-    duration: 700,
-    active,
-  });
+  const fromScram = useScramble(
+    shielded ? hide(row.from, bulletCount) : row.from,
+    { duration: 700, active },
+  );
+  const toScram = useScramble(
+    shielded ? hide(row.to, bulletCount) : row.to,
+    { duration: 700, active },
+  );
   const amtScram = useScramble(
     shielded ? "••••••" : row.amount,
     { duration: 600, active },
@@ -96,6 +98,20 @@ export function PrivacyDemo() {
   const [mode, setMode] = useState<"public" | "shielded">("public");
   const shielded = mode === "shielded";
   const [ref, inView] = useInView<HTMLElement>();
+  // Narrow viewports get a shorter bullet shield because 22 bullets at the
+  // existing letter-spacing fills the entire mobile column, making the
+  // shielded view feel visually heavier than the public ellipsis-truncated
+  // view in the same column. 10 bullets reads as "redacted segment" while
+  // matching the public side's whitespace density.
+  const [isNarrow, setIsNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 900px)");
+    const sync = () => setIsNarrow(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  const bulletCount = isNarrow ? 10 : 22;
 
   return (
     <section id="privacy" className="privacy" ref={ref}>
@@ -163,7 +179,13 @@ export function PrivacyDemo() {
               <div style={{ textAlign: "right" }}>Status</div>
             </div>
             {LEDGER_ROWS.map((r, i) => (
-              <LedgerRow key={i} row={r} shielded={shielded} active={inView} />
+              <LedgerRow
+                key={i}
+                row={r}
+                shielded={shielded}
+                active={inView}
+                bulletCount={bulletCount}
+              />
             ))}
           </div>
         </div>
