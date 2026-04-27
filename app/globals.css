@@ -878,20 +878,37 @@ footer .footer-links a:hover { color: var(--fg); }
   text-transform: none;
   text-decoration: none;
   pointer-events: none;
-  opacity: 0;
-  transform: translateY(-4px);
+  /* `display: none` when closed strips the panel from layout — without this,
+     its 260px width pushes body scrollWidth past the viewport on mobile when
+     a term sits in the right portion of the screen, causing horizontal pan. */
+  display: none;
+}
+.crypto-term__panel[data-open="true"] {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
   transition:
     opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.crypto-term__panel[data-open="true"] {
-  opacity: 1;
-  transform: translateY(0);
+/* Preserves the slide+fade entrance when the panel transitions from
+   display:none to display:block. Exit is instant — acceptable for tooltips. */
+@starting-style {
+  .crypto-term__panel[data-open="true"] {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .crypto-term__panel {
+  .crypto-term__panel[data-open="true"] {
     transition: opacity 80ms linear;
     transform: none;
+  }
+  @starting-style {
+    .crypto-term__panel[data-open="true"] {
+      opacity: 0;
+      transform: none;
+    }
   }
 }
 
