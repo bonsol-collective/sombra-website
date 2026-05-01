@@ -27,7 +27,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sombra.tech"),
-  title: "Sombra — post-quantum privacy on Solana",
+  title: "Sombra",
   description:
     "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
   alternates: { canonical: "/" },
