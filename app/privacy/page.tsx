@@ -79,9 +79,16 @@ export default function PrivacyPage() {
                 identifier.
               </li>
               <li>
-                <strong>Cached UTXOs and balances</strong> — encrypted on-chain
-                payloads decrypted in-memory and cached locally so the Wallet
-                renders instantly on open.
+                <strong>Cached UTXOs and balances</strong> — to render your
+                portfolio instantly when you re-open the popup, the Wallet
+                caches the <strong>decrypted</strong> UTXO list (token
+                amounts, sender/receiver vault identifiers) in{" "}
+                <code>chrome.storage.local</code>. This cache is not encrypted
+                at rest with your password &mdash; it is rebuilt on each sync
+                after unlock. File-system access to the Chrome profile can
+                therefore reveal your decrypted transaction history; we
+                recommend treating Sombra as a hot wallet and avoiding use on
+                shared or untrusted machines.
               </li>
               <li>
                 <strong>Pending job state</strong> — the status of in-flight
@@ -118,23 +125,42 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>QFire relay</strong> — Bonsol-operated relay used to
-                publish ZK proofs and receive on-chain attestations. QFire
-                receives proof bytes and your sender vault identifier; it does
-                not receive your private keys, your seed phrase, or your
-                cleartext token amounts.
+                publish ZK proofs and to forward node-signed attestation
+                transactions to Solana. QFire receives the proof bytes and
+                your sender vault identifier. Because the proof&rsquo;s public
+                journal commits to the receiver vault PDAs, the on-chain UTXO
+                hashes you are spending, and (for withdrawals) the destination
+                Solana wallet, token, and amount, QFire sees those values too
+                &mdash; but all of them are also visible on the public Solana
+                ledger by design. QFire does NOT receive your private keys,
+                your seed phrase, or the cleartext token amounts and token
+                types of vault-to-vault transfers; those remain encrypted in
+                the on-chain UTXO payload, decryptable only by the receiver.
               </li>
               <li>
-                <strong>Remote prover</strong> (default) — by default, proof
-                inputs (encrypted UTXO contents you have decrypted in-memory,
-                token amounts, and randomness) are sent over TLS to a
-                Bonsol-operated proving server, which runs the RISC0 STARK
-                prover and returns the proof. Your password, your seed
+                <strong>Remote prover</strong> (default) — by default, the
+                proof inputs needed to generate your ZK proof are sent over
+                TLS to a Bonsol-operated proving server. These inputs are
+                derived from data you have decrypted in your browser&rsquo;s
+                memory and include: your wallet&rsquo;s Kyber public key
+                (which identifies your wallet to the prover), the decrypted
+                contents of the UTXOs you are spending (token amounts and
+                types), the receiver vault PDAs and decrypted token amounts
+                of any transfers, and the destination Solana wallet, token,
+                and amount of any withdrawal. Your password, your seed
                 phrase, your Kyber secret key, and your encrypted vault are
-                never sent. The remote prover roadmap includes
-                hardware-attested execution (AMD SEV-SNP CPU + Nvidia GPU
-                attestation) so that even Bonsol operators cannot read proof
-                inputs in transit or at rest. Hardware attestation is in
-                progress and not yet enabled in the MVP.
+                never sent. <strong>In the current build this means the
+                proving server operator is technically a trusted third party
+                with read access to your decrypted transaction inputs while
+                a proof is being generated.</strong> The remote prover is
+                being developed with hardware-attested execution (AMD SEV-SNP
+                CPU + Nvidia GPU attestation) so that even Bonsol operators
+                cannot read proof inputs in transit or at rest; hardware
+                attestation is not yet enabled in the MVP build. Users who
+                require zero trust in the proving operator can switch prover
+                mode to &ldquo;Local&rdquo; in Settings (this requires
+                separately installing the Sombra prover daemon and disables
+                remote proving entirely).
               </li>
               <li>
                 <strong>Local prover daemon</strong> (advanced, opt-in) — if
@@ -179,6 +205,22 @@ export default function PrivacyPage() {
                 See Section 3 for the full at-rest description.
               </li>
             </ul>
+
+            <p>
+              <strong>What Sombra hides, and what it does not.</strong>. 
+              Token amounts and token types of vault-to-vault transfers are 
+              encrypted on-chain and only the receiver can decrypt them. 
+              Vault identifiers are pseudonymous hashes of Kyber public keys, 
+              not tied to a real-world identity unless the user reveals their 
+              public key off-chain. What Sombra does <em>not</em> hide is the 
+              existence and timing of transactions, the sender and receiver 
+              vault identifiers (visible on the public Solana ledger), 
+              and the destination wallet, token, and amount of any withdrawal
+              back to a regular Solana wallet (these have to be public so 
+              the SPL token program can execute the transfer). 
+              Anyone evaluating Sombra for a specific threat model 
+              should review this trade-off carefully.
+            </p>
           </section>
 
           <section>
@@ -193,14 +235,17 @@ export default function PrivacyPage() {
                 Sombra prover daemon.
               </li>
               <li>
-                <code>alarms</code> — to schedule periodic UTXO sync while the
-                popup is open.
+                <code>alarms</code> — to schedule background checks on
+                in-flight proof submissions so a stuck or slow proof can be
+                detected and recovered even when the popup is closed.
               </li>
               <li>
                 <code>host_permissions</code> — limited to the Solana RPC, the
-                QFire relay, and (if enabled) the remote prover URL. No
-                content scripts; the extension never reads or modifies any
-                website you visit.
+                QFire relay, and the remote prover URL (the Wallet uses the
+                remote prover by default; the local daemon path uses native
+                messaging instead, which doesn&rsquo;t require an HTTPS host
+                permission). No content scripts; the extension never reads or
+                modifies any website you visit.
               </li>
             </ul>
           </section>
