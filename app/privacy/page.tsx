@@ -151,13 +151,31 @@ export default function PrivacyPage() {
             <h2>5. Cryptographic design</h2>
             <p>
               Sombra is built on post-quantum primitives. Asymmetric encryption
-              uses Kyber-768 (NIST ML-KEM-768). Symmetric encryption uses
-              ChaCha20-Poly1305. Hashing uses SHA-256. Zero-knowledge proofs
-              use RISC0 STARKs. No part of the protocol relies on elliptic
-              curve cryptography for confidentiality. Solana account signing
-              still uses Ed25519, which is a property of the Solana network,
-              not the Sombra protocol.
+              uses Kyber-768 (NIST ML-KEM-768). Hashing uses SHA-256.
+              Zero-knowledge proofs use RISC0 STARKs. No part of the protocol
+              relies on elliptic curve cryptography for confidentiality. Solana
+              account signing still uses Ed25519, which is a property of the
+              Solana network, not the Sombra protocol.
             </p>
+            <p>
+              Two distinct symmetric ciphers are used at different layers:
+            </p>
+            <ul>
+              <li>
+                <strong>On-chain UTXO payloads</strong> are encrypted with{" "}
+                <strong>ChaCha20-Poly1305</strong>. The 32-byte symmetric key
+                is derived per-UTXO via Kyber-768 key encapsulation between
+                the sender and the receiver&rsquo;s vault, so only the
+                receiver can decrypt.
+              </li>
+              <li>
+                <strong>The local encrypted vault</strong> (the file containing
+                your seed phrase and Kyber secret key in browser storage) is
+                sealed with <strong>AES-256-GCM</strong>, using a key derived
+                from your password via PBKDF2 (600,000 iterations, SHA-256).
+                See Section 3 for the full at-rest description.
+              </li>
+            </ul>
           </section>
 
           <section>
