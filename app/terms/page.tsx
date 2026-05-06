@@ -165,19 +165,12 @@ export default function TermsPage() {
           <section>
             <h2>11. Governing law</h2>
             <p>
-              These Terms are governed by the laws of the jurisdiction of
-              Bonsol Labs Inc.&rsquo;s registered office, without regard to
-              conflict-of-laws rules. Any dispute arising from these Terms or
-              your use of the Software will be resolved in the courts of that
-              jurisdiction, unless mandatory consumer-protection law in your
+              These Terms are governed by the laws of the State of Delaware,
+              United States, without regard to conflict-of-laws rules. Any
+              dispute arising from these Terms or your use of the Software
+              will be resolved in the state or federal courts located in
+              Delaware, unless mandatory consumer-protection law in your
               country of residence provides otherwise.
-            </p>
-            <p>
-              <em>
-                [Note for review: replace with the specific jurisdiction
-                (e.g., &ldquo;the State of Delaware, United States&rdquo;)
-                before publishing.]
-              </em>
             </p>
           </section>
 
