@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "May 5, 2026";
+const LAST_UPDATED = "May 6, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -207,7 +207,7 @@ export default function PrivacyPage() {
             </ul>
 
             <p>
-              <strong>What Sombra hides, and what it does not.</strong>. 
+              <strong>What Sombra hides, and what it does not.</strong>
               Token amounts and token types of vault-to-vault transfers are 
               encrypted on-chain and only the receiver can decrypt them. 
               Vault identifiers are pseudonymous hashes of Kyber public keys, 
