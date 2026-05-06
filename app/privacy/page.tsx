@@ -163,10 +163,13 @@ export default function PrivacyPage() {
             <ul>
               <li>
                 <strong>On-chain UTXO payloads</strong> are encrypted with{" "}
-                <strong>ChaCha20-Poly1305</strong>. The 32-byte symmetric key
-                is derived per-UTXO via Kyber-768 key encapsulation between
-                the sender and the receiver&rsquo;s vault, so only the
-                receiver can decrypt.
+                <strong>ChaCha20-Poly1305</strong>. For each UTXO, the sender
+                uses Kyber-768 to encapsulate a fresh 32-byte shared secret
+                against the receiver vault&rsquo;s Kyber public key; that
+                shared secret is used directly as the ChaCha20-Poly1305 key.
+                Only the receiver &mdash; who holds the matching Kyber secret
+                key &mdash; can decapsulate the same secret and decrypt the
+                payload.
               </li>
               <li>
                 <strong>The local encrypted vault</strong> (the file containing
