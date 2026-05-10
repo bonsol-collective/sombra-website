@@ -12,6 +12,8 @@ export function Footer() {
         <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">
           Whitepaper
         </a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
         <a
           href="https://x.com/bonsol_labs"
           target="_blank"
