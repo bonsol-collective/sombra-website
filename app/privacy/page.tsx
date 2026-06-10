@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "May 6, 2026";
+const LAST_UPDATED = "June 3, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
                 via PBKDF2 (600,000 iterations, SHA-256) and sealed with
                 AES-256-GCM. The unencrypted secret only exists in volatile
                 memory while the Wallet is unlocked, and is wiped on lock or
-                after 5 minutes of inactivity.
+                automatically 10 minutes after you unlock.
               </li>
               <li>
                 <strong>Public wallet data</strong> — your Solana public
@@ -81,14 +81,17 @@ export default function PrivacyPage() {
               <li>
                 <strong>Cached UTXOs and balances</strong> — to render your
                 portfolio instantly when you re-open the popup, the Wallet
-                caches the <strong>decrypted</strong> UTXO list (token
-                amounts, sender/receiver vault identifiers) in{" "}
-                <code>chrome.storage.local</code>. This cache is not encrypted
-                at rest with your password &mdash; it is rebuilt on each sync
-                after unlock. File-system access to the Chrome profile can
-                therefore reveal your decrypted transaction history; we
-                recommend treating Sombra as a hot wallet and avoiding use on
-                shared or untrusted machines.
+                caches your UTXO list (token amounts, sender/receiver vault
+                identifiers) in <code>chrome.storage.local</code>,{" "}
+                <strong>encrypted at rest with AES-256-GCM</strong> under a key
+                derived from your wallet secret that only exists in volatile
+                memory while the Wallet is unlocked. The sealed snapshot is
+                additionally bound (via AEAD associated data) to your account,
+                network, and vault, so it cannot be decrypted under a different
+                identity, and it cannot be read from the Chrome profile on disk
+                while the Wallet is locked. As with any hot wallet, treat a
+                device on which the Wallet is currently unlocked as sensitive,
+                and avoid shared or untrusted machines.
               </li>
               <li>
                 <strong>Pending job state</strong> — the status of in-flight
