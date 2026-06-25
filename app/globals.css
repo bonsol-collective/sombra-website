@@ -907,6 +907,16 @@ section { padding: 140px 36px; position: relative; }
   transition: color 0.2s;
 }
 .legal-body a:hover { color: var(--fg); }
+.legal-callout {
+  margin: 0 0 40px 0;
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent);
+  border-radius: 2px;
+}
+.legal-callout p { margin-bottom: 0; }
+.legal-callout strong { color: var(--fg); }
 
 @media (max-width: 640px) {
   .legal { padding: 110px 22px 60px; }

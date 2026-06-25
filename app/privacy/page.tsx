@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "June 3, 2026";
+const LAST_UPDATED = "June 25, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -31,9 +31,25 @@ export default function PrivacyPage() {
               We don&rsquo;t collect personal data, we don&rsquo;t run
               analytics, and your private keys never leave your device. Below
               is the full breakdown of what data exists, where it lives, and
-              what crosses a network.
+              what crosses a network. One important exception in this build: if
+              you use the default remote prover, the proving server operator can
+              temporarily read your decrypted transaction inputs (amounts, token
+              types, and destinations) while a proof is being generated. See
+              Section 4 for detail, and switch to Local prover mode if you
+              require zero trust.
             </p>
           </section>
+
+          <aside className="legal-callout">
+            <p>
+              <strong>Beta / DevNet notice.</strong> Sombra is currently in beta
+              and operates on the Solana DevNet test network only. Tokens on
+              DevNet are test tokens with no monetary value. This is pre-release
+              software: it may contain bugs, your test wallet and local data may
+              be reset between builds, and features may change or be removed
+              without notice.
+            </p>
+          </aside>
 
           <section>
             <h2>1. Who we are</h2>
@@ -221,8 +237,17 @@ export default function PrivacyPage() {
               and the destination wallet, token, and amount of any withdrawal
               back to a regular Solana wallet (these have to be public so 
               the SPL token program can execute the transfer). 
-              Anyone evaluating Sombra for a specific threat model 
+              Anyone evaluating Sombra for a specific threat model
               should review this trade-off carefully.
+            </p>
+            <p>
+              <strong>Anonymity is not guaranteed.</strong> Even with on-chain
+              payload encryption, your activity may be deanonymized through
+              transaction timing and graph analysis, correlation with the
+              destination wallets you withdraw to, the remote prover&rsquo;s view
+              of your inputs (see Section 4), or your own off-chain disclosures.
+              Sombra reduces what is visible on-chain; it does not make you
+              anonymous.
             </p>
           </section>
 
@@ -267,7 +292,41 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>8. Children</h2>
+            <h2>8. Data retention</h2>
+            <ul>
+              <li>
+                <strong>Local device data</strong> — your encrypted vault,
+                cached UTXOs, job state, and settings remain on your device
+                until you delete the extension&rsquo;s data or uninstall it. We
+                never receive them and therefore never retain them.
+              </li>
+              <li>
+                <strong>Remote prover inputs</strong> — proof inputs sent to the
+                Bonsol proving server are held only transiently in memory for the
+                duration of proof generation and are not written to persistent
+                storage.
+              </li>
+              <li>
+                <strong>QFire relay</strong> — proof bytes and sender vault
+                identifiers are processed to publish your proof to Solana and are
+                discarded after submission; the resulting transaction is, by
+                design, public on the Solana ledger.
+              </li>
+              <li>
+                <strong>Solana RPC metadata</strong> — standard request metadata
+                (including your IP address) may be logged by the RPC operator
+                under their own retention policy, which we do not control.
+              </li>
+              <li>
+                <strong>Waitlist email</strong> — held by Formspree as our
+                processor solely to contact you about beta access, and deleted on
+                request or when the beta program ends.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>9. Children</h2>
             <p>
               Sombra is not intended for users under 13 (or under 16 in the
               EU). We do not knowingly collect data from minors.
@@ -275,7 +334,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>9. Changes to this policy</h2>
+            <h2>10. Changes to this policy</h2>
             <p>
               When this policy changes in a material way, we will update the
               date above and announce the change in the Wallet&rsquo;s release
@@ -285,7 +344,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>10. Contact</h2>
+            <h2>11. Contact</h2>
             <p>
               Questions, deletion requests, or security disclosures:{" "}
               <a href="mailto:sombra@bonsol.org">sombra@bonsol.org</a>.
