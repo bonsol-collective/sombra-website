@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "May 5, 2026";
+const LAST_UPDATED = "June 25, 2026";
 
 export default function TermsPage() {
   return (
@@ -49,7 +49,23 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>2. Self-custody and key management</h2>
+            <h2>2. Beta software and DevNet</h2>
+            <p>
+              Sombra is currently a beta release that operates on the Solana
+              DevNet test network only. DevNet tokens are test tokens and have no
+              monetary value. The Software is pre-release and provided for testing
+              and evaluation: it may contain defects, behave unpredictably, lose
+              or reset your local data and test wallets between updates, and
+              change materially or be discontinued at any time. Do not use the
+              beta to store anything of value, and do not rely on it for any
+              production or financial purpose. When Sombra later supports Solana
+              Mainnet and real funds, these Terms will be updated and your
+              acceptance will be requested again.
+            </p>
+          </section>
+
+          <section>
+            <h2>3. Self-custody and key management</h2>
             <p>
               The Software is non-custodial. Your seed phrase and private keys
               live on your device, encrypted with a password you choose. We
@@ -69,7 +85,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>3. No financial advice</h2>
+            <h2>4. No financial advice</h2>
             <p>
               The Software is a tool. It is not investment advice, tax advice,
               or legal advice. Any decision to acquire, transfer, or dispose
@@ -79,7 +95,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>4. Compliance with local law</h2>
+            <h2>5. Compliance with local law</h2>
             <p>
               You agree to comply with all laws and regulations applicable to
               you, including sanctions, anti-money-laundering rules, and tax
@@ -92,7 +108,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>5. Third-party networks and services</h2>
+            <h2>6. Third-party networks and services</h2>
             <p>
               The Software interacts with the Solana blockchain and with
               Bonsol-operated infrastructure (QFire relay, optional remote
@@ -105,7 +121,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>6. No warranty</h2>
+            <h2>7. No warranty</h2>
             <p>
               THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS
               AVAILABLE&rdquo;, WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR
@@ -113,12 +129,14 @@ export default function TermsPage() {
               FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR THE ABSENCE OF
               BUGS, ERRORS, OR VULNERABILITIES. WE DO NOT WARRANT THAT THE
               SOFTWARE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE AGAINST
-              EVERY POSSIBLE ATTACK.
+              EVERY POSSIBLE ATTACK. WE DO NOT WARRANT THAT THE SOFTWARE PROVIDES
+              ANONYMITY OR UNTRACEABILITY; THE PRIVACY PROPERTIES AND THEIR LIMITS
+              ARE DESCRIBED IN THE PRIVACY POLICY.
             </p>
           </section>
 
           <section>
-            <h2>7. Limitation of liability</h2>
+            <h2>8. Limitation of liability</h2>
             <p>
               TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, BONSOL AND
               ITS AFFILIATES, OFFICERS, EMPLOYEES, AND CONTRIBUTORS WILL NOT
@@ -131,7 +149,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>8. No refunds</h2>
+            <h2>9. No refunds</h2>
             <p>
               The Software is free to use. Bonsol does not collect
               subscription fees from end users for the Wallet. On-chain
@@ -141,7 +159,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>9. Updates and discontinuation</h2>
+            <h2>10. Updates and discontinuation</h2>
             <p>
               We may update the Software at any time, including to add, remove,
               or change features, fix security issues, or comply with law.
@@ -153,7 +171,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>10. Intellectual property and license</h2>
+            <h2>11. Intellectual property and license</h2>
             <p>
               The Software is licensed, not sold. The source code is governed
               by the license file included with each component (currently
@@ -163,7 +181,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>11. Governing law</h2>
+            <h2>12. Governing law</h2>
             <p>
               These Terms are governed by the laws of the State of Delaware,
               United States, without regard to conflict-of-laws rules. Any
@@ -175,7 +193,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>12. Changes to these Terms</h2>
+            <h2>13. Changes to these Terms</h2>
             <p>
               We may revise these Terms from time to time. The current version
               is always at <a href="https://sombra.tech/terms">sombra.tech/terms</a>{" "}
@@ -186,7 +204,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>13. Contact</h2>
+            <h2>14. Contact</h2>
             <p>
               Legal notices and inquiries:{" "}
               <a href="mailto:sombra@bonsol.org">sombra@bonsol.org</a>.
