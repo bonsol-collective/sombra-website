@@ -5,12 +5,12 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy — Sombra",
   description:
-    "How Sombra handles user data. We don't collect personal data, we don't run analytics, and your private keys never leave your device.",
+    "How Sombra handles user data. We don't collect personal data, optional analytics and crash reporting can be turned off in Settings, and your private keys never leave your device.",
   alternates: { canonical: "/privacy" },
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "June 25, 2026";
+const LAST_UPDATED = "June 29, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -28,10 +28,12 @@ export default function PrivacyPage() {
             <h2>Summary</h2>
             <p>
               Sombra is a self-custody, post-quantum privacy wallet for Solana.
-              We don&rsquo;t collect personal data, we don&rsquo;t run
-              analytics, and your private keys never leave your device. Below
-              is the full breakdown of what data exists, where it lives, and
-              what crosses a network. One important exception in this build: if
+              We don&rsquo;t collect personal data, and your private keys never
+              leave your device. The Wallet does include optional, anonymous
+              analytics and crash reporting that you can switch off at any time
+              in Settings (see Section 5). Below is the full breakdown of what
+              data exists, where it lives, and what crosses a network. One
+              important exception in this build: if
               you use the default remote prover, the proving server operator can
               temporarily read your decrypted transaction inputs (amounts, token
               types, and destinations) while a proof is being generated. See
@@ -66,7 +68,8 @@ export default function PrivacyPage() {
             <h2>2. Data we do not collect</h2>
             <ul>
               <li>No accounts, no sign-up, no email required to use the Wallet.</li>
-              <li>No analytics or telemetry inside the Wallet (no Sentry, PostHog, Google Analytics, Mixpanel, or equivalents).</li>
+              <li>No personal data, account, or persistent user identifier &mdash; the optional analytics and crash reporting described in Section 5 are anonymous and assign no distinct ID to you.</li>
+              <li>No third-party advertising or marketing trackers inside the Wallet (no Google Analytics, Mixpanel, ad networks, or equivalents).</li>
               <li>No tracking cookies inside the Wallet.</li>
               <li>No clipboard scanning, no keystroke logging, no screen capture.</li>
               <li>No sale of data. Ever. There is no data to sell.</li>
@@ -120,7 +123,8 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>Settings</strong> — your prover mode, network
-                selection, and other UI preferences.
+                selection, your analytics and crash-reporting toggle
+                preferences, and other UI preferences.
               </li>
             </ul>
           </section>
@@ -189,11 +193,67 @@ export default function PrivacyPage() {
                 Chrome native messaging; nothing leaves your device for proof
                 generation in this mode.
               </li>
+              <li>
+                <strong>Analytics (PostHog)</strong> and{" "}
+                <strong>crash reporting (Sentry)</strong> — contacted only
+                while the corresponding toggle is enabled (both are on by
+                default and can be turned off in Settings). These endpoints
+                receive the anonymous usage and crash data described in
+                Section 5, and never receive your keys, seed phrase, or the
+                cleartext amounts, token types, or addresses of your
+                transactions.
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2>5. Cryptographic design</h2>
+            <h2>5. Optional analytics &amp; crash reporting</h2>
+            <p>
+              To help us fix bugs and understand which features are used, the
+              Wallet includes two optional, independently controllable
+              telemetry streams: product analytics (PostHog) and crash
+              reporting (Sentry). Both are <strong>enabled by default</strong>{" "}
+              and can be turned off at any time in Settings. Turning a toggle
+              off stops all collection for that stream.
+            </p>
+            <ul>
+              <li>
+                <strong>Anonymous, no distinct ID.</strong> Both streams
+                collect anonymous usage and stability data only. We do not
+                assign or transmit a persistent user identifier, account, or
+                device fingerprint that ties events back to you, and we do not
+                attempt to re-identify you across sessions.
+              </li>
+              <li>
+                <strong>Analytics (PostHog).</strong> When enabled, the Wallet
+                sends anonymous product-usage events &mdash; for example which
+                screens are opened and whether common actions succeed or fail
+                &mdash; so we can prioritize improvements.
+              </li>
+              <li>
+                <strong>Crash reporting (Sentry).</strong> When enabled, the
+                Wallet sends anonymized error and crash diagnostics (such as
+                the error type, a stack trace, and basic environment
+                information like the extension version and browser) when
+                something goes wrong.
+              </li>
+              <li>
+                <strong>What is never sent.</strong> Neither stream ever
+                receives your seed phrase, password, private or Kyber secret
+                keys, your encrypted vault, or the decrypted amounts, token
+                types, or addresses of your transactions. Diagnostic payloads
+                are scrubbed to avoid including this data.
+              </li>
+            </ul>
+            <p>
+              PostHog and Sentry act as data processors on our behalf and are
+              contacted only while the corresponding toggle is enabled. See
+              Section 9 for retention.
+            </p>
+          </section>
+
+          <section>
+            <h2>6. Cryptographic design</h2>
             <p>
               Sombra is built on post-quantum primitives. Asymmetric encryption
               uses Kyber-768 (NIST ML-KEM-768). Hashing uses SHA-256.
@@ -252,7 +312,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>6. Permissions the extension requests</h2>
+            <h2>7. Permissions the extension requests</h2>
             <ul>
               <li>
                 <code>storage</code> — to persist your encrypted vault, cached
@@ -269,17 +329,19 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <code>host_permissions</code> — limited to the Solana RPC, the
-                QFire relay, and the remote prover URL (the Wallet uses the
-                remote prover by default; the local daemon path uses native
-                messaging instead, which doesn&rsquo;t require an HTTPS host
-                permission). No content scripts; the extension never reads or
-                modifies any website you visit.
+                QFire relay, the remote prover URL, and the analytics (PostHog)
+                and crash-reporting (Sentry) endpoints used by the optional
+                telemetry described in Section 5 (the Wallet uses the remote
+                prover by default; the local daemon path uses native messaging
+                instead, which doesn&rsquo;t require an HTTPS host permission).
+                No content scripts; the extension never reads or modifies any
+                website you visit.
               </li>
             </ul>
           </section>
 
           <section>
-            <h2>7. Marketing site (sombra.tech)</h2>
+            <h2>8. Marketing site (sombra.tech)</h2>
             <p>
               The marketing site uses Vercel hosting and Vercel Analytics for
               aggregate traffic measurement (page views, referrers,
@@ -292,7 +354,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>8. Data retention</h2>
+            <h2>9. Data retention</h2>
             <ul>
               <li>
                 <strong>Local device data</strong> — your encrypted vault,
@@ -318,6 +380,15 @@ export default function PrivacyPage() {
                 under their own retention policy, which we do not control.
               </li>
               <li>
+                <strong>Analytics &amp; crash-reporting data</strong> — when the
+                respective toggle is enabled, anonymous usage events (PostHog)
+                and crash diagnostics (Sentry) are retained by those processors
+                under their standard retention policies. Because the data is
+                anonymous and carries no distinct user identifier, it cannot be
+                attributed back to you. Turning a toggle off in Settings stops
+                further collection for that stream.
+              </li>
+              <li>
                 <strong>Waitlist email</strong> — held by Formspree as our
                 processor solely to contact you about beta access, and deleted on
                 request or when the beta program ends.
@@ -326,7 +397,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>9. Children</h2>
+            <h2>10. Children</h2>
             <p>
               Sombra is not intended for users under 13 (or under 16 in the
               EU). We do not knowingly collect data from minors.
@@ -334,7 +405,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>10. Changes to this policy</h2>
+            <h2>11. Changes to this policy</h2>
             <p>
               When this policy changes in a material way, we will update the
               date above and announce the change in the Wallet&rsquo;s release
@@ -344,7 +415,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>11. Contact</h2>
+            <h2>12. Contact</h2>
             <p>
               Questions, deletion requests, or security disclosures:{" "}
               <a href="mailto:sombra@bonsol.org">sombra@bonsol.org</a>.

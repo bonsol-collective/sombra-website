@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "June 25, 2026";
+const LAST_UPDATED = "July 1, 2026";
 
 export default function TermsPage() {
   return (
@@ -118,6 +118,21 @@ export default function TermsPage() {
               on Solana may delay, prevent, or alter your transactions. We
               are not liable for these events.
             </p>
+            <p>
+              With analytics or crash reporting enabled, the Software also
+              talks to third-party processors (PostHog and Sentry) whose acts
+              and omissions are outside our control and for which we are not
+              liable.
+            </p>
+            <aside className="legal-callout">
+              <p>
+                <strong>Analytics &amp; crash reporting are optional.</strong>{" "}
+                Both are anonymous, carry no distinct user identifier, and can
+                be switched off in Settings. See the{" "}
+                <a href="https://sombra.tech/privacy">Privacy Policy</a> for the
+                full breakdown.
+              </p>
+            </aside>
           </section>
 
           <section>
