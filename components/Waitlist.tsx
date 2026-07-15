@@ -24,29 +24,47 @@ function Recaptcha() {
     const container = ref.current;
     if (!RECAPTCHA_SITE_KEY || !container) return;
 
+    const widgetTheme = () =>
+      document.documentElement.getAttribute("data-theme") === "eclipse"
+        ? "dark"
+        : "light";
+
     const render = () => {
-      // grecaptcha.render throws if called twice on the same element
-      // (React strict mode re-runs effects in dev).
-      if (container.childNodes.length === 0) {
-        window.grecaptcha!.render(container, {
-          sitekey: RECAPTCHA_SITE_KEY,
-          theme: "dark",
-        });
-      }
+      if (!window.grecaptcha?.render) return;
+      // grecaptcha refuses to render twice into the same element, so mount
+      // each widget in a fresh child div (also makes re-renders idempotent
+      // under React strict mode's double-run effects).
+      container.replaceChildren();
+      const slot = document.createElement("div");
+      container.appendChild(slot);
+      window.grecaptcha.render(slot, {
+        sitekey: RECAPTCHA_SITE_KEY,
+        theme: widgetTheme(),
+      });
     };
+
+    // The widget's theme is fixed at render time - re-render it when the
+    // site theme toggles so it follows eclipse/dusk/grid.
+    const observer = new MutationObserver(render);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
 
     if (window.grecaptcha?.render) {
       render();
-      return;
+    } else {
+      window.onRecaptchaLoad = render;
+      if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
+        const script = document.createElement("script");
+        script.src =
+          "https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit";
+        script.async = true;
+        document.head.appendChild(script);
+      }
     }
-    window.onRecaptchaLoad = render;
-    if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
-      const script = document.createElement("script");
-      script.src =
-        "https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit";
-      script.async = true;
-      document.head.appendChild(script);
-    }
+
+    return () => observer.disconnect();
   }, []);
 
   return <div ref={ref} className="waitlist-captcha" />;
