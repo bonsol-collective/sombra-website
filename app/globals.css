@@ -752,6 +752,21 @@ section { padding: 140px 36px; position: relative; }
 }
 .waitlist h2 i { font-style: italic; color: var(--accent); }
 .waitlist p { margin-top: 24px; color: var(--fg-dim); font-size: 17px; }
+/* Anti-spam honeypot: visually removed but still present in the form's
+   FormData so bots that fill every field trip it. Not display:none -
+   position keeps it in the DOM the way scrapers expect. */
+.waitlist-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.waitlist-captcha {
+  margin-top: 16px;
+  display: flex; justify-content: center;
+}
+.waitlist-captcha:empty { display: none; }
 .waitlist-form {
   margin: 48px auto 0;
   max-width: 520px;
