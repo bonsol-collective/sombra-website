@@ -123,8 +123,8 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>Settings</strong> — your prover mode, network
-                selection, your analytics and crash-reporting toggle
-                preferences, and other UI preferences.
+                selection, your analytics and crash-reporting preference,
+                and other UI preferences.
               </li>
             </ul>
           </section>
@@ -196,8 +196,9 @@ export default function PrivacyPage() {
               <li>
                 <strong>Analytics (PostHog)</strong> and{" "}
                 <strong>crash reporting (Sentry)</strong> — contacted only
-                while the corresponding toggle is enabled (both are on by
-                default and can be turned off in Settings). These endpoints
+                while the analytics &amp; crash-reporting toggle is enabled (it
+                is on by default and can be turned off in Settings). These
+                endpoints
                 receive the anonymous usage and crash data described in
                 Section 5, and never receive your keys, seed phrase, or the
                 cleartext amounts, token types, or addresses of your
@@ -210,11 +211,11 @@ export default function PrivacyPage() {
             <h2>5. Optional analytics &amp; crash reporting</h2>
             <p>
               To help us fix bugs and understand which features are used, the
-              Wallet includes two optional, independently controllable
-              telemetry streams: product analytics (PostHog) and crash
-              reporting (Sentry). Both are <strong>enabled by default</strong>{" "}
-              and can be turned off at any time in Settings. Turning a toggle
-              off stops all collection for that stream.
+              Wallet includes two optional telemetry streams: product analytics
+              (PostHog) and crash reporting (Sentry). Both are{" "}
+              <strong>enabled by default</strong> and are controlled by a single
+              &ldquo;Analytics &amp; crash reports&rdquo; switch in Settings.
+              Turning it off stops all collection for both streams immediately.
             </p>
             <ul>
               <li>
@@ -247,8 +248,8 @@ export default function PrivacyPage() {
             </ul>
             <p>
               PostHog and Sentry act as data processors on our behalf and are
-              contacted only while the corresponding toggle is enabled. See
-              Section 9 for retention.
+              contacted only while the Analytics &amp; crash reports toggle is
+              enabled. See Section 9 for retention.
             </p>
           </section>
 
@@ -381,12 +382,12 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>Analytics &amp; crash-reporting data</strong> — when the
-                respective toggle is enabled, anonymous usage events (PostHog)
-                and crash diagnostics (Sentry) are retained by those processors
-                under their standard retention policies. Because the data is
-                anonymous and carries no distinct user identifier, it cannot be
-                attributed back to you. Turning a toggle off in Settings stops
-                further collection for that stream.
+                Analytics &amp; crash reports toggle is enabled, anonymous usage
+                events (PostHog) and crash diagnostics (Sentry) are retained by
+                those processors under their standard retention policies.
+                Because the data is anonymous and carries no distinct user
+                identifier, it cannot be attributed back to you. Turning it off
+                in Settings stops further collection from both streams.
               </li>
               <li>
                 <strong>Waitlist email</strong> — held by Formspree as our
