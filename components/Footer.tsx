@@ -28,6 +28,13 @@ export function Footer() {
         >
           Telegram
         </a>
+        <a
+          href="https://discord.gg/cSrTYAT2US"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Discord
+        </a>
       </div>
     </footer>
   );

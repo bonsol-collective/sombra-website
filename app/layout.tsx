@@ -93,6 +93,7 @@ const JSON_LD = {
       sameAs: [
         "https://x.com/bonsol_labs",
         "https://t.me/+l2s8ejQ170U2ZDUx",
+        "https://discord.gg/cSrTYAT2US",
       ],
     },
     {
