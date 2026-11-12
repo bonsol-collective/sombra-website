@@ -17,7 +17,7 @@
   flex: 1; min-width: 0; height: 469px; overflow: hidden; border-radius: 12px; background: #f5f5f5;
   display: flex; align-items: center; justify-content: center;
 }
-.ring img { display: block; width: 431px; height: 431px; }
+.ring img { display: block; width: 431px; height: 431px; mix-blend-mode: darken; } /* hides the WebP's 1-level-lighter background square */
 
 /* Steps 2–3 art on Figma's 857×469 panel grid; everything in % so it scales down. */
 .stage { position: relative; width: min(100%, 857px); aspect-ratio: 857 / 469; }
@@ -68,6 +68,10 @@
   .title { margin-bottom: 40px; }
   .row { flex-direction: column; align-items: stretch; }
   .steps { flex-basis: auto; }
-  .visual { height: 320px; }
-  .ring img { width: 300px; height: 300px; }
+  /* Same square box for every step (flex: none, or the column flexbox sizes it to its art). */
+  .visual { flex: none; height: auto; aspect-ratio: 1 / 1; }
+  .ring { width: 83%; }
+  .ring img { width: 100%; height: auto; }
+  /* Coins/wallet sit in the middle ~60% of the 857×469 grid — enlarge it to fill the square. */
+  .stage { flex: none; width: 140%; }
 }
