@@ -1,5 +1,5 @@
 /* Shared 50/50 copy + photo layout (Figma Wallet 422:44353, Swaps 422:44368). */
-.split { display: grid; grid-template-columns: 1fr 1fr; min-height: 732px; padding: 0; }
+.split { display: grid; grid-template-columns: 1fr 1fr; min-height: 732px; }
 .copy {
   padding: 120px var(--pad-x) 100px;
   display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 48px;

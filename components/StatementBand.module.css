@@ -1,5 +1,4 @@
 /* Figma 53:17142 (1440×700) / 234:1294 (402×460, inset rounded card) */
-.section { padding: 0; }
 .card {
   position: relative; isolation: isolate; height: 700px;
   display: flex; align-items: center; justify-content: center;

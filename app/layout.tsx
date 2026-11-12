@@ -1,23 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-
-const geist = Geist({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-geist",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
-  display: "swap",
-});
 
 // APK Galeria (Autograph Type Design) — licensed by Sombra / Bonsol Labs.
 const galeria = localFont({
@@ -28,18 +12,11 @@ const galeria = localFont({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://sombra.tech"),
   title: "Sombra",
   description:
-    "Sombra brings quantum-safe privacy to Solana. Private trading and transfers, built for the quantum era.",
+    "The new privacy standard powering the next era of money. Sombra keeps balances, payroll and B2B settlements confidential on Solana, with post-quantum cryptography.",
   alternates: { canonical: "/" },
   authors: [{ name: "Bonsol Labs", url: "https://bonsol.org" }],
   creator: "Bonsol Labs",
@@ -71,10 +48,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4ebe0" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0908" },
-  ],
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -147,18 +121,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      data-theme="dusk"
-      className={`${galeria.variable} ${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={galeria.variable}>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('sombra-theme');if(t==='eclipse'||t==='dusk'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
