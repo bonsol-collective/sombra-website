@@ -1,6 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { PrivateDefi } from "@/components/PrivateDefi";
+import { StatementBand } from "@/components/StatementBand";
 import { ProofBand } from "@/components/ProofBand";
 import { Pillars } from "@/components/Pillars";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -16,6 +17,7 @@ export default function Page() {
       <main className="page">
       <Hero />
       <PrivateDefi />
+      <StatementBand />
       <ProofBand />
       <Pillars />
       <HowItWorks />
