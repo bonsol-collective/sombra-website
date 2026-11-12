@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArtStage } from "./coprocessor/ArtStage";
 import { PayrollArt } from "./coprocessor/PayrollArt";
 import { CrossBorderArt } from "./coprocessor/CrossBorderArt";
+import { StocksArt } from "./coprocessor/StocksArt";
 import s from "./CoProcessor.module.css";
 
 type Card = { art: string; title: string; body: string; Art?: () => React.ReactNode };
@@ -9,7 +10,7 @@ type Card = { art: string; title: string; body: string; Art?: () => React.ReactN
 const CARDS: Card[] = [
   { art: "payroll", Art: PayrollArt, title: "Payroll", body: "Pay employees, contractors and vendors on-chain without putting salaries, rates or contract terms on the public record." },
   { art: "cross-border", Art: CrossBorderArt, title: "Cross-border payments", body: "Send stablecoins internationally while keeping amounts and counterparties private." },
-  { art: "stocks", title: "Trade tokenised stocks", body: "Trade supported tokenised stocks and funds without revealing position size or trade direction." },
+  { art: "stocks", Art: StocksArt, title: "Trade tokenised stocks", body: "Trade supported tokenised stocks and funds without revealing position size or trade direction." },
   { art: "deals", title: "Strategic Deals", body: "Execute acquisitions and token buybacks privately, so your moves don’t signal the market before you’re ready." },
   { art: "treasury", title: "Treasury", body: "Put your treasury plans into motion privately, from reserve management and rebalancing to transfers across entities." },
   { art: "wallets", title: "Wallets", body: "Give wallet users a more discreet way to send assets, with private transfers built into the experience." },
