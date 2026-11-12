@@ -1,0 +1,16 @@
+/* Figma 3:6101 (1440×700) / 234:2342 (402×569) */
+.section {
+  position: relative; isolation: isolate; min-height: 700px; padding: 80px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  color: var(--color-paper); text-align: center;
+}
+.bg { object-fit: cover; z-index: -2; }
+.section::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(19, 0, 0, 0.2); }
+.eyebrow { font-size: 12px; line-height: 1.45; letter-spacing: -0.03em; text-transform: uppercase; }
+.text { max-width: 825px; font-size: 24px; line-height: 1.45; letter-spacing: -0.03em; }
+
+@media (max-width: 900px) {
+  .section { min-height: 569px; padding: 80px 20px; }
+  .eyebrow { font-size: 10px; }
+  .text { max-width: 338px; font-size: 18px; }
+}
