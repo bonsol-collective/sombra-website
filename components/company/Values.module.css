@@ -2,13 +2,14 @@
 .section { display: grid; grid-template-columns: 1fr 1fr; min-height: 732px; }
 
 .slider { position: relative; overflow: hidden; background: #f5f5f5; aspect-ratio: 720 / 732; }
-.track { position: absolute; inset: 0 0 auto; display: flex; flex-direction: column; animation: slide 12s cubic-bezier(.65, 0, .25, 1) infinite; }
+.track { position: absolute; inset: 0 0 auto; display: flex; flex-direction: column; animation: slide 11.4s ease-in-out infinite; }
 .track img { display: block; width: 100%; height: auto; }
 /* 3 slides + a copy of the first: the jump from the copy back to 0 is invisible. */
+/* Figma motion (356:25679): 11.4s, hold → ease-in-out slide, times from Figma. */
 @keyframes slide {
-  0%, 26% { transform: translateY(0); }
-  33.3%, 59% { transform: translateY(-25%); }
-  66.6%, 92% { transform: translateY(-50%); }
+  0%, 26.32% { transform: translateY(0); }
+  33.33%, 59.65% { transform: translateY(-25%); }
+  66.67%, 92.98% { transform: translateY(-50%); }
   100% { transform: translateY(-75%); }
 }
 
