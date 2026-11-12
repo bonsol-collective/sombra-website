@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -15,6 +16,15 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+// APK Galeria (Autograph Type Design) — licensed by Sombra / Bonsol Labs.
+const galeria = localFont({
+  src: "./fonts/APKGaleria.woff2",
+  weight: "400",
+  style: "normal",
+  variable: "--font-galeria",
   display: "swap",
 });
 
@@ -140,7 +150,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dusk"
-      className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      className={`${galeria.variable} ${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>
