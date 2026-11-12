@@ -1,0 +1,19 @@
+/* Figma 3:6149 — 1440×900 incl. 72px nav; visual 675×638 at right */
+.section {
+  max-width: 1440px; margin: 0 auto; min-height: 828px; padding: 78px var(--pad-x) 40px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 675px; align-items: center; gap: 40px;
+}
+.copy { grid-row: 1; grid-column: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
+.title { font-size: 48px; line-height: 1.1; letter-spacing: -0.05em; font-weight: 400; }
+.text { max-width: 435px; }
+.visual { grid-row: 1; grid-column: 2; height: 638px; border-radius: 24px; background: var(--color-surface); }
+
+@media (max-width: 1200px) {
+  .section { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .section { display: flex; flex-direction: column; align-items: stretch; gap: 24px; min-height: 0; padding: 32px 20px 20px; }
+  .copy { gap: 24px; }
+  .title { font-size: 34px; }
+  .visual { height: 300px; border-radius: 16px; }
+}
