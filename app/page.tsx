@@ -6,6 +6,7 @@ import { ValueFlow } from "@/components/ValueFlow";
 import { Wallet } from "@/components/Wallet";
 import { Swaps } from "@/components/Swaps";
 import { CoProcessor } from "@/components/CoProcessor";
+import { ThreeSteps } from "@/components/ThreeSteps";
 import { ProofBand } from "@/components/ProofBand";
 import { Pillars } from "@/components/Pillars";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -26,6 +27,7 @@ export default function Page() {
       <Wallet />
       <Swaps />
       <CoProcessor />
+      <ThreeSteps />
       <ProofBand />
       <Pillars />
       <HowItWorks />
