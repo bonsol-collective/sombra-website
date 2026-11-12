@@ -1,4 +1,5 @@
 import { ButtonLink } from "./ButtonLink";
+import { DefiMesh } from "./DefiMesh";
 import s from "./PrivateDefi.module.css";
 
 /** Figma 3:6025 (desktop) / 347:80 (mobile). */
@@ -13,8 +14,8 @@ export function PrivateDefi() {
         </p>
         <ButtonLink href="/demo" arrow>Get started</ButtonLink>
       </div>
-      {/* TODO(design): Figma has an "Animation:" placeholder here; no animation delivered yet. */}
-      <div className={s.visual} aria-hidden="true" />
+      {/* Animation for Figma's "Animation:" slot — the DeFi mesh export. */}
+      <DefiMesh />
     </section>
   );
 }
