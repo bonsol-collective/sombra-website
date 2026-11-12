@@ -1,0 +1,52 @@
+/* Figma Navbar 458:136 — White (solid) is the default; .clear = Transparent */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: 72px; padding: 0 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--color-paper); color: var(--color-ink);
+  transition: background 550ms var(--ease), color 550ms var(--ease);
+}
+.spacer { height: 72px; }
+
+.logo { position: relative; display: block; width: 24px; height: 24px; }
+.logo img { position: absolute; inset: 0; transition: opacity 550ms var(--ease); }
+.markWhite { opacity: 0; }
+
+.links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 36px; font-size: 14px; line-height: 1.45; white-space: nowrap;
+}
+.links a:hover { opacity: 0.7; }
+
+.actions { display: flex; gap: 10px; }
+.action { transition: background 550ms var(--ease), filter 0.2s var(--ease); }
+
+/* Transparent over the hero until scrolled, hovered or opened */
+.clear:not(:hover) { background: transparent; color: var(--color-paper); }
+.clear:not(:hover) .markWhite { opacity: 1; }
+.clear:not(:hover) .markInk { opacity: 0; }
+.clear:not(:hover) .action { background: var(--color-paper); }
+
+.menuToggle { display: none; width: 24px; height: 24px; }
+.clear:not(:hover) .menuToggle img { filter: brightness(0) invert(1); }
+
+.panel {
+  position: absolute; top: 100%; left: 0; right: 0;
+  display: flex; flex-direction: column; gap: 20px;
+  padding: 16px 20px 28px;
+  background: var(--color-paper); color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+  font-size: 28px; line-height: 1.1; letter-spacing: -0.05em;
+}
+.panelActions { display: flex; gap: 10px; padding-top: 8px; }
+
+@media (max-width: 900px) {
+  .nav { height: 56px; padding: 0 20px; }
+  .spacer { height: 56px; }
+  .links, .actions { display: none; }
+  .menuToggle { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav, .logo img, .action { transition: none; }
+}
