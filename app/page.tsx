@@ -8,12 +8,6 @@ import { Swaps } from "@/components/Swaps";
 import { CoProcessor } from "@/components/CoProcessor";
 import { ThreeSteps } from "@/components/ThreeSteps";
 import { TransparencyBand } from "@/components/TransparencyBand";
-import { ProofBand } from "@/components/ProofBand";
-import { Pillars } from "@/components/Pillars";
-import { HowItWorks } from "@/components/HowItWorks";
-import { PrivacyDemo } from "@/components/PrivacyDemo";
-import { Quantum } from "@/components/Quantum";
-import { Waitlist } from "@/components/Waitlist";
 import { Footer } from "@/components/Footer";
 
 export default function Page() {
@@ -21,21 +15,15 @@ export default function Page() {
     <>
       <Nav overlay />
       <main className="page">
-      <Hero />
-      <PrivateDefi />
-      <StatementBand />
-      <ValueFlow />
-      <Wallet />
-      <Swaps />
-      <CoProcessor />
-      <ThreeSteps />
-      <TransparencyBand />
-      <ProofBand />
-      <Pillars />
-      <HowItWorks />
-      <PrivacyDemo />
-      <Quantum />
-      <Waitlist />
+        <Hero />
+        <PrivateDefi />
+        <StatementBand />
+        <ValueFlow />
+        <Wallet />
+        <Swaps />
+        <CoProcessor />
+        <ThreeSteps />
+        <TransparencyBand />
       </main>
       <Footer />
     </>
