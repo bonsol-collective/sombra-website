@@ -33,8 +33,7 @@ export function Footer() {
     <footer className={s.footer}>
       <div className={s.inner}>
         <div className={s.brand}>
-          <img className={s.logoDesktop} src="/brand/footer-logo.svg" width={230} height={44} alt="Sombra" />
-          <img className={s.logoMobile} src="/brand/footer-mark.svg" width={31} height={32} alt="Sombra" />
+          <img className={s.logo} src="/brand/logomark_white.svg" width={32} height={32} alt="Sombra" />
           <p className={s.tagline}>The foundation of private value.</p>
           {/* Hands the email to /demo, which prefills its form. */}
           <form className={s.signup} action="/demo" method="get">
@@ -66,7 +65,7 @@ export function Footer() {
           ))}
         </nav>
       </div>
-      <img className={s.wordmark} src="/brand/wordmark-footer.svg" width={1376} height={320} alt="" />
+      <img className={s.wordmark} src="/brand/wordmark_white.svg" width={1376} height={320} alt="" />
     </footer>
   );
 }

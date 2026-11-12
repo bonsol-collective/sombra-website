@@ -11,7 +11,7 @@
   display: flex; justify-content: space-between; align-items: flex-start; gap: 48px;
 }
 .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 48px; }
-.logoMobile, .ctaMobile { display: none; }
+.ctaMobile { display: none; }
 .tagline { font-size: 24px; line-height: 1.1; letter-spacing: -0.04em; }
 
 .signup {
@@ -39,15 +39,15 @@
 .colTitle { color: var(--color-paper); }
 .column a:hover { color: var(--color-paper); }
 
-.wordmark { width: calc(100% - 64px); max-width: 1376px; height: auto; display: block; }
+.wordmark { width: calc(100% - 64px); max-width: 1376px; height: auto; display: block; opacity: 0.05; }
 
 @media (max-width: 900px) {
   .inner { flex-direction: column; gap: 32px; padding: calc(80px + 48px) 20px 40px; }
-  .logoDesktop, .cta { display: none; }
-  .logoMobile, .ctaMobile { display: inline; }
+  .cta { display: none; }
+  .ctaMobile { display: inline; }
   .tagline { font-size: 20px; }
   .brand { display: contents; }
-  .logoMobile, .tagline { margin-bottom: 16px; }
+  .logo, .tagline { margin-bottom: 16px; }
   .signup { width: 100%; }
   .signup { flex-direction: column; align-items: stretch; gap: 12px; padding: 0; background: none; }
   .email { height: 54px; padding: 0 24px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); text-align: center; }

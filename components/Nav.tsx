@@ -39,8 +39,8 @@ export function Nav({ overlay = false }: { overlay?: boolean }) {
     <>
       <header className={`${s.nav} ${clear ? s.clear : ""}`}>
         <Link href="/" className={s.logo} aria-label="Sombra — home">
-          <img className={s.markInk} src="/brand/mark-ink.svg" width={24} height={24} alt="" />
-          <img className={s.markWhite} src="/brand/mark-white.svg" width={24} height={24} alt="" />
+          <img className={s.markInk} src="/brand/logomark_black.svg" width={24} height={24} alt="" />
+          <img className={s.markWhite} src="/brand/logomark_white.svg" width={24} height={24} alt="" />
         </Link>
 
         <nav className={s.links} aria-label="Main">
