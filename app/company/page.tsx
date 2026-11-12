@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Mission } from "@/components/company/Mission";
 import { Belief } from "@/components/company/Belief";
+import { Values } from "@/components/company/Values";
 
 export const metadata: Metadata = {
   title: "Company — Sombra",
@@ -18,6 +19,7 @@ export default function CompanyPage() {
       <main className="page">
         <Mission />
         <Belief />
+        <Values />
       </main>
       <Footer />
     </>
