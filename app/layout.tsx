@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Sombra — Step into the shadow.",
+        alt: "Sombra — The new privacy standard powering the next era of money.",
       },
     ],
     type: "website",
