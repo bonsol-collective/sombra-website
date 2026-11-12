@@ -3,6 +3,7 @@ import { ArtStage } from "./coprocessor/ArtStage";
 import { PayrollArt } from "./coprocessor/PayrollArt";
 import { CrossBorderArt } from "./coprocessor/CrossBorderArt";
 import { StocksArt } from "./coprocessor/StocksArt";
+import { CheckoutArt, DefiArt, WalletsArt } from "./coprocessor/OverlayArts";
 import s from "./CoProcessor.module.css";
 
 type Card = { art: string; title: string; body: string; Art?: () => React.ReactNode };
@@ -13,9 +14,9 @@ const CARDS: Card[] = [
   { art: "stocks", Art: StocksArt, title: "Trade tokenised stocks", body: "Trade supported tokenised stocks and funds without revealing position size or trade direction." },
   { art: "deals", title: "Strategic Deals", body: "Execute acquisitions and token buybacks privately, so your moves don’t signal the market before you’re ready." },
   { art: "treasury", title: "Treasury", body: "Put your treasury plans into motion privately, from reserve management and rebalancing to transfers across entities." },
-  { art: "wallets", title: "Wallets", body: "Give wallet users a more discreet way to send assets, with private transfers built into the experience." },
-  { art: "defi", title: "De-Fi Applications", body: "Create financial products where users decide how much of their activity the world gets to see." },
-  { art: "checkout", title: "Merchant Checkout", body: "Let customers pay in stablecoins while keeping the connection between their wallet and their purchase private." },
+  { art: "wallets", Art: WalletsArt, title: "Wallets", body: "Give wallet users a more discreet way to send assets, with private transfers built into the experience." },
+  { art: "defi", Art: DefiArt, title: "De-Fi Applications", body: "Create financial products where users decide how much of their activity the world gets to see." },
+  { art: "checkout", Art: CheckoutArt, title: "Merchant Checkout", body: "Let customers pay in stablecoins while keeping the connection between their wallet and their purchase private." },
 ];
 
 /**
