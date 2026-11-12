@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
+import { PrivateDefi } from "@/components/PrivateDefi";
 import { ProofBand } from "@/components/ProofBand";
 import { Pillars } from "@/components/Pillars";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -14,6 +15,7 @@ export default function Page() {
       <Nav overlay />
       <main className="page">
       <Hero />
+      <PrivateDefi />
       <ProofBand />
       <Pillars />
       <HowItWorks />

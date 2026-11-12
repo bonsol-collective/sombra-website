@@ -98,10 +98,12 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   position: relative; z-index: 1; overflow: clip;
   background: var(--color-paper); border-radius: 0 0 48px 48px;
 }
-.t-h2 {
-  font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.05em; font-weight: 400;
+.t-h2 { font-size: 48px; line-height: 1.1; letter-spacing: -0.05em; font-weight: 400; }
+.t-body { font-size: 18px; line-height: 1.45; letter-spacing: -0.03em; color: var(--color-muted); }
+@media (max-width: 900px) {
+  .t-h2 { font-size: 30px; }
+  .t-body { font-size: 16px; }
 }
-.t-body { font-size: 16px; line-height: 1.45; color: var(--color-muted); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 4px;
