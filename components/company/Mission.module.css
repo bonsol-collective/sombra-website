@@ -1,5 +1,7 @@
 /* Figma 356:9431 / 320:82780 — 2 × 900px panels, hills photo + 40% black */
-.section { position: relative; background: var(--color-ink); color: var(--color-paper); }
+/* overflow: clip keeps the pinned photo inside this section (it would otherwise ride
+   100vh past the end and paint over the next sections) without breaking sticky. */
+.section { position: relative; overflow: clip; background: var(--color-ink); color: var(--color-paper); }
 .pin { position: sticky; top: 0; height: 100vh; margin-bottom: -100vh; overflow: hidden; }
 .bg { object-fit: cover; }
 .pin::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
