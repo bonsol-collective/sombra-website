@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { TrustHero } from "@/components/trust/TrustHero";
 import { TrustCards } from "@/components/trust/TrustCards";
+import { Faq } from "@/components/trust/Faq";
 
 export const metadata: Metadata = {
   title: "Trust & Compliance — Sombra",
@@ -18,6 +19,7 @@ export default function TrustPage() {
       <main className="page">
         <TrustHero />
         <TrustCards />
+        <Faq />
       </main>
       <Footer />
     </>
