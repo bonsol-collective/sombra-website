@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Mission } from "@/components/company/Mission";
 import { Belief } from "@/components/company/Belief";
 import { Values } from "@/components/company/Values";
+import { JoinUs } from "@/components/company/JoinUs";
 
 export const metadata: Metadata = {
   title: "Company — Sombra",
@@ -20,6 +21,7 @@ export default function CompanyPage() {
         <Mission />
         <Belief />
         <Values />
+        <JoinUs />
       </main>
       <Footer />
     </>
