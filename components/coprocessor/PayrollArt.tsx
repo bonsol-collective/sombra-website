@@ -1,4 +1,5 @@
 import m from "./motion.module.css";
+import { TypeIn } from "./TypeIn";
 import s from "./PayrollArt.module.css";
 
 // Sheet guide lines (Figma 242:11715–31): x, y, width in sheet px.
@@ -29,8 +30,8 @@ export function PayrollArt() {
           <p className={`${s.t} ${m.n242_11698}`} style={{ left: 233, top: 15.89, fontSize: 4 }}>5678</p>
           <p className={`${s.t} ${m.n242_11707}`} style={{ left: 225.1, top: 62.1 }}>USDT</p>
           <p className={`${s.t} ${m.n242_11711}`} style={{ left: 15.36, top: 84.27 }}>Memo</p>
-          <p className={`${s.num} ${m.n242_11703}`}>2134567 56789 43567890</p>
-          <p className={`${s.num} ${m.n333_193}`}>2134567 56789 43567890</p>
+          <p className={`${s.num} ${m.n242_11703}`}><TypeIn text="2134567 56789 43567890" start={1500} step={40} /></p>
+          <p className={`${s.num} ${m.n333_193}`}><TypeIn text="2134567 56789 43567890" start={6500} step={40} /></p>
           <div className={`${s.outline} ${m.n242_11735}`} />
         </div>
       </div>

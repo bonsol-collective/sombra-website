@@ -15,7 +15,7 @@
 }
 /* Art PNG is card-sized; skip its empty top 133px (20.98% of 634) */
 .art { aspect-ratio: 634 / 355; overflow: hidden; }
-.art img { display: block; width: 100%; height: auto; margin-top: -20.98%; }
+.art > img { display: block; width: 100%; height: auto; margin-top: -20.98%; }
 
 @media (max-width: 900px) {
   .section { padding: 80px 20px 40px; }
