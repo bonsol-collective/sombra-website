@@ -1,0 +1,24 @@
+/* Figma 356:9431 / 320:82780 — 2 × 900px panels, hills photo + 40% black */
+.section { position: relative; padding: 0; background: var(--color-ink); color: var(--color-paper); }
+.pin { position: sticky; top: 0; height: 100vh; margin-bottom: -100vh; overflow: hidden; }
+.bg { object-fit: cover; }
+.pin::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
+
+.panel {
+  position: relative; height: 900px; padding: 0 var(--pad-x);
+  display: flex; align-items: center; justify-content: center;
+}
+.eyebrow {
+  position: absolute; top: 138px; left: var(--pad-x);
+  font-size: 12px; line-height: 1.45; letter-spacing: -0.03em; text-transform: uppercase;
+}
+.lead { max-width: 624px; text-align: center; font-size: 24px; line-height: 1.2; letter-spacing: -0.03em; font-weight: 400; }
+.story { max-width: 624px; display: flex; flex-direction: column; gap: 24px; font-size: 20px; line-height: 1.2; letter-spacing: -0.03em; }
+
+@media (max-width: 900px) {
+  .panel { height: 732px; }
+  .eyebrow { top: 230px; }
+  .lead { max-width: 362px; font-size: 24px; text-align: left; }
+  .story { max-width: 362px; font-size: 18px; }
+  .br { display: none; }
+}
