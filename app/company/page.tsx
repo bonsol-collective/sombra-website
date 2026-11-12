@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Mission } from "@/components/company/Mission";
+import { Belief } from "@/components/company/Belief";
 
 export const metadata: Metadata = {
   title: "Company — Sombra",
@@ -16,6 +17,7 @@ export default function CompanyPage() {
       <Nav overlay />
       <main className="page">
         <Mission />
+        <Belief />
       </main>
       <Footer />
     </>
