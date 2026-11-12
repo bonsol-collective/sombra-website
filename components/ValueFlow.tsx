@@ -1,24 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useFit } from "./useFit";
 import "./value-flow.css";
 import { DESKTOP_HTML, MOBILE_HTML } from "./valueFlowMarkup";
 import s from "./ValueFlow.module.css";
-
-/** Scales a fixed-size artboard to its container via the --k custom property. */
-function useFit(artboardWidth: number) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([e]) => {
-      if (e.contentRect.width) el.style.setProperty("--k", String(e.contentRect.width / artboardWidth));
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [artboardWidth]);
-  return ref;
-}
 
 /**
  * "How value moves through the shielded pool." — 14s CSS/SVG loop ported verbatim from the

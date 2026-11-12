@@ -1,8 +1,12 @@
 import Image from "next/image";
+import { ArtStage } from "./coprocessor/ArtStage";
+import { PayrollArt } from "./coprocessor/PayrollArt";
 import s from "./CoProcessor.module.css";
 
-const CARDS = [
-  { art: "payroll", title: "Payroll", body: "Pay employees, contractors and vendors on-chain without putting salaries, rates or contract terms on the public record." },
+type Card = { art: string; title: string; body: string; Art?: () => React.ReactNode };
+
+const CARDS: Card[] = [
+  { art: "payroll", Art: PayrollArt, title: "Payroll", body: "Pay employees, contractors and vendors on-chain without putting salaries, rates or contract terms on the public record." },
   { art: "cross-border", title: "Cross-border payments", body: "Send stablecoins internationally while keeping amounts and counterparties private." },
   { art: "stocks", title: "Trade tokenised stocks", body: "Trade supported tokenised stocks and funds without revealing position size or trade direction." },
   { art: "deals", title: "Strategic Deals", body: "Execute acquisitions and token buybacks privately, so your moves don’t signal the market before you’re ready." },
@@ -13,9 +17,9 @@ const CARDS = [
 ];
 
 /**
- * Figma 3:6040 (desktop) / 347:93 (mobile). Each card's illustration is the Figma art
- * composited onto a 634×488 card-sized PNG (public/images/coprocessor).
- * ponytail: 1x exports; re-export at 2x if they look soft on retina.
+ * Figma 3:6040 (desktop) / 347:93 (mobile). Animated cards render their art in HTML on a
+ * 634×488 ArtStage with Figma's motion (coprocessor/motion.module.css); cards with no motion in
+ * Figma use the exported art PNG (public/images/coprocessor).
  */
 export function CoProcessor() {
   return (
@@ -29,7 +33,11 @@ export function CoProcessor() {
               <p className={s.body}>{c.body}</p>
             </div>
             <div className={s.art}>
-              <Image src={`/images/coprocessor/${c.art}.png`} width={634} height={488} alt="" sizes="(max-width: 900px) 100vw, 634px" />
+              {c.Art ? (
+                <ArtStage><c.Art /></ArtStage>
+              ) : (
+                <Image src={`/images/coprocessor/${c.art}.png`} width={634} height={488} alt="" sizes="(max-width: 900px) 100vw, 634px" />
+              )}
             </div>
           </article>
         ))}

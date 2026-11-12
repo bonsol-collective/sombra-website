@@ -1,0 +1,29 @@
+/* Figma 242:11665 — 321×321 at (156, 148) in the 634×488 card */
+.card { position: absolute; left: 156px; top: 148px; width: 321px; height: 321px; overflow: hidden; border-radius: 13.148px; background: var(--color-paper); }
+.preview { position: absolute; left: 13.88px; top: 14.88px; width: 293px; height: 213px; overflow: hidden; border-radius: 7.734px; background: #f1f0ee; }
+.sheet {
+  position: absolute; left: calc(50% + 0.28px); top: calc(50% + 0.41px); width: 255.552px; height: 121.817px;
+  transform: translate(-50%, -50%); overflow: hidden; border-radius: 7.169px; background: var(--color-paper);
+}
+.lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.lines line { stroke: #d6d9d3; stroke-width: 0.26482; }
+.t { position: absolute; font-size: 5.735px; line-height: 1.2; letter-spacing: -0.03em; color: #60605e; white-space: nowrap; }
+/* Figma uses "APK Praktikal" (trial) here; a system mono stands in. */
+.num {
+  position: absolute; left: 15.89px; top: 96.66px; white-space: nowrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 7.945px; line-height: 1.2; letter-spacing: -0.03em; color: #51756c;
+}
+.outline {
+  position: absolute; left: calc(50% - 0.66px); top: calc(50% + 0.66px); width: 238.338px; height: 104.604px;
+  translate: -50% -50%; border: 0.265px solid #9bd29d;
+}
+
+.controls { position: absolute; left: 13.92px; top: 239.77px; width: 293.133px; height: 68.836px; overflow: hidden; }
+.sent, .send {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: 6.18px; font-size: 23.1px; letter-spacing: -0.03em; white-space: nowrap;
+}
+.sent { background: #ededed; color: var(--color-pine); }
+.send { background: var(--color-pine); color: var(--color-paper); }
+.check { position: relative; display: block; width: 25.6px; height: 25.6px; }
+.check svg { position: absolute; left: 2.93px; top: 5.07px; overflow: visible; }

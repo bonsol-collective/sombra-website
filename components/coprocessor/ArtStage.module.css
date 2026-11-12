@@ -1,0 +1,7 @@
+.fit { --k: 1; position: relative; width: 100%; height: 100%; overflow: hidden; }
+.stage {
+  position: absolute; left: 0; top: 0; width: 634px; height: 488px;
+  transform-origin: 0 0; transform: scale(var(--k)) translateY(-133px);
+}
+/* Full-card base image (the Figma export with the moving parts removed). */
+.stage > img:first-child { position: absolute; inset: 0; width: 634px; height: 488px; }
