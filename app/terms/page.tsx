@@ -16,7 +16,7 @@ export default function TermsPage() {
   return (
     <>
       <Nav />
-      <main className="legal">
+      <main className="page legal">
         <header className="legal-header">
           <div className="legal-eyebrow">Legal</div>
           <h1 className="legal-title">Terms of Service</h1>

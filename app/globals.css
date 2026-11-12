@@ -93,6 +93,11 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 /* ============ REDESIGN PRIMITIVES ============ */
 .wrap { max-width: 1440px; margin: 0 auto; padding-inline: var(--pad-x); }
+/* Page content sits above the footer with a 48px rounded bottom (Figma). */
+.page {
+  position: relative; z-index: 1; overflow: clip;
+  background: var(--color-paper); border-radius: 0 0 48px 48px;
+}
 .t-h2 {
   font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.05em; font-weight: 400;
 }
@@ -1005,20 +1010,6 @@ section { padding: 140px 36px; position: relative; }
   .legal-body section { padding: 0; }
 }
 
-/* ============ FOOTER ============ */
-footer {
-  padding: 60px 36px 40px;
-  border-top: 1px solid var(--line);
-  display: flex; justify-content: space-between; align-items: center;
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--fg-mute);
-}
-footer .footer-brand { display: flex; flex-direction: column; gap: 8px; }
-footer .footer-attr { color: var(--fg-dim); }
-footer .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
-footer .footer-links a { transition: color 0.2s; }
-footer .footer-links a:hover { color: var(--fg); }
-
 .nav-cta-short { display: none; }
 
 /* ============ CRYPTO-TERM ============ */
@@ -1233,12 +1224,6 @@ footer .footer-links a:hover { color: var(--fg); }
   .nav { padding: 16px 20px; }
   .nav-cta-full { display: none; }
   .nav-cta-short { display: inline; }
-  footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 48px 24px 32px;
-  }
   .quantum-stats { grid-template-columns: 1fr; }
   .hero-footer { padding: 16px 24px; }
   .hero-footer-scroll { display: none; }

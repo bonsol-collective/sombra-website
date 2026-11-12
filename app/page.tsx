@@ -12,6 +12,7 @@ export default function Page() {
   return (
     <>
       <Nav />
+      <main className="page">
       <Hero />
       <ProofBand />
       <Pillars />
@@ -19,6 +20,7 @@ export default function Page() {
       <PrivacyDemo />
       <Quantum />
       <Waitlist />
+      </main>
       <Footer />
     </>
   );
