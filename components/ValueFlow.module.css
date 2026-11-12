@@ -1,0 +1,33 @@
+/* Value flow section. Artboards: desktop 2380×1000 (cropped to x40–2340, y250–960), mobile 390×860. */
+.section { background: var(--color-warm); padding: var(--pad-y) var(--pad-x); }
+.title { max-width: 1280px; margin: 0 auto 48px; }
+
+.desktop {
+  --k: 0.5565;
+  position: relative; max-width: 1280px; margin: 0 auto;
+  aspect-ratio: 2300 / 710; overflow: hidden;
+}
+.stageD {
+  position: absolute; top: 0; left: 0; width: 2380px; height: 1000px;
+  transform-origin: 0 0; transform: scale(var(--k)) translate(-40px, -250px);
+}
+
+.mobile { --k: 1; display: none; position: relative; aspect-ratio: 390 / 860; overflow: hidden; }
+.stageM {
+  position: absolute; top: 0; left: 0; width: 390px; height: 860px;
+  transform-origin: 0 0; transform: scale(var(--k));
+}
+
+@media (max-width: 900px) {
+  .section { padding: 24px 0; }
+  .title, .desktop { display: none; }
+  .mobile { display: block; }
+}
+
+/* No loop: hold the frame where the whole route is drawn and the withdraw step is active. */
+@media (prefers-reduced-motion: reduce) {
+  .stageD :global(*), .stageM :global(*) {
+    animation-delay: -10.5s !important;
+    animation-play-state: paused !important;
+  }
+}
