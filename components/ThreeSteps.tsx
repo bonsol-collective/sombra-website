@@ -42,8 +42,20 @@ export function ThreeSteps() {
               <img src="/images/steps/ring.webp" width={431} height={431} alt="" />
             </picture>
           )}
-          {open === 1 && <img className={s.art} src="/images/steps/step2.png" width={858} height={469} alt="" />}
-          {open === 2 && <img className={s.art} src="/images/steps/step3.png" width={858} height={469} alt="" />}
+          {open === 1 && (
+            <div className={s.stage}>
+              {[1, 2, 3].map((n) => (
+                <span key={n} className={`${s.coin} ${s[`coin${n}`]}`}>
+                  <img src={`/images/steps/coin-${n}.png`} alt="" />
+                </span>
+              ))}
+            </div>
+          )}
+          {open === 2 && (
+            <div className={s.stage}>
+              <img className={s.wallet} src="/images/steps/wallet.png" alt="" />
+            </div>
+          )}
         </div>
       </div>
     </section>
