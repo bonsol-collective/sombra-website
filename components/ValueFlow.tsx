@@ -67,9 +67,11 @@ export function ValueFlow() {
   return (
     <section ref={section} id="flow" className={s.section}>
       <div className={s.pin}>
-        <h2 className={`t-h2 ${s.title}`}>How value moves<br />through the shielded pool.</h2>
-        <div ref={desktop} className={s.desktop}>
-          <div className={`vf-d ${s.stageD}`} dangerouslySetInnerHTML={{ __html: DESKTOP_HTML }} />
+        <div className={s.frame}>
+          <h2 className={`t-h2 ${s.title}`}>How value moves<br />through the shielded pool.</h2>
+          <div ref={desktop} className={s.desktop}>
+            <div className={`vf-d ${s.stageD}`} dangerouslySetInnerHTML={{ __html: DESKTOP_HTML }} />
+          </div>
         </div>
         <div ref={mobile} className={s.mobile}>
           <div className={`vf-m ${s.stageM}`} dangerouslySetInnerHTML={{ __html: MOBILE_HTML }} />

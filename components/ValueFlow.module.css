@@ -1,16 +1,19 @@
 /* Value flow section. Artboards: desktop 2380×1000 (cropped to x40–2340, y250–960), mobile 390×860.
    The section is 4 screens tall; .pin sticks for the whole scroll while JS plays one phase per screen. */
-.section { height: 400vh; background: var(--color-warm); } /* matches the export's #FCF9F2 stage */
+.section { height: 400vh; background: var(--color-paper); }
 .pin {
   position: sticky; top: 0; height: 100vh; height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 72px var(--pad-x) 24px; /* clear the fixed nav */
+  padding: 72px 24px 24px; /* clear the fixed nav */
 }
-.title { width: 100%; max-width: 1280px; margin: 0 auto 48px; }
+/* Desktop: the wide 2300×710 crop uses the full screen width (up to 1840px), capped so the
+   heading + stage still fit the pinned screen height (≈250px of nav, heading and padding). */
+.frame { width: min(100%, 1840px, calc((100vh - 250px) * 2300 / 710)); margin: 0 auto; }
+.title { margin-bottom: 40px; padding-left: 2.61%; } /* 60/2300: lines up with the step timeline */
 
 .desktop {
-  --k: 0.5565;
-  position: relative; width: 100%; max-width: 1280px; margin: 0 auto;
+  --k: 0.6;
+  position: relative; width: 100%;
   aspect-ratio: 2300 / 710; overflow: hidden;
 }
 .stageD {
@@ -26,7 +29,7 @@
 
 @media (max-width: 900px) {
   .pin { padding: 64px 0 8px; } /* 56px nav + a little air */
-  .title, .desktop { display: none; }
+  .frame { display: none; }
   /* Fit the tall 390×860 artboard into the screen height (useFit scales by the resulting width). */
   .mobile { display: block; align-self: center; height: 100%; max-width: 100%; }
 }
