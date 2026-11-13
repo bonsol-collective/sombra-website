@@ -23,7 +23,7 @@ const BACKWARD = 3; //  …and when rewinding
  */
 export function ValueFlow() {
   const section = useRef<HTMLElement>(null);
-  const desktop = useFit(1840);
+  const desktop = useFit(1800);
   const steps = useFit(430);
   const mobile = useFit(390);
 

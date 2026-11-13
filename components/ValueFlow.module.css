@@ -1,16 +1,16 @@
 /* Value flow section. Desktop artboard 2380×1000 is shown twice: the diagram cropped to
-   x500–2340 / y250–960 (centred) and the step timeline cropped to x40–470 / y416–576. Mobile 390×860.
+   x520–2320 / y270–960 (the panels' outer edges) and the step timeline cropped to x40–470 / y416–576. Mobile 390×860.
    The section is 4 screens tall; .pin sticks for the whole scroll while JS plays one phase per screen. */
 .section { height: 400vh; background: var(--color-paper); }
 .pin {
   position: sticky; top: 0; height: 100vh; height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 72px 24px 24px; /* clear the fixed nav */
+  padding: 72px var(--pad-x) 24px; /* clear the fixed nav; same side margins as the other sections */
 }
-/* Desktop: the 1840×710 diagram crop uses the screen width (up to 1840px), capped so heading
-   row + diagram still fit the pinned screen height (≈300px of nav, heading row and gaps). */
-.frame { width: min(100%, 1840px, calc((100vh - 300px) * 1840 / 710)); margin: 0 auto; }
-.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 32px; padding-inline: 1.1%; }
+/* Desktop: the 1800×690 diagram crop spans the content width (1280px max, like the 1440px sections),
+   capped so heading row + diagram still fit the pinned screen height (≈300px of nav, heading row and gaps). */
+.frame { width: min(100%, 1280px, calc((100vh - 300px) * 1800 / 690)); margin: 0 auto; }
+.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 32px; }
 
 .steps { --k: 0.72; position: relative; flex: none; width: 310px; aspect-ratio: 430 / 160; overflow: hidden; }
 .stageSteps {
@@ -21,11 +21,11 @@
 .desktop {
   --k: 0.75;
   position: relative; width: 100%;
-  aspect-ratio: 1840 / 710; overflow: hidden;
+  aspect-ratio: 1800 / 690; overflow: hidden;
 }
 .stageD {
   position: absolute; top: 0; left: 0; width: 2380px; height: 1000px;
-  transform-origin: 0 0; transform: scale(var(--k)) translate(-500px, -250px);
+  transform-origin: 0 0; transform: scale(var(--k)) translate(-520px, -270px);
 }
 
 .mobile { --k: 1; display: none; position: relative; aspect-ratio: 390 / 860; overflow: hidden; }
