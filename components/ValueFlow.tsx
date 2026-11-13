@@ -9,6 +9,9 @@ import s from "./ValueFlow.module.css";
 // Where each phase of the export's 14s timeline has finished playing (seconds):
 // Deposit (0–20%), Blend in (–34%), Send privately (–56%), Withdraw (–92%, before the fade-out).
 const STOPS = [2.8, 4.76, 7.84, 12.9];
+// Before the section pins, hold here: ball visible on its start dot, route not drawn yet
+// (the "live" layer fades in at 0–0.14s; the token starts moving at 0.8s).
+const REST = 0.3;
 const FORWARD = 1.5; // playback speed when scrolling down (×real time)
 const BACKWARD = 3; //  …and when rewinding
 
@@ -33,7 +36,7 @@ export function ValueFlow() {
     const goal = () => {
       const r = el.getBoundingClientRect();
       const vh = innerHeight;
-      if (r.top > vh * 0.5) return 0; // not reached yet: nothing played
+      if (r.top > 0) return REST; // not pinned yet: ball waits at the start
       const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
       return STOPS[Math.min(STOPS.length - 1, Math.floor(p * STOPS.length))];
     };
@@ -55,8 +58,9 @@ export function ValueFlow() {
       if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
     });
     io.observe(el);
-    // Start parked at 0 so nothing plays on its own before the section is reached.
-    for (const a of el.getAnimations({ subtree: true })) { a.pause(); a.currentTime = 0; }
+    // Start parked at REST so nothing plays on its own before the section is reached.
+    t = REST;
+    for (const a of el.getAnimations({ subtree: true })) { a.pause(); a.currentTime = REST * 1000; }
     return () => { io.disconnect(); cancelAnimationFrame(raf); };
   }, []);
 
