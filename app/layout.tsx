@@ -30,7 +30,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og.png",
+        // ?v=2: new URL for the redesign image, so X/LinkedIn/Slack don’t reuse their cached copy of the old one.
+        url: "/og.png?v=2",
         width: 1200,
         height: 630,
         alt: "Sombra — The new privacy standard powering the next era of money.",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     title: "Sombra",
     description:
       "Private, post-quantum trading and transfers on Solana.",
-    images: ["/og.png"],
+    images: ["/og.png?v=2"],
   },
 };
 
@@ -99,7 +100,7 @@ const JSON_LD = {
       operatingSystem: "Web",
       description:
         "Post-quantum private UTXO transfers on Solana. Signature-free ownership proofs via Kyber-768 and RISC0 STARKs.",
-      image: "https://sombra.tech/og.png",
+      image: "https://sombra.tech/og.png?v=2",
       publisher: { "@id": "https://bonsol.org/#organization" },
     },
     {
