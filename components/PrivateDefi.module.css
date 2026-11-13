@@ -2,14 +2,13 @@
 .section {
   max-width: 1440px; margin: 0 auto; min-height: 600px;
   padding: 120px var(--pad-x) 80px;
-  display: grid; grid-template-columns: minmax(0, 1fr) 728px; align-items: center; gap: 40px;
+  /* Copy column = the heading's width, so "Without compromises." never wraps; the mesh takes the rest. */
+  display: grid; grid-template-columns: max-content minmax(0, 728px); justify-content: space-between;
+  align-items: center; gap: 40px;
 }
 .copy { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
 .text { max-width: 435px; }
 
-@media (max-width: 1200px) {
-  .section { grid-template-columns: 1fr 1fr; }
-}
 @media (max-width: 900px) {
   .section { display: flex; flex-direction: column; align-items: stretch; gap: 24px; min-height: 0; padding: 64px 20px; }
   .copy { gap: 24px; }
