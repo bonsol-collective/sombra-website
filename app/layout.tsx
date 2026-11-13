@@ -12,8 +12,14 @@ const galeria = localFont({
   display: "swap",
 });
 
+// Vercel preview builds link their own og.png (sombra.tech still serves the live site's image).
+const SITE_URL =
+  process.env.VERCEL_ENV === "preview" && process.env.VERCEL_BRANCH_URL
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : "https://sombra.tech";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sombra.tech"),
+  metadataBase: new URL(SITE_URL),
   title: "Sombra",
   description:
     "The new privacy standard powering the next era of money. Sombra keeps balances, payroll and B2B settlements confidential on Solana, with post-quantum cryptography.",
