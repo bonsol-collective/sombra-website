@@ -55,6 +55,9 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .btn:hover { filter: brightness(0.92); }
 .btn:focus-visible { outline: 2px solid var(--color-route); outline-offset: 2px; }
 .btn img { width: 20px; height: 20px; }
+/* Figma "Button_small" (485:269): the same button at 0.8× (nav actions). */
+.btn--sm { height: 40px; padding: 0 19.2px; gap: 3.2px; border-radius: 6.4px; font-size: 12px; }
+.btn--sm img { width: 16px; height: 16px; }
 .btn--pine { background: var(--color-pine); color: var(--color-paper); }
 .btn--canyon { background: var(--color-canyon); color: var(--color-paper); }
 .btn--white { background: var(--color-paper); color: var(--color-ink); }

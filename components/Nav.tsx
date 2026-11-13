@@ -50,10 +50,10 @@ export function Nav({ overlay = false }: { overlay?: boolean }) {
         </nav>
 
         <div className={s.actions}>
-          <ButtonLink href="https://docs.sombra.tech" variant="grey" arrow className={s.action}>
+          <ButtonLink href="https://docs.sombra.tech" variant="grey" arrow className={`btn--sm ${s.action}`}>
             Read docs
           </ButtonLink>
-          <ButtonLink href="/demo" variant="grey" className={s.action}>
+          <ButtonLink href="/demo" variant="grey" className={`btn--sm ${s.action}`}>
             Contact
           </ButtonLink>
         </div>
