@@ -54,7 +54,7 @@ The `sombra.tech` domain is aliased to the production deployment.
 
 ## Social preview image
 
-The OpenGraph image at `public/og.png` is captured from the hidden `/og-preview` route and must be regenerated after any design change that affects it. Dev mode overlays a Next.js indicator on the page, so regeneration uses a production build.
+The OpenGraph image at `public/og-2026-11.png` is captured from the hidden `/og-preview` route and must be regenerated after any design change that affects it. Dev mode overlays a Next.js indicator on the page, so regeneration uses a production build.
 
 ```bash
 npm run build
@@ -64,8 +64,8 @@ npx playwright screenshot \
   --viewport-size=1200,630 \
   --wait-for-timeout=3000 \
   http://localhost:3100/og-preview \
-  public/og.png
+  public/og-2026-11.png
 kill %1
 ```
 
-Commit the regenerated `public/og.png`.
+Commit the regenerated `public/og-2026-11.png`. When the image changes, give the file a new name and update the three references in `app/layout.tsx`: social platforms keep a copy of the old image by its URL.
