@@ -42,7 +42,7 @@ export function Wallet() {
             assets, send and receive funds, and explore the ecosystem privately.
           </p>
         </div>
-        <ButtonLink href="https://docs.sombra.tech" arrow>Get the wallet</ButtonLink>
+        <ButtonLink href="https://chromewebstore.google.com/detail/sombra/nkhfcciblohgagbemdbnmdmekekdejga" arrow>Get the wallet</ButtonLink>
       </div>
 
       <div className={split.media}>
