@@ -16,7 +16,6 @@ export function Mission() {
         <h1 className={s.lead}>We exist to build financial privacy that is <br className={s.br} />designed to last in a changing world.</h1>
       </div>
       <div className={s.panel}>
-        <p className={s.eyebrow} aria-hidden="true">Our mission</p>
         <div className={s.story}>
           <p>
             New forms of computation will unlock extraordinary possibilities and test the foundations
