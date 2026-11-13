@@ -23,7 +23,8 @@ const BACKWARD = 3; //  …and when rewinding
  */
 export function ValueFlow() {
   const section = useRef<HTMLElement>(null);
-  const desktop = useFit(2300);
+  const desktop = useFit(1840);
+  const steps = useFit(430);
   const mobile = useFit(390);
 
   useEffect(() => {
@@ -68,7 +69,14 @@ export function ValueFlow() {
     <section ref={section} id="flow" className={s.section}>
       <div className={s.pin}>
         <div className={s.frame}>
-          <h2 className={`t-h2 ${s.title}`}>How value moves<br />through the shielded pool.</h2>
+          <div className={s.head}>
+            <h2 className={`t-h2 ${s.title}`}>How value moves<br />through the shielded pool.</h2>
+            {/* Same artboard, cropped to the step timeline (both copies share the scroll timeline). */}
+            <div ref={steps} className={s.steps} aria-hidden="true">
+              <div className={`vf-d ${s.stageSteps}`} dangerouslySetInnerHTML={{ __html: DESKTOP_HTML }} />
+            </div>
+          </div>
+          {/* Cropped to the three panels so the diagram sits centred. */}
           <div ref={desktop} className={s.desktop}>
             <div className={`vf-d ${s.stageD}`} dangerouslySetInnerHTML={{ __html: DESKTOP_HTML }} />
           </div>
