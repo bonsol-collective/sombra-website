@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ButtonLink } from "./ButtonLink";
 import split from "./Split.module.css";
 import s from "./Swaps.module.css";
 
@@ -29,7 +28,8 @@ export function Swaps() {
             keeping your trade amounts and activity out of public view.
           </p>
         </div>
-        <ButtonLink href="https://docs.sombra.tech" arrow>Try the app</ButtonLink>
+        {/* The app isn’t live yet: a static label, not a link. */}
+        <span className={`btn btn--grey ${s.soon}`}>App coming soon</span>
       </div>
 
       <div className={split.media}>
