@@ -12,45 +12,48 @@ const galeria = localFont({
   display: "swap",
 });
 
-// Vercel preview builds link their own og.png (sombra.tech still serves the live site's image).
+// Vercel preview builds link their own image (sombra.tech still serves the live site's image).
 const SITE_URL =
   process.env.VERCEL_ENV === "preview" && process.env.VERCEL_BRANCH_URL
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : "https://sombra.tech";
 
+// One title and one text for the page and for the link previews (Discord, Telegram, X, LinkedIn, Slack).
+const PREVIEW_TITLE = "Sombra — The new privacy standard powering the next era of money.";
+const DESCRIPTION =
+  "The new privacy standard powering the next era of money. Sombra keeps balances, payroll and B2B settlements confidential on Solana, with post-quantum cryptography.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Sombra",
-  description:
-    "The new privacy standard powering the next era of money. Sombra keeps balances, payroll and B2B settlements confidential on Solana, with post-quantum cryptography.",
+  description: DESCRIPTION,
   alternates: { canonical: "/" },
   authors: [{ name: "Bonsol Labs", url: "https://bonsol.org" }],
   creator: "Bonsol Labs",
   publisher: "Bonsol Labs",
   openGraph: {
-    title: "Sombra — post-quantum privacy on Solana",
-    description:
-      "Private trading and transfers on Solana. Quantum-safe from day one.",
+    title: PREVIEW_TITLE,
+    description: DESCRIPTION,
     url: "https://sombra.tech",
     siteName: "Sombra",
     locale: "en_US",
     images: [
       {
-        // ?v=2: new URL for the redesign image, so X/LinkedIn/Slack don’t reuse their cached copy of the old one.
-        url: "/og.png?v=2",
+        // A new file name for each new image: Discord, X, LinkedIn and Slack keep a copy of an image by its URL.
+        // A query string (`og.png?v=2`) was not enough for Discord (seen on 14 Nov 2026).
+        url: "/og-2026-11.png",
         width: 1200,
         height: 630,
-        alt: "Sombra — The new privacy standard powering the next era of money.",
+        alt: PREVIEW_TITLE,
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sombra",
-    description:
-      "Private, post-quantum trading and transfers on Solana.",
-    images: ["/og.png?v=2"],
+    title: PREVIEW_TITLE,
+    description: DESCRIPTION,
+    images: ["/og-2026-11.png"],
   },
 };
 
@@ -106,7 +109,7 @@ const JSON_LD = {
       operatingSystem: "Web",
       description:
         "Post-quantum private UTXO transfers on Solana. Signature-free ownership proofs via Kyber-768 and RISC0 STARKs.",
-      image: "https://sombra.tech/og.png?v=2",
+      image: "https://sombra.tech/og-2026-11.png",
       publisher: { "@id": "https://bonsol.org/#organization" },
     },
     {

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** 1200×630 source for public/og.png — see README "Social preview image". */
+/** 1200×630 source for public/og-2026-11.png — see README "Social preview image". */
 export default function OgPreviewPage() {
   return (
     <div className={styles.canvas}>
