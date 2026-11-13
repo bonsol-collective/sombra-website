@@ -1,0 +1,27 @@
+/* Figma 3:6348 — 546px centered column, 120px vertical padding (incl. 72px nav) */
+.section {
+  width: 100%; max-width: calc(546px + 2 * var(--pad-x)); margin: 0 auto;
+  padding: 48px var(--pad-x) 168px; display: flex; flex-direction: column; gap: 24px;
+}
+.title { font-size: 48px; line-height: 1.1; letter-spacing: -0.05em; font-weight: 400; }
+.lede { font-size: 16px; line-height: 1.45; }
+
+.form { display: flex; flex-direction: column; gap: 16px; }
+.pair { display: flex; gap: 8px; }
+.pair > * { flex: 1; }
+.label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; line-height: 1.45; }
+.field:disabled { opacity: 0.6; }
+
+.foot { margin-top: 8px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.note { align-self: stretch; font-size: 14px; line-height: 1.45; color: var(--color-muted); }
+.submit:disabled { cursor: default; filter: none; opacity: 0.7; }
+.error { font-size: 13px; color: var(--color-canyon); }
+.captcha { min-height: 78px; }
+.honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+@media (max-width: 900px) {
+  .section { padding: 32px 20px 96px; }
+  .title { font-size: 34px; }
+  .pair { flex-direction: column; gap: 16px; }
+  .submit { align-self: stretch; }
+}

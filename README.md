@@ -8,7 +8,7 @@ Live at [sombra.tech](https://sombra.tech).
 
 - [Next.js 15](https://nextjs.org) (App Router) + React 19
 - TypeScript
-- [Formspree](https://formspree.io) for the waitlist form
+- The demo request form posts to `/api/demo`, which stores each request in a Google Sheet ([setup](docs/demo-sheet.md))
 - Deployed on [Vercel](https://vercel.com)
 
 ## Development
@@ -26,14 +26,21 @@ Open [http://localhost:3000](http://localhost:3000).
 - `npm run build` — production build
 - `npm run start` — run the production build locally
 - `npm run lint` — lint with Next.js defaults
+- `npm test` — tests of the demo request checks (Node 22.18 or later)
 
 ## Structure
 
 ```
-app/          # App Router entry, global styles, icon
-components/   # Nav, Hero, Pillars, PrivacyDemo, Quantum, Waitlist, Footer, ThemeToggle
-hooks/        # useInView, useMouseParallax, useScramble, useScrollY
+app/              # Routes: / (home), /trust, /company, /demo, /privacy, /terms, /og-preview
+app/fonts/        # APK Galeria (licensed by Sombra / Bonsol Labs)
+app/globals.css   # Design tokens (--color-*), buttons, fields, legal pages
+components/       # Nav, Footer, ButtonLink + one component (+ CSS module) per home section
+components/trust/ components/company/ components/demo/   # per-page sections
+public/images/    # Photography and illustrations exported from Figma
 ```
+
+Design source: Figma "Sombra – Product Design". The value-flow animation
+(`components/ValueFlow.tsx`) is generated from the designer's HTML export.
 
 ## Deployment
 

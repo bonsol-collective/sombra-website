@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 
 /**
- * Generates /sitemap.xml at build time. Single-page marketing site today;
- * whitepaper is the only additional indexable asset.
+ * Generates /sitemap.xml at build time.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -12,6 +11,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: "https://sombra.tech/trust",
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://sombra.tech/company",
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: "https://sombra.tech/demo",
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
       url: "https://sombra.tech/whitepaper.pdf",

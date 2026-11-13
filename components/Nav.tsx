@@ -1,62 +1,89 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
-import { MobileMenu } from "./MobileMenu";
+import { useEffect, useState } from "react";
+import { ButtonLink } from "./ButtonLink";
+import s from "./Nav.module.css";
 
-export function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false);
+const LINKS = [
+  { href: "/", label: "Product" },
+  { href: "/trust", label: "Trust & Compliance" },
+  { href: "/company", label: "Company" },
+];
+
+/**
+ * Figma Navbar (458:136) + Navigation / Mobile (340:32).
+ * `overlay`: transparent over a photo hero, solid once scrolled, hovered or opened.
+ */
+export function Nav({ overlay = false }: { overlay?: boolean }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const clear = overlay && !scrolled && !open;
 
   return (
     <>
-      <nav className="nav">
-        <Link href="/" className="nav-logo" aria-label="Sombra — home">
-          <span className="nav-logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32">
-              <defs>
-                <radialGradient id="nav-corona" cx="50%" cy="50%" r="50%">
-                  <stop offset="52%" stopColor="var(--accent)" stopOpacity="0" />
-                  <stop offset="70%" stopColor="var(--accent)" stopOpacity="0.95" />
-                  <stop offset="88%" stopColor="var(--accent)" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
-                </radialGradient>
-              </defs>
-              <circle cx="16" cy="16" r="16" fill="url(#nav-corona)" />
-              <circle cx="16" cy="16" r="8.5" fill="var(--ink)" />
-            </svg>
-          </span>
-          <span>Sombra</span>
+      <header className={`${s.nav} ${clear ? s.clear : ""}`}>
+        <Link href="/" className={s.logo} aria-label="Sombra — home">
+          <img className={s.markInk} src="/brand/logomark_black.svg" width={24} height={24} alt="" />
+          <img className={s.markWhite} src="/brand/logomark_white.svg" width={24} height={24} alt="" />
         </Link>
-        <div className="nav-links">
-          <a href="#product">Product</a>
-          <a href="#flow">Flow</a>
-          <a href="#privacy">Privacy</a>
-          <a href="#quantum">Quantum</a>
-          <a href="#waitlist">Waitlist</a>
+
+        <nav className={s.links} aria-label="Main">
+          {LINKS.map((l) => (
+            <Link key={l.href} href={l.href}>{l.label}</Link>
+          ))}
+        </nav>
+
+        <div className={s.actions}>
+          <ButtonLink href="https://docs.sombra.tech" variant="grey" arrow className={`btn--sm ${s.action}`}>
+            Read docs
+          </ButtonLink>
+          <ButtonLink href="/demo" variant="grey" className={`btn--sm ${s.action}`}>
+            Contact
+          </ButtonLink>
         </div>
-        <div className="nav-actions">
-          <ThemeToggle />
-          <button
-            type="button"
-            className="nav-menu-toggle"
-            aria-label="Open menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(true)}
-          >
-            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true">
-              <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              <line x1="0" y1="6" x2="18" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              <line x1="0" y1="11" x2="18" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          <a href="#waitlist" className="nav-cta">
-            <span className="nav-cta-full">Join waitlist →</span>
-            <span className="nav-cta-short">Join →</span>
-          </a>
-        </div>
-      </nav>
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+
+        <button
+          type="button"
+          className={s.menuToggle}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <img src="/brand/menu.svg" width={24} height={24} alt="" />
+        </button>
+
+        {open && (
+          <div id="mobile-menu" className={s.panel}>
+            {LINKS.map((l) => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                {l.label}
+              </Link>
+            ))}
+            <div className={s.panelActions}>
+              <ButtonLink href="https://docs.sombra.tech" variant="grey" arrow>Read docs</ButtonLink>
+              <ButtonLink href="/demo" variant="pine">Contact</ButtonLink>
+            </div>
+          </div>
+        )}
+      </header>
+      {!overlay && <div className={s.spacer} aria-hidden="true" />}
     </>
   );
 }

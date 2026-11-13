@@ -1,0 +1,9 @@
+/* Figma chip 242:43578 — 203×59 white row */
+.chip { position: absolute; width: 203px; height: 59px; overflow: hidden; border-radius: 8px; background: var(--color-paper); }
+.flag { position: absolute; left: 13px; top: 12px; width: 33px; height: 34px; overflow: hidden; border-radius: 4px; }
+.flag img { display: block; }
+.label { position: absolute; top: 14px; font-size: 8px; line-height: 1.2; letter-spacing: -0.03em; color: var(--color-muted); }
+.right { right: 13px; text-align: right; }
+.value { position: absolute; top: 27px; font-size: 12px; line-height: 1.2; letter-spacing: -0.03em; color: var(--color-pine-accent); white-space: nowrap; }
+.amount { right: 12px; text-align: right; color: var(--color-ink); }
+.amount span:nth-child(-n + 5) { color: var(--color-pine-accent); } /* the "*****" part */

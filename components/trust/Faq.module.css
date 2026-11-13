@@ -1,0 +1,36 @@
+/* Figma 3:6176 — FAQ + button left, 971px accordion right */
+.section { max-width: 1440px; margin: 0 auto; padding: 80px var(--pad-x) 128px; display: flex; gap: 32px; align-items: flex-start; }
+.side { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.title { font-size: 48px; line-height: 1.1; font-weight: 400; }
+.list { flex: 0 1 971px; display: flex; flex-direction: column; gap: 12px; }
+
+.item { position: relative; padding: 24px; border-radius: 12px; background: #f5f5f5; }
+.q {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 26px;
+  font-size: 18px; line-height: 1.45; letter-spacing: -0.03em; text-align: left; user-select: none;
+}
+.q:focus-visible { outline: 2px solid var(--color-route); outline-offset: 4px; border-radius: 4px; }
+.chevron {
+  flex: none; display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; margin: -11px -8px -11px 0; border-radius: 8px; background: #e9e6e9;
+  transition: transform 0.4s var(--ease);
+}
+.item[data-open] .chevron { transform: rotate(180deg); }
+.panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s var(--ease); }
+.item[data-open] .panel { grid-template-rows: 1fr; }
+.clip { min-height: 0; overflow: hidden; }
+.a {
+  margin-top: 8px; max-width: 785px; display: flex; flex-direction: column; gap: 23px;
+  font-size: 16px; line-height: 1.45; letter-spacing: -0.03em; color: var(--color-muted);
+  opacity: 0; transition: opacity 0.3s var(--ease);
+}
+.item[data-open] .a { opacity: 1; transition-delay: 0.08s; }
+
+@media (max-width: 900px) {
+  .section { flex-direction: column; padding: 64px 20px 96px; gap: 24px; }
+  .list { flex-basis: auto; width: 100%; }
+  .q { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chevron, .panel, .a { transition: none; }
+}

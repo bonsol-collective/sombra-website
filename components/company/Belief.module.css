@@ -1,0 +1,8 @@
+/* Figma 26:21 — photo cropped from the right of image 155, 45% black overlay */
+.text { max-width: 560px; display: flex; flex-direction: column; gap: 24px; }
+.bg { object-position: 54% 50%; }
+.media::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(0, 0, 0, 0.45); }
+
+@media (max-width: 900px) {
+  .media { min-height: 330px; }
+}

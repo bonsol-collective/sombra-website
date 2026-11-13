@@ -1,0 +1,61 @@
+/* Figma footer 458:544 (desktop) / 458:830 (mobile) */
+.footer {
+  margin-top: -48px; /* tucks under .page's 48px rounded bottom */
+  background: var(--color-ink); color: var(--color-surface);
+  display: flex; flex-direction: column; align-items: center;
+  overflow: hidden;
+}
+.inner {
+  width: 100%; max-width: 1440px;
+  padding: calc(120px + 48px) 80px 100px;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 48px;
+}
+.brand { display: flex; flex-direction: column; align-items: flex-start; gap: 48px; }
+.ctaMobile { display: none; }
+.tagline { font-size: 24px; line-height: 1.1; letter-spacing: -0.04em; }
+
+.signup {
+  width: 640px; max-width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 8px 8px 24px; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.email {
+  flex: 1; min-width: 0; height: 50px;
+  background: none; border: 0; color: var(--color-paper);
+  font: inherit; font-size: 14px;
+}
+.email::placeholder { color: var(--color-line); }
+.email:focus { outline: none; }
+.signup:focus-within { outline: 2px solid var(--color-route); outline-offset: 2px; }
+
+.copy { font-size: 12px; line-height: 1.1; letter-spacing: -0.01em; }
+
+.columns {
+  display: flex; gap: 64px;
+  font-size: 13px; line-height: 1.45; letter-spacing: -0.01em; white-space: nowrap;
+}
+.column { display: flex; flex-direction: column; gap: 12px; }
+.colTitle { color: var(--color-paper); }
+.column a:hover { color: var(--color-paper); }
+
+.wordmark { width: calc(100% - 64px); max-width: 1376px; height: auto; display: block; opacity: 0.05; }
+
+@media (max-width: 900px) {
+  .inner { flex-direction: column; gap: 32px; padding: calc(80px + 48px) 20px 40px; }
+  .cta { display: none; }
+  .ctaMobile { display: inline; }
+  .tagline { font-size: 20px; }
+  .brand { display: contents; }
+  .logo, .tagline { margin-bottom: 16px; }
+  .signup { width: 100%; }
+  .signup { flex-direction: column; align-items: stretch; gap: 12px; padding: 0; background: none; }
+  /* flex: none — in the stacked column, the desktop flex: 1 would override the 54px height. */
+  .email { flex: none; height: 54px; padding: 0 24px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); text-align: center; }
+  .signup :global(.btn) { height: 50px; border-radius: 12px; font-size: 14px; }
+  .signup:focus-within { outline: none; }
+  .email:focus-visible { outline: 2px solid var(--color-route); }
+  .columns { flex-direction: column; gap: 36px; font-size: 16px; }
+  .copy { order: 1; font-size: 14px; }
+  .wordmark { width: 100%; }
+}

@@ -1,0 +1,24 @@
+/* Figma 320:82751 (1440×980) / 234:160 (402×732) */
+.hero {
+  position: relative; isolation: isolate;
+  /* Fills the first screen; content centered like Figma's 980px frame. svh keeps it
+     steady while mobile browser bars show/hide; min-height lets tiny screens grow. */
+  min-height: 100vh; min-height: 100svh; padding: 72px var(--pad-x) 80px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  color: var(--color-paper); text-align: center;
+}
+.bg { object-fit: cover; z-index: -2; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(0, 0, 0, 0.3); }
+
+.title { max-width: 1280px; font-size: 64px; line-height: 1.1; letter-spacing: -0.05em; font-weight: 400; }
+.sub { max-width: 926px; font-size: 20px; line-height: 1.45; letter-spacing: -0.04em; }
+.cta { margin-top: 25px; }
+
+@media (max-width: 900px) {
+  /* Mobile (Figma 234:160): copy centered, button pinned near the bottom. */
+  .hero { justify-content: flex-start; padding: 56px 20px 46px; }
+  .title { margin-top: auto; max-width: 354px; font-size: 34px; }
+  .sub { max-width: 324px; font-size: 16px; }
+  .cta { margin-top: auto; }
+  .br { display: none; }
+}

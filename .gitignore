@@ -14,3 +14,5 @@ dist/
 *.tsbuildinfo
 next-env.d.ts
 .superpowers/
+.agent/
+.claude/

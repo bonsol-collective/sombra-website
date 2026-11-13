@@ -1,0 +1,166 @@
+/* Generated from .agent/reference/value-flow — ported verbatim, scoped. */
+.vf-d .tlList{animation:vfd-tlList 14s cubic-bezier(.65,0,.25,1) infinite}
+@keyframes vfd-tlList{0%,20%{transform:translateY(0)}23.5%,34%{transform:translateY(-150px)}37.5%,56%{transform:translateY(-300px)}59.5%,93%{transform:translateY(-450px)}98%,100%{transform:translateY(0)}}
+.vf-d .tlI{height:150px;box-sizing:border-box;padding-top:2px;opacity:.2}
+.vf-d .tlI .t{font-size:44px;line-height:1.1;letter-spacing:-.05em;color:#1A1A1A}
+.vf-d .tlI .s{margin-top:10px;font-size:22px;line-height:1.35;letter-spacing:-.03em;color:rgba(26,26,26,.85)}
+.vf-d .i1{animation:vfd-i1 14s ease infinite}
+@keyframes vfd-i1{0%,20%{opacity:1}23.5%,94%{opacity:.22}98%,100%{opacity:1}}
+.vf-d .i2{animation:vfd-i2 14s ease infinite}
+@keyframes vfd-i2{0%,20%{opacity:.22}23.5%,34%{opacity:1}37.5%,100%{opacity:.22}}
+.vf-d .i3{animation:vfd-i3 14s ease infinite}
+@keyframes vfd-i3{0%,34%{opacity:.22}37.5%,56%{opacity:1}59.5%,100%{opacity:.22}}
+.vf-d .i4{animation:vfd-i4 14s ease infinite}
+@keyframes vfd-i4{0%,56%{opacity:.22}59.5%,93%{opacity:1}98%,100%{opacity:.22}}
+.vf-d .tlFill{transform-origin:top;animation:vfd-tlFill 14s cubic-bezier(.65,0,.25,1) infinite}
+@keyframes vfd-tlFill{0%,20%{transform:scaleY(0)}23.5%,34%{transform:scaleY(.3333)}37.5%,56%{transform:scaleY(.6667)}59.5%,93%{transform:scaleY(1)}98%,100%{transform:scaleY(0)}}
+.vf-d .dot{position:absolute;left:-5px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;background:#FFFFFF;border:2px solid rgba(26,26,26,.25)}
+.vf-d .d1{animation:vfd-d1 14s ease infinite}
+@keyframes vfd-d1{0%,98%{background:#3A86C8;border-color:#3A86C8}100%{background:#3A86C8;border-color:#3A86C8}}
+.vf-d .d2{animation:vfd-d2 14s ease infinite}
+@keyframes vfd-d2{0%,20%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}23.5%,93%{background:#3A86C8;border-color:#3A86C8}98%,100%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}}
+.vf-d .d3{animation:vfd-d3 14s ease infinite}
+@keyframes vfd-d3{0%,34%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}37.5%,93%{background:#3A86C8;border-color:#3A86C8}98%,100%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}}
+.vf-d .d4{animation:vfd-d4 14s ease infinite}
+@keyframes vfd-d4{0%,56%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}59.5%,93%{background:#A73D13;border-color:#A73D13}98%,100%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}}
+.vf-d .cap{font-size:18px;letter-spacing:-.01em;color:#2A2954;font-weight:400}
+.vf-d .live{animation:vfd-live 14s linear infinite}
+@keyframes vfd-live{0%{opacity:0}1%,92.86%{opacity:1}97.14%,100%{opacity:0}}
+.vf-d .route{stroke-dasharray:1;stroke-dashoffset:1;animation:vfd-route 14s ease-in-out infinite}
+@keyframes vfd-route{0%,5.71%{stroke-dashoffset:1}10%{stroke-dashoffset:.8482}22%,36%{stroke-dashoffset:.4342}42%,58%{stroke-dashoffset:.36}64%{stroke-dashoffset:.1383}72%,100%{stroke-dashoffset:0}}
+.vf-d .token{offset-path:path('M140 470 H360 C440 470, 470 640, 490 780 C500 815, 530 830, 570 830 H1020 C1060 830, 1086 800, 1086 720 C1100 790, 1184 790, 1198 720 C1230 820, 1420 830, 1440 620 C1460 510, 1490 470, 1540 470 H1780');offset-rotate:0deg;offset-anchor:50% 50%;animation:vfd-tokMove 14s ease-in-out infinite,vfd-tokLook 14s linear infinite}
+@keyframes vfd-tokMove{0%,5.71%{offset-distance:0%}10%{offset-distance:15.18%}22%,36%{offset-distance:56.58%}42%,58%{offset-distance:64%}64%{offset-distance:86.17%}72%,100%{offset-distance:100%}}
+@keyframes vfd-tokLook{0%,21%{background:#3A86C8;border-color:#3A86C8;box-shadow:0 0 14px 4px rgba(58,134,200,.4)}22.5%,35.5%{background:#FFFFFF;border-color:#3A86C8;box-shadow:0 0 14px 4px rgba(58,134,200,.4)}36.8%,57.5%{background:#3A86C8;border-color:#B1E0FF;box-shadow:0 0 18px 6px rgba(177,224,255,.9)}59%,100%{background:#A73D13;border-color:#A73D13;box-shadow:0 0 16px 4px rgba(167,61,19,.35)}}
+.vf-d .rp{stroke-dasharray:1;stroke-dashoffset:1}
+.vf-d .rp1{animation:vfd-rp1 14s ease-out infinite}
+@keyframes vfd-rp1{0%,22%{stroke-dashoffset:1;opacity:1}26%{stroke-dashoffset:0;opacity:1}33%,100%{stroke-dashoffset:0;opacity:0}}
+.vf-d .rp2{animation:vfd-rp2 14s ease-out infinite}
+@keyframes vfd-rp2{0%,42%{stroke-dashoffset:1;opacity:1}46%{stroke-dashoffset:0;opacity:1}53%,100%{stroke-dashoffset:0;opacity:0}}
+.vf-d .pop{transform-box:fill-box;transform-origin:center}
+.vf-d .s20{animation:vfd-s20 14s ease-out infinite}
+@keyframes vfd-s20{0%,22%{opacity:0;transform:scale(.3)}23.5%{opacity:1;transform:scale(1.4)}25%,100%{opacity:1;transform:scale(1)}}
+.vf-d .s21{animation:vfd-s21 14s ease-out infinite}
+@keyframes vfd-s21{0%,26.5%{opacity:0;transform:scale(.3)}28%{opacity:.5;transform:scale(1.3)}29%,100%{opacity:.5;transform:scale(1)}}
+.vf-d .s22{animation:vfd-s22 14s ease-out infinite}
+@keyframes vfd-s22{0%,29.5%{opacity:0;transform:scale(.3)}31%{opacity:.5;transform:scale(1.3)}32%,100%{opacity:.5;transform:scale(1)}}
+.vf-d .s23{animation:vfd-s23 14s ease-out infinite}
+@keyframes vfd-s23{0%,32.5%{opacity:0;transform:scale(.3)}34%{opacity:.5;transform:scale(1.3)}35%,100%{opacity:.5;transform:scale(1)}}
+.vf-d .s24{animation:vfd-s24 14s ease-out infinite}
+@keyframes vfd-s24{0%,42%{opacity:0;transform:scale(.3)}43.5%{opacity:1;transform:scale(1.4)}45%,100%{opacity:1;transform:scale(1)}}
+.vf-d .ring{transform-box:fill-box;transform-origin:center;opacity:0}
+.vf-d .rOn{animation:vfd-rOn 14s ease-out infinite}
+@keyframes vfd-rOn{0%,10%{opacity:0;transform:scale(.5)}10.6%{opacity:.9;transform:scale(1)}16%,100%{opacity:0;transform:scale(2.8)}}
+.vf-d .rRt1{animation:vfd-rRt1 14s ease-out infinite}
+@keyframes vfd-rRt1{0%,26%{opacity:0;transform:scale(.5)}26.6%{opacity:.9;transform:scale(1)}32%,100%{opacity:0;transform:scale(3)}}
+.vf-d .rRt2{animation:vfd-rRt2 14s ease-out infinite}
+@keyframes vfd-rRt2{0%,46%{opacity:0;transform:scale(.5)}46.6%{opacity:.9;transform:scale(1)}52%,100%{opacity:0;transform:scale(3)}}
+.vf-d .rOff{animation:vfd-rOff 14s ease-out infinite}
+@keyframes vfd-rOff{0%,64%{opacity:0;transform:scale(.5)}64.6%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(2.8)}}
+.vf-d .sPL{animation:vfd-sPL 14s ease infinite}
+@keyframes vfd-sPL{0%,5.71%{opacity:.32}7.2%,92.86%{opacity:1}97.14%,100%{opacity:.32}}
+.vf-d .sOn{animation:vfd-sOn 14s ease infinite}
+@keyframes vfd-sOn{0%,10%{opacity:.32}11.5%,92.86%{opacity:1}97.14%,100%{opacity:.32}}
+.vf-d .sOff{animation:vfd-sOff 14s ease infinite}
+@keyframes vfd-sOff{0%,64%{opacity:.32}65.5%,92.86%{opacity:1}97.14%,100%{opacity:.32}}
+.vf-d .sDe{animation:vfd-sDe 14s ease infinite}
+@keyframes vfd-sDe{0%,72%{opacity:.32}73.5%,92.86%{opacity:1}97.14%,100%{opacity:.32}}
+.vf-d .sHid{animation:vfd-sHid 14s ease infinite}
+@keyframes vfd-sHid{0%,48%{opacity:.3}51%,92.86%{opacity:1}97.14%,100%{opacity:.3}}
+.vf-d .L1{animation:vfd-L1 14s ease infinite}
+@keyframes vfd-L1{0%,21.5%{opacity:0}23%,25.5%{opacity:1}26.5%,100%{opacity:0}}
+.vf-d .L2{animation:vfd-L2 14s ease infinite}
+@keyframes vfd-L2{0%,26%{opacity:0}27.5%,34.5%{opacity:1}35.5%,100%{opacity:0}}
+.vf-d .dimT{opacity:0;animation:vfd-dimT 14s ease infinite}
+@keyframes vfd-dimT{0%,35%{opacity:0}37.5%,56%{opacity:.65}58.5%,100%{opacity:0}}
+.vf-d .boxT{opacity:0;animation:vfd-boxT 14s ease infinite}
+@keyframes vfd-boxT{0%,35.5%{opacity:0}37.5%,56%{opacity:1}58.5%,100%{opacity:0}}
+.vf-d .arcT{stroke-dasharray:1;stroke-dashoffset:1;animation:vfd-arcT 14s ease-in-out infinite}
+@keyframes vfd-arcT{0%,36%{stroke-dashoffset:1;opacity:1}42%,56%{stroke-dashoffset:0;opacity:1}58.5%,100%{stroke-dashoffset:0;opacity:0}}
+.vf-d .L3{animation:vfd-L3 14s ease infinite}
+@keyframes vfd-L3{0%,35.5%{opacity:0}37%,56.5%{opacity:1}57.5%,100%{opacity:0}}
+.vf-d .L4{animation:vfd-L4 14s ease infinite}
+@keyframes vfd-L4{0%,57.5%{opacity:0}59%,92.86%{opacity:1}97.14%,100%{opacity:0}}
+.vf-d .LR{animation:vfd-LR 14s ease infinite}
+@keyframes vfd-LR{0%,42%{opacity:0}44%,92.86%{opacity:1}97.14%,100%{opacity:0}}
+.vf-d .pW{animation:vfd-pW 14s ease infinite}
+@keyframes vfd-pW{0%,5.71%{opacity:.35}7.2%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-d .pP{animation:vfd-pP 14s ease infinite}
+@keyframes vfd-pP{0%,34%{opacity:.35}35.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-d .pPN{animation:vfd-pPN 14s ease infinite}
+@keyframes vfd-pPN{0%,35%{opacity:.35}36.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-d .pSP{animation:vfd-pSP 14s ease infinite}
+@keyframes vfd-pSP{0%,37%{opacity:.35}38.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-d .pIx{animation:vfd-pIx 14s ease infinite}
+@keyframes vfd-pIx{0%,43%{opacity:.35}44.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-d .lb{position:absolute;line-height:1.2}
+.vf-d .lb b{display:block;font-weight:400;font-size:28px;color:#1A1A1A;letter-spacing:-.03em}
+.vf-d .lb i{display:block;font-style:normal;font-size:22px;line-height:1.3;color:rgba(26,26,26,.85);letter-spacing:-.03em;margin-top:6px}
+.vf-d .lb .cap{margin-bottom:6px}
+.vf-d .chip{height:70px;box-sizing:border-box;border-radius:10px;padding:0 22px;display:flex;flex-direction:column;justify-content:center;gap:3px;color:#FCF9F2}
+.vf-d .coin{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(26,26,26,.7);font-size:15px;letter-spacing:-.01em;color:#1A1A1A}
+.vf-m .cap{font-size:13px;letter-spacing:-.01em;color:#2A2954}
+.vf-m .live{animation:vfm-live 14s linear infinite}
+@keyframes vfm-live{0%{opacity:0}1%,92.86%{opacity:1}97.14%,100%{opacity:0}}
+.vf-m .route{stroke-dasharray:1;stroke-dashoffset:1;animation:vfm-route 14s ease-in-out infinite}
+@keyframes vfm-route{0%,5.71%{stroke-dashoffset:1}10%{stroke-dashoffset:.7752}22%,36%{stroke-dashoffset:.4086}42%,58%{stroke-dashoffset:.356}64%{stroke-dashoffset:.2758}72%,100%{stroke-dashoffset:0}}
+.vf-m .token{offset-path:path('M330 312 H80 C40 312, 30 330, 30 365 V590 C30 620, 45 630, 75 630 H225 C238 630, 245 618, 245 590 C250 612, 300 612, 305 590 C310 640, 352 650, 352 690 V762 C352 777, 340 785, 325 785 H60');offset-rotate:0deg;offset-anchor:50% 50%;animation:vfm-tokMove 14s ease-in-out infinite,vfm-tokLook 14s linear infinite}
+@keyframes vfm-tokMove{0%,5.71%{offset-distance:0%}10%{offset-distance:22.48%}22%,36%{offset-distance:59.14%}42%,58%{offset-distance:64.4%}64%{offset-distance:72.42%}72%,100%{offset-distance:100%}}
+@keyframes vfm-tokLook{0%,21%{background:#3A86C8;border-color:#3A86C8;box-shadow:0 0 10px 3px rgba(58,134,200,.4)}22.5%,35.5%{background:#FFFFFF;border-color:#3A86C8;box-shadow:0 0 10px 3px rgba(58,134,200,.4)}36.8%,57.5%{background:#3A86C8;border-color:#B1E0FF;box-shadow:0 0 12px 4px rgba(177,224,255,.9)}59%,100%{background:#A73D13;border-color:#A73D13;box-shadow:0 0 10px 3px rgba(167,61,19,.35)}}
+.vf-m .rp{stroke-dasharray:1;stroke-dashoffset:1}
+.vf-m .rp1{animation:vfm-rp1 14s ease-out infinite}
+@keyframes vfm-rp1{0%,22%{stroke-dashoffset:1;opacity:1}26%{stroke-dashoffset:0;opacity:1}33%,100%{stroke-dashoffset:0;opacity:0}}
+.vf-m .rp2{animation:vfm-rp2 14s ease-out infinite}
+@keyframes vfm-rp2{0%,42%{stroke-dashoffset:1;opacity:1}46%{stroke-dashoffset:0;opacity:1}53%,100%{stroke-dashoffset:0;opacity:0}}
+.vf-m .pop{transform-box:fill-box;transform-origin:center}
+.vf-m .s10{animation:vfm-s10 14s ease-out infinite}
+@keyframes vfm-s10{0%,22%{opacity:0;transform:scale(.3)}23.5%{opacity:1;transform:scale(1.4)}25%,100%{opacity:1;transform:scale(1)}}
+.vf-m .s11{animation:vfm-s11 14s ease-out infinite}
+@keyframes vfm-s11{0%,27%{opacity:0;transform:scale(.3)}28.5%{opacity:.5;transform:scale(1.3)}29.5%,100%{opacity:.5;transform:scale(1)}}
+.vf-m .s12{animation:vfm-s12 14s ease-out infinite}
+@keyframes vfm-s12{0%,31%{opacity:0;transform:scale(.3)}32.5%{opacity:.5;transform:scale(1.3)}33.5%,100%{opacity:.5;transform:scale(1)}}
+.vf-m .s13{animation:vfm-s13 14s ease-out infinite}
+@keyframes vfm-s13{0%,42%{opacity:0;transform:scale(.3)}43.5%{opacity:1;transform:scale(1.4)}45%,100%{opacity:1;transform:scale(1)}}
+.vf-m .ring{transform-box:fill-box;transform-origin:center;opacity:0}
+.vf-m .rOn{animation:vfm-rOn 14s ease-out infinite}
+@keyframes vfm-rOn{0%,10%{opacity:0;transform:scale(.5)}10.6%{opacity:.9;transform:scale(1)}16%,100%{opacity:0;transform:scale(2.6)}}
+.vf-m .rRt1{animation:vfm-rRt1 14s ease-out infinite}
+@keyframes vfm-rRt1{0%,26%{opacity:0;transform:scale(.5)}26.6%{opacity:.9;transform:scale(1)}32%,100%{opacity:0;transform:scale(2.8)}}
+.vf-m .rRt2{animation:vfm-rRt2 14s ease-out infinite}
+@keyframes vfm-rRt2{0%,46%{opacity:0;transform:scale(.5)}46.6%{opacity:.9;transform:scale(1)}52%,100%{opacity:0;transform:scale(2.8)}}
+.vf-m .rOff{animation:vfm-rOff 14s ease-out infinite}
+@keyframes vfm-rOff{0%,64%{opacity:0;transform:scale(.5)}64.6%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(2.6)}}
+.vf-m .sOn{animation:vfm-sOn 14s ease infinite}
+@keyframes vfm-sOn{0%,10%{opacity:.35}11.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-m .sOff{animation:vfm-sOff 14s ease infinite}
+@keyframes vfm-sOff{0%,64%{opacity:.35}65.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-m .sDe{animation:vfm-sDe 14s ease infinite}
+@keyframes vfm-sDe{0%,72%{opacity:.35}73.5%,92.86%{opacity:1}97.14%,100%{opacity:.35}}
+.vf-m .dimT{opacity:0;animation:vfm-dimT 14s ease infinite}
+@keyframes vfm-dimT{0%,35%{opacity:0}37.5%,56%{opacity:.65}58.5%,100%{opacity:0}}
+.vf-m .boxT{opacity:0;animation:vfm-boxT 14s ease infinite}
+@keyframes vfm-boxT{0%,35.5%{opacity:0}37.5%,56%{opacity:1}58.5%,100%{opacity:0}}
+.vf-m .arcT{stroke-dasharray:1;stroke-dashoffset:1;animation:vfm-arcT 14s ease-in-out infinite}
+@keyframes vfm-arcT{0%,36%{stroke-dashoffset:1;opacity:1}42%,56%{stroke-dashoffset:0;opacity:1}58.5%,100%{stroke-dashoffset:0;opacity:0}}
+.vf-m .sHid{animation:vfm-sHid 14s ease infinite}
+@keyframes vfm-sHid{0%,48%{opacity:.3}51%,92.86%{opacity:1}97.14%,100%{opacity:.3}}
+.vf-m .seg{position:relative;height:3px;border-radius:2px;background:rgba(26,26,26,.12);overflow:hidden}
+.vf-m .seg i{position:absolute;inset:0;background:#3A86C8;transform-origin:left;transform:scaleX(0)}
+.vf-m .g1{animation:vfm-g1 14s linear infinite}
+@keyframes vfm-g1{0%{transform:scaleX(0)}21.5%,93%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+.vf-m .g2{animation:vfm-g2 14s linear infinite}
+@keyframes vfm-g2{0%,21.5%{transform:scaleX(0)}36%,93%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+.vf-m .g3{animation:vfm-g3 14s linear infinite}
+@keyframes vfm-g3{0%,36%{transform:scaleX(0)}58%,93%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+.vf-m .g4{animation:vfm-g4 14s linear infinite;background:#A73D13!important}
+@keyframes vfm-g4{0%,58%{transform:scaleX(0)}90%,93%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+.vf-m .st{position:absolute;left:0;top:0;width:350px;opacity:0}
+.vf-m .st .t{font-size:28px;line-height:1.1;letter-spacing:-.05em;color:#1A1A1A}
+.vf-m .st .s{margin-top:6px;font-size:16px;line-height:1.35;letter-spacing:-.02em;color:rgba(26,26,26,.85)}
+.vf-m .t1{animation:vfm-t1 14s ease infinite}
+@keyframes vfm-t1{0%,20.5%{opacity:1;transform:none}22%,97%{opacity:0;transform:translateY(-8px)}99%,100%{opacity:1;transform:none}}
+.vf-m .t2{animation:vfm-t2 14s ease infinite}
+@keyframes vfm-t2{0%,21.5%{opacity:0;transform:translateY(8px)}23%,34.5%{opacity:1;transform:none}36%,100%{opacity:0;transform:translateY(-8px)}}
+.vf-m .t3{animation:vfm-t3 14s ease infinite}
+@keyframes vfm-t3{0%,36%{opacity:0;transform:translateY(8px)}37.5%,56.5%{opacity:1;transform:none}58%,100%{opacity:0;transform:translateY(-8px)}}
+.vf-m .t4{animation:vfm-t4 14s ease infinite}
+@keyframes vfm-t4{0%,58%{opacity:0;transform:translateY(8px)}59.5%,95%{opacity:1;transform:none}98%,100%{opacity:0}}

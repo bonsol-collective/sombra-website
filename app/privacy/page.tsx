@@ -16,7 +16,8 @@ export default function PrivacyPage() {
   return (
     <>
       <Nav />
-      <main className="legal">
+      <main className="page">
+        <div className="legal">
         <header className="legal-header">
           <div className="legal-eyebrow">Legal</div>
           <h1 className="legal-title">Privacy Policy</h1>
@@ -423,6 +424,7 @@ export default function PrivacyPage() {
             </p>
           </section>
         </article>
+        </div>
       </main>
       <Footer />
     </>

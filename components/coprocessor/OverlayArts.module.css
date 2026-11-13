@@ -1,0 +1,25 @@
+/* Wallets — Figma 242:53240 / 53251 / 53259 */
+.payAmount {
+  position: absolute; left: 404px; top: 314px; width: 77px; text-align: right; white-space: nowrap;
+  font-size: 36.98px; line-height: 41px; letter-spacing: -0.05em; color: var(--color-pine-accent);
+}
+.receive { position: absolute; left: 181px; top: 442px; font-size: 20px; line-height: 20px; letter-spacing: -0.03em; color: var(--color-pine-accent); white-space: nowrap; }
+.arrow { position: absolute; left: 323px; top: 368px; }
+
+/* De-Fi — Figma 242:42170 tile, 242:42189 shield frame, 242:42199 check */
+.tile { position: absolute; left: 354px; top: 342px; width: 77px; height: 61px; overflow: hidden; border-radius: 11.25px; background: rgba(177, 224, 255, 0.5); }
+.shield { position: absolute; left: 26.5px; top: 18px; width: 24px; height: 24px; }
+.shield img { position: absolute; left: 3.25px; top: 1.25px; }
+.check { position: absolute; left: 8.25px; top: 9.25px; overflow: visible; }
+
+/* Checkout — Figma 242:29809 method tile, 242:29827 card input */
+.method { position: absolute; left: 114.05px; top: 351.72px; }
+.input {
+  position: absolute; left: 114.05px; top: 465.69px; width: 392.66px; height: 33.83px;
+  border: 0.757px solid #dcdcdc; border-radius: 4.45px; background: #f7f7f7;
+}
+.cardIcon { position: absolute; left: 9.03px; top: 9.92px; }
+.cardNumber {
+  position: absolute; left: 31.3px; top: 8.14px; white-space: nowrap;
+  font-size: 12.47px; line-height: 15px; letter-spacing: -0.03em; color: #18192f;
+}

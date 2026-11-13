@@ -1,98 +1,25 @@
-"use client";
+import Image from "next/image";
+import { ButtonLink } from "./ButtonLink";
+import s from "./Hero.module.css";
 
-import { useEffect, useState } from "react";
-import { useScrollY } from "@/hooks/useScrollY";
-import { useMouseParallax } from "@/hooks/useMouseParallax";
-import { CryptoTerm } from "./CryptoTerm";
-
-function HeroEclipse({ scrollY, speed }: { scrollY: number; speed: number }) {
-  const [t, setT] = useState(0);
-  const [isNarrow, setIsNarrow] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 900px)");
-    const sync = () => setIsNarrow(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-
-  useEffect(() => {
-    let raf: number;
-    const start = performance.now();
-    const loop = (now: number) => {
-      setT((now - start) / 1000);
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  const parallax = useMouseParallax(18);
-
-  const scrollNorm = isNarrow ? 0 : Math.min(1, scrollY / 800);
-  const idleX = isNarrow ? 0 : Math.sin(t * 0.3 * speed) * 18;
-  const idleY = isNarrow ? 0 : Math.cos(t * 0.22 * speed) * 12;
-  const x = idleX + (isNarrow ? 0 : parallax.x) - scrollNorm * 40;
-  const y = idleY + (isNarrow ? 0 : parallax.y * 0.5) + scrollNorm * 20;
-  const scale = 1 + scrollNorm * 0.15;
-
+/**
+ * Figma Home hero (320:82751 desktop, 234:160 mobile).
+ * ponytail: Figma fills this with a video; we ship its poster frame until the
+ * mp4 is supplied, then swap in <video autoPlay muted loop playsInline poster>.
+ */
+export function Hero() {
   return (
-    <div className="hero-canvas">
-      <div className="hero-grid-bg" aria-hidden="true"></div>
-      <div className="hero-eclipse">
-        <div
-          className="hero-corona"
-          style={{ opacity: 0.55 + Math.sin(t * 0.6) * 0.1 }}
-        ></div>
-        <div className="hero-sun"></div>
-        <div
-          className="hero-shadow"
-          style={{ transform: `translate(${x}px, ${y}px) scale(${scale})` }}
-        ></div>
-      </div>
-    </div>
-  );
-}
-
-type HeroProps = {
-  tagline?: string;
-  speed?: number;
-};
-
-export function Hero({
-  tagline = "Step into the shadow.",
-  speed = 1,
-}: HeroProps) {
-  const scrollY = useScrollY();
-  return (
-    <header className="hero">
-      <HeroEclipse scrollY={scrollY} speed={speed} />
-      <div className="hero-content">
-        <div>
-          <div className="hero-tagline">{tagline}</div>
-          <h1 className="hero-title">
-            Trade in the <i>shadow.</i>
-          </h1>
-          <h2 className="hero-deck">
-            Private trades. Post-quantum. Solana-native.
-          </h2>
-        </div>
-        <div className="hero-meta">
-          <strong>Sombra</strong> brings{" "}
-          <CryptoTerm term="Kyber-768" variant="inline">
-            quantum-safe
-          </CryptoTerm>{" "}
-          privacy to Solana — private UTXO transfers and shielded trading,
-          built for the quantum era.
-        </div>
-      </div>
-      <div className="hero-footer">
-        <div>
-          <span className="hero-footer-dot"></span> Mainnet beta · Q2 2026
-        </div>
-        <div></div>
-        <div className="hero-footer-scroll">scroll to reveal ↓</div>
-      </div>
-    </header>
+    <section className={s.hero}>
+      <Image className={s.bg} src="/images/hero-canyon.jpg" alt="" fill priority sizes="100vw" />
+      <h1 className={s.title}>
+        The new privacy standard <br className={s.br} />powering the next era of money.
+      </h1>
+      <p className={s.sub}>
+        We keep individual and organizational balances, payroll, and B2B settlements confidential.
+        <br />
+        Privacy built to last with post-quantum cryptography.
+      </p>
+      <ButtonLink href="/demo" arrow className={s.cta}>Get started</ButtonLink>
+    </section>
   );
 }

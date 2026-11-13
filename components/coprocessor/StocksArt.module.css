@@ -1,0 +1,5 @@
+/* Figma "Enter Payment Details" texts 242:51310 / 51315 (they read "Trading View" / stars) */
+.title, .stars { position: absolute; left: 91.4px; font-size: 17.36px; line-height: 1.2; white-space: nowrap; }
+.title { top: 243.9px; color: #18192f; }
+.stars { left: 93px; top: 276px; color: var(--color-pine-accent); letter-spacing: 0.05em; }
+.chart { position: absolute; left: 145px; top: 228px; width: 457px; height: 260px; overflow: hidden; }
