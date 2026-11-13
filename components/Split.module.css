@@ -6,7 +6,7 @@
 }
 .text { display: flex; flex-direction: column; gap: 32px; max-width: 560px; }
 .title { font-size: 48px; line-height: 1; letter-spacing: -0.05em; font-weight: 400; }
-.sub { font-size: 20px; line-height: 1.2; letter-spacing: -0.03em; color: var(--color-muted); }
+.sub { font-size: 20px; line-height: 1.45; letter-spacing: -0.03em; color: var(--color-muted); } /* 145% per Figma */
 
 .media {
   position: relative; isolation: isolate; overflow: hidden;
