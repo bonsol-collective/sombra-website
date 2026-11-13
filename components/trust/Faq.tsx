@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { ButtonLink } from "../ButtonLink";
 import s from "./Faq.module.css";
 
@@ -27,8 +30,9 @@ const FAQ: { q: string; a: string[] }[] = [
   },
 ];
 
-/** Figma 3:6176 (desktop) / 340:64 (mobile). Native <details>; the first one starts open. */
+/** Figma 3:6176 (desktop) / 340:64 (mobile). Accordion rows; the first starts open. */
 export function Faq() {
+  const [open, setOpen] = useState(() => FAQ.map((_, i) => i === 0));
   return (
     <section className={s.section}>
       <div className={s.side}>
@@ -37,13 +41,24 @@ export function Faq() {
       </div>
       <div className={s.list}>
         {FAQ.map(({ q, a }, i) => (
-          <details key={q} className={s.item} open={i === 0}>
-            <summary className={s.q}>
+          <div key={q} className={s.item} data-open={open[i] || undefined}>
+            <button
+              type="button"
+              className={s.q}
+              aria-expanded={open[i]}
+              aria-controls={`faq-${i}`}
+              onClick={() => setOpen((o) => o.map((v, j) => (j === i ? !v : v)))}
+            >
               {q}
               <span className={s.chevron}><img src="/brand/chevron-down.svg" width={24} height={24} alt="" /></span>
-            </summary>
-            <div className={s.a}>{a.map((p) => <p key={p}>{p}</p>)}</div>
-          </details>
+            </button>
+            {/* Height animates via grid rows 0fr → 1fr; inert keeps closed answers out of tab order and screen readers. */}
+            <div id={`faq-${i}`} className={s.panel} inert={!open[i]}>
+              <div className={s.clip}>
+                <div className={s.a}>{a.map((p) => <p key={p}>{p}</p>)}</div>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>
