@@ -1,10 +1,9 @@
 /* Generated from .agent/reference/value-flow — ported verbatim, scoped. */
 .vf-d .tlList{animation:vfd-tlList 14s cubic-bezier(.65,0,.25,1) infinite}
-@keyframes vfd-tlList{0%,20%{transform:translateY(0)}23.5%,34%{transform:translateY(-200px)}37.5%,56%{transform:translateY(-400px)}59.5%,93%{transform:translateY(-600px)}98%,100%{transform:translateY(0)}}
-.vf-d .tlI{height:200px;box-sizing:border-box;padding-top:2px;opacity:.2}
-.vf-d .tlI .n{font-size:15px;letter-spacing:.18em;color:#3A86C8;margin-bottom:16px}
-.vf-d .tlI .t{font-size:42px;line-height:1.1;letter-spacing:-.025em;color:#1A1A1A}
-.vf-d .tlI .s{margin-top:10px;font-size:21px;line-height:1.35;letter-spacing:-.03em;color:rgba(26,26,26,.85)}
+@keyframes vfd-tlList{0%,20%{transform:translateY(0)}23.5%,34%{transform:translateY(-150px)}37.5%,56%{transform:translateY(-300px)}59.5%,93%{transform:translateY(-450px)}98%,100%{transform:translateY(0)}}
+.vf-d .tlI{height:150px;box-sizing:border-box;padding-top:2px;opacity:.2}
+.vf-d .tlI .t{font-size:44px;line-height:1.1;letter-spacing:-.05em;color:#1A1A1A}
+.vf-d .tlI .s{margin-top:10px;font-size:22px;line-height:1.35;letter-spacing:-.03em;color:rgba(26,26,26,.85)}
 .vf-d .i1{animation:vfd-i1 14s ease infinite}
 @keyframes vfd-i1{0%,20%{opacity:1}23.5%,94%{opacity:.22}98%,100%{opacity:1}}
 .vf-d .i2{animation:vfd-i2 14s ease infinite}
@@ -15,23 +14,23 @@
 @keyframes vfd-i4{0%,56%{opacity:.22}59.5%,93%{opacity:1}98%,100%{opacity:.22}}
 .vf-d .tlFill{transform-origin:top;animation:vfd-tlFill 14s cubic-bezier(.65,0,.25,1) infinite}
 @keyframes vfd-tlFill{0%,20%{transform:scaleY(0)}23.5%,34%{transform:scaleY(.3333)}37.5%,56%{transform:scaleY(.6667)}59.5%,93%{transform:scaleY(1)}98%,100%{transform:scaleY(0)}}
-.vf-d .dot{position:absolute;left:-5px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;background:#FFFFFF;border:2px solid rgba(26,26,26,.25)}
+.vf-d .dot{position:absolute;left:-5px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;background:#FCF9F2;border:2px solid rgba(26,26,26,.25)}
 .vf-d .d1{animation:vfd-d1 14s ease infinite}
 @keyframes vfd-d1{0%,98%{background:#3A86C8;border-color:#3A86C8}100%{background:#3A86C8;border-color:#3A86C8}}
 .vf-d .d2{animation:vfd-d2 14s ease infinite}
-@keyframes vfd-d2{0%,20%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}23.5%,93%{background:#3A86C8;border-color:#3A86C8}98%,100%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}}
+@keyframes vfd-d2{0%,20%{background:#FCF9F2;border-color:rgba(26,26,26,.25)}23.5%,93%{background:#3A86C8;border-color:#3A86C8}98%,100%{background:#FCF9F2;border-color:rgba(26,26,26,.25)}}
 .vf-d .d3{animation:vfd-d3 14s ease infinite}
-@keyframes vfd-d3{0%,34%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}37.5%,93%{background:#3A86C8;border-color:#3A86C8}98%,100%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}}
+@keyframes vfd-d3{0%,34%{background:#FCF9F2;border-color:rgba(26,26,26,.25)}37.5%,93%{background:#3A86C8;border-color:#3A86C8}98%,100%{background:#FCF9F2;border-color:rgba(26,26,26,.25)}}
 .vf-d .d4{animation:vfd-d4 14s ease infinite}
-@keyframes vfd-d4{0%,56%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}59.5%,93%{background:#A73D13;border-color:#A73D13}98%,100%{background:#FFFFFF;border-color:rgba(26,26,26,.25)}}
-.vf-d .cap{font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#2A2954;font-weight:400}
+@keyframes vfd-d4{0%,56%{background:#FCF9F2;border-color:rgba(26,26,26,.25)}59.5%,93%{background:#A73D13;border-color:#A73D13}98%,100%{background:#FCF9F2;border-color:rgba(26,26,26,.25)}}
+.vf-d .cap{font-size:18px;letter-spacing:-.01em;color:#2A2954;font-weight:400}
 .vf-d .live{animation:vfd-live 14s linear infinite}
 @keyframes vfd-live{0%{opacity:0}1%,92.86%{opacity:1}97.14%,100%{opacity:0}}
 .vf-d .route{stroke-dasharray:1;stroke-dashoffset:1;animation:vfd-route 14s ease-in-out infinite}
 @keyframes vfd-route{0%,5.71%{stroke-dashoffset:1}10%{stroke-dashoffset:.8482}22%,36%{stroke-dashoffset:.4342}42%,58%{stroke-dashoffset:.36}64%{stroke-dashoffset:.1383}72%,100%{stroke-dashoffset:0}}
 .vf-d .token{offset-path:path('M140 470 H360 C440 470, 470 640, 490 780 C500 815, 530 830, 570 830 H1020 C1060 830, 1086 800, 1086 720 C1100 790, 1184 790, 1198 720 C1230 820, 1420 830, 1440 620 C1460 510, 1490 470, 1540 470 H1780');offset-rotate:0deg;offset-anchor:50% 50%;animation:vfd-tokMove 14s ease-in-out infinite,vfd-tokLook 14s linear infinite}
 @keyframes vfd-tokMove{0%,5.71%{offset-distance:0%}10%{offset-distance:15.18%}22%,36%{offset-distance:56.58%}42%,58%{offset-distance:64%}64%{offset-distance:86.17%}72%,100%{offset-distance:100%}}
-@keyframes vfd-tokLook{0%,21%{background:#3A86C8;border-color:#3A86C8;box-shadow:0 0 14px 4px rgba(58,134,200,.4)}22.5%,35.5%{background:#FFFFFF;border-color:#3A86C8;box-shadow:0 0 14px 4px rgba(58,134,200,.4)}36.8%,57.5%{background:#3A86C8;border-color:#B1E0FF;box-shadow:0 0 18px 6px rgba(177,224,255,.9)}59%,100%{background:#A73D13;border-color:#A73D13;box-shadow:0 0 16px 4px rgba(167,61,19,.35)}}
+@keyframes vfd-tokLook{0%,21%{background:#3A86C8;border-color:#3A86C8;box-shadow:0 0 14px 4px rgba(58,134,200,.4)}22.5%,35.5%{background:#FCF9F2;border-color:#3A86C8;box-shadow:0 0 14px 4px rgba(58,134,200,.4)}36.8%,57.5%{background:#3A86C8;border-color:#B1E0FF;box-shadow:0 0 18px 6px rgba(177,224,255,.9)}59%,100%{background:#A73D13;border-color:#A73D13;box-shadow:0 0 16px 4px rgba(167,61,19,.35)}}
 .vf-d .rp{stroke-dasharray:1;stroke-dashoffset:1}
 .vf-d .rp1{animation:vfd-rp1 14s ease-out infinite}
 @keyframes vfd-rp1{0%,22%{stroke-dashoffset:1;opacity:1}26%{stroke-dashoffset:0;opacity:1}33%,100%{stroke-dashoffset:0;opacity:0}}
@@ -98,7 +97,7 @@
 .vf-d .lb i{display:block;font-style:normal;font-size:22px;line-height:1.3;color:rgba(26,26,26,.85);letter-spacing:-.03em;margin-top:6px}
 .vf-d .lb .cap{margin-bottom:6px}
 .vf-d .chip{height:70px;box-sizing:border-box;border-radius:10px;padding:0 22px;display:flex;flex-direction:column;justify-content:center;gap:3px;color:#FCF9F2}
-.vf-d .coin{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(26,26,26,.7);font-size:15px;letter-spacing:.1em;color:#1A1A1A}
+.vf-d .coin{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(26,26,26,.7);font-size:15px;letter-spacing:-.01em;color:#1A1A1A}
 .vf-m .cap{font-size:13px;letter-spacing:-.01em;color:#2A2954}
 .vf-m .live{animation:vfm-live 14s linear infinite}
 @keyframes vfm-live{0%{opacity:0}1%,92.86%{opacity:1}97.14%,100%{opacity:0}}
@@ -106,7 +105,7 @@
 @keyframes vfm-route{0%,5.71%{stroke-dashoffset:1}10%{stroke-dashoffset:.7752}22%,36%{stroke-dashoffset:.4086}42%,58%{stroke-dashoffset:.356}64%{stroke-dashoffset:.2758}72%,100%{stroke-dashoffset:0}}
 .vf-m .token{offset-path:path('M330 312 H80 C40 312, 30 330, 30 365 V590 C30 620, 45 630, 75 630 H225 C238 630, 245 618, 245 590 C250 612, 300 612, 305 590 C310 640, 352 650, 352 690 V762 C352 777, 340 785, 325 785 H60');offset-rotate:0deg;offset-anchor:50% 50%;animation:vfm-tokMove 14s ease-in-out infinite,vfm-tokLook 14s linear infinite}
 @keyframes vfm-tokMove{0%,5.71%{offset-distance:0%}10%{offset-distance:22.48%}22%,36%{offset-distance:59.14%}42%,58%{offset-distance:64.4%}64%{offset-distance:72.42%}72%,100%{offset-distance:100%}}
-@keyframes vfm-tokLook{0%,21%{background:#3A86C8;border-color:#3A86C8;box-shadow:0 0 10px 3px rgba(58,134,200,.4)}22.5%,35.5%{background:#FFFFFF;border-color:#3A86C8;box-shadow:0 0 10px 3px rgba(58,134,200,.4)}36.8%,57.5%{background:#3A86C8;border-color:#B1E0FF;box-shadow:0 0 12px 4px rgba(177,224,255,.9)}59%,100%{background:#A73D13;border-color:#A73D13;box-shadow:0 0 10px 3px rgba(167,61,19,.35)}}
+@keyframes vfm-tokLook{0%,21%{background:#3A86C8;border-color:#3A86C8;box-shadow:0 0 10px 3px rgba(58,134,200,.4)}22.5%,35.5%{background:#FCF9F2;border-color:#3A86C8;box-shadow:0 0 10px 3px rgba(58,134,200,.4)}36.8%,57.5%{background:#3A86C8;border-color:#B1E0FF;box-shadow:0 0 12px 4px rgba(177,224,255,.9)}59%,100%{background:#A73D13;border-color:#A73D13;box-shadow:0 0 10px 3px rgba(167,61,19,.35)}}
 .vf-m .rp{stroke-dasharray:1;stroke-dashoffset:1}
 .vf-m .rp1{animation:vfm-rp1 14s ease-out infinite}
 @keyframes vfm-rp1{0%,22%{stroke-dashoffset:1;opacity:1}26%{stroke-dashoffset:0;opacity:1}33%,100%{stroke-dashoffset:0;opacity:0}}

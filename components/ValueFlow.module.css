@@ -1,5 +1,5 @@
 /* Value flow section. Artboards: desktop 2380×1000 (cropped to x40–2340, y250–960), mobile 390×860. */
-.section { background: var(--color-paper); padding: var(--pad-y) var(--pad-x); }
+.section { background: var(--color-warm); padding: var(--pad-y) var(--pad-x); } /* matches the export's #FCF9F2 stage */
 .title { max-width: 1280px; margin: 0 auto 48px; }
 
 .desktop {
