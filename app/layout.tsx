@@ -5,7 +5,7 @@ import "./globals.css";
 
 // APK Galeria (Autograph Type Design) — licensed by Sombra / Bonsol Labs.
 const galeria = localFont({
-  src: "./fonts/APKGaleria.woff2",
+  src: "./fonts/APKGaleria-Regular.woff2",
   weight: "400",
   style: "normal",
   variable: "--font-galeria",
