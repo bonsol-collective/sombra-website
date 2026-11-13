@@ -48,10 +48,6 @@
 @keyframes vfd-s23{0%,32.5%{opacity:0;transform:scale(.3)}34%{opacity:.5;transform:scale(1.3)}35%,100%{opacity:.5;transform:scale(1)}}
 .vf-d .s24{animation:vfd-s24 14s ease-out infinite}
 @keyframes vfd-s24{0%,42%{opacity:0;transform:scale(.3)}43.5%{opacity:1;transform:scale(1.4)}45%,100%{opacity:1;transform:scale(1)}}
-.vf-d .n1{animation:vfd-n1 14s ease-out infinite}
-@keyframes vfd-n1{0%,36.5%{opacity:0;transform:translateY(-8px)}38.5%,92.86%{opacity:1;transform:none}97.14%,100%{opacity:0;transform:none}}
-.vf-d .n2{animation:vfd-n2 14s ease-out infinite}
-@keyframes vfd-n2{0%,58.5%{opacity:0;transform:translateY(-8px)}60.5%,92.86%{opacity:1;transform:none}97.14%,100%{opacity:0;transform:none}}
 .vf-d .ring{transform-box:fill-box;transform-origin:center;opacity:0}
 .vf-d .rOn{animation:vfd-rOn 14s ease-out infinite}
 @keyframes vfd-rOn{0%,10%{opacity:0;transform:scale(.5)}10.6%{opacity:.9;transform:scale(1)}16%,100%{opacity:0;transform:scale(2.8)}}
@@ -102,7 +98,6 @@
 .vf-d .lb i{display:block;font-style:normal;font-size:22px;line-height:1.3;color:rgba(26,26,26,.85);letter-spacing:-.03em;margin-top:6px}
 .vf-d .lb .cap{margin-bottom:6px}
 .vf-d .chip{height:70px;box-sizing:border-box;border-radius:10px;padding:0 22px;display:flex;flex-direction:column;justify-content:center;gap:3px;color:#FCF9F2}
-.vf-d .nf{display:block;width:30px;height:10px;border-radius:3px;background:rgba(26,26,26,.14)}
 .vf-d .coin{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(26,26,26,.7);font-size:15px;letter-spacing:.1em;color:#1A1A1A}
 .vf-m .cap{font-size:13px;letter-spacing:-.01em;color:#2A2954}
 .vf-m .live{animation:vfm-live 14s linear infinite}
@@ -126,10 +121,6 @@
 @keyframes vfm-s12{0%,31%{opacity:0;transform:scale(.3)}32.5%{opacity:.5;transform:scale(1.3)}33.5%,100%{opacity:.5;transform:scale(1)}}
 .vf-m .s13{animation:vfm-s13 14s ease-out infinite}
 @keyframes vfm-s13{0%,42%{opacity:0;transform:scale(.3)}43.5%{opacity:1;transform:scale(1.4)}45%,100%{opacity:1;transform:scale(1)}}
-.vf-m .n1{animation:vfm-n1 14s ease-out infinite}
-@keyframes vfm-n1{0%,36.5%{opacity:0}38.5%,92.86%{opacity:1}97.14%,100%{opacity:0}}
-.vf-m .n2{animation:vfm-n2 14s ease-out infinite}
-@keyframes vfm-n2{0%,58.5%{opacity:0}60.5%,92.86%{opacity:1}97.14%,100%{opacity:0}}
 .vf-m .ring{transform-box:fill-box;transform-origin:center;opacity:0}
 .vf-m .rOn{animation:vfm-rOn 14s ease-out infinite}
 @keyframes vfm-rOn{0%,10%{opacity:0;transform:scale(.5)}10.6%{opacity:.9;transform:scale(1)}16%,100%{opacity:0;transform:scale(2.6)}}
