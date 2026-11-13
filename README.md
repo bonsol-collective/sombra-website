@@ -8,7 +8,7 @@ Live at [sombra.tech](https://sombra.tech).
 
 - [Next.js 15](https://nextjs.org) (App Router) + React 19
 - TypeScript
-- [Formspree](https://formspree.io) + reCAPTCHA for the demo request form
+- The demo request form posts to `/api/demo`, which stores each request in a Google Sheet ([setup](docs/demo-sheet.md))
 - Deployed on [Vercel](https://vercel.com)
 
 ## Development
@@ -26,6 +26,7 @@ Open [http://localhost:3000](http://localhost:3000).
 - `npm run build` — production build
 - `npm run start` — run the production build locally
 - `npm run lint` — lint with Next.js defaults
+- `npm test` — tests of the demo request checks (Node 22.18 or later)
 
 ## Structure
 
