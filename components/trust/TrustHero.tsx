@@ -1,12 +1,12 @@
 import { ButtonLink } from "../ButtonLink";
+import { QuantumFridgeArt } from "./QuantumFridgeArt";
 import s from "./TrustHero.module.css";
 
 /** Figma 3:6149 (desktop) / 340:37 (mobile). */
 export function TrustHero() {
   return (
     <section className={s.section}>
-      {/* TODO(design): Figma shows a checkerboard image placeholder here. */}
-      <div className={s.visual} aria-hidden="true" />
+      <QuantumFridgeArt />
       <div className={s.copy}>
         <h1 className={s.title}>Critical privacy<br />infrastructure for<br />on-chain finance.</h1>
         <p className={`t-body ${s.text}`}>
