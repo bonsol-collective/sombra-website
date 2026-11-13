@@ -12,6 +12,14 @@
   --color-pine-card: #3c4a47;
   --color-canyon: #a73d13;
   --color-route: #3a86c8;
+  /* Product-UI mocks (Trust cards, Three steps stage). */
+  --color-hairline: #ececec;
+  --color-pine-tint: #e6ebe8;
+  --color-canyon-tint: #f7e7e0;
+  --color-sky: #d8efff;
+  --color-tusd: #1d4e9a;
+  --color-usdt: #4a9e86;
+  --color-spl: #b1e0ff;
   --pad-x: 80px;
   --pad-y: 120px;
   --ease: cubic-bezier(.2, .7, .2, 1);
