@@ -19,6 +19,6 @@
   background: var(--color-pine-accent); color: var(--color-paper); font-size: 13px; letter-spacing: -0.03em;
 }
 
-/* "App coming soon": button look, no interaction. */
-.soon { cursor: default; }
-.soon:hover { filter: none; }
+/* "Coming soon": a temporary tag, not a button (website QA: 24px radius, #E6EFED). */
+span.soon { border-radius: 24px; background: var(--color-tag); color: var(--color-ink); cursor: default; }
+span.soon:hover { filter: none; }
