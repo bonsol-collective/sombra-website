@@ -20,6 +20,7 @@
   --color-tusd: #1d4e9a;
   --color-usdt: #4a9e86;
   --color-spl: #b1e0ff;
+  --color-tag: #e6efed; /* "Coming soon" tag */
   --pad-x: 80px;
   --pad-y: 120px;
   --ease: cubic-bezier(.2, .7, .2, 1);

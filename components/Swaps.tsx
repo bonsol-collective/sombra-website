@@ -29,7 +29,7 @@ export function Swaps() {
           </p>
         </div>
         {/* The app isn’t live yet: a static label, not a link. */}
-        <span className={`btn btn--grey ${s.soon}`}>App coming soon</span>
+        <span className={`btn ${s.soon}`}>Coming soon</span>
       </div>
 
       <div className={split.media}>

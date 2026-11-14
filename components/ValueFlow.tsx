@@ -14,6 +14,13 @@ const STOPS = [2.8, 4.76, 7.84, 12.9];
 const REST = 0.3;
 const FORWARD = 1.5; // playback speed when scrolling down (×real time)
 const BACKWARD = 3; //  …and when rewinding
+// Mobile step text (the artboard's own copy, rendered as real text; shown one at a time by value-flow.css).
+const MOBILE_STEPS = [
+  ["Deposit", "Tokens enter the shielded pool."],
+  ["Blend in", "Your note hides among every other."],
+  ["Send privately", "Only sender and recipient see the link."],
+  ["Withdraw", "Tokens return to Solana."],
+];
 
 /**
  * "How value moves through the shielded pool." — the Value flow HTML exports
@@ -25,7 +32,7 @@ export function ValueFlow() {
   const section = useRef<HTMLElement>(null);
   const desktop = useFit(1800);
   const steps = useFit(430);
-  const mobile = useFit(390);
+  const mobile = useFit(362);
 
   useEffect(() => {
     const el = section.current;
@@ -81,8 +88,19 @@ export function ValueFlow() {
             <div className={`vf-d ${s.stageD}`} dangerouslySetInnerHTML={{ __html: DESKTOP_HTML }} />
           </div>
         </div>
-        <div ref={mobile} className={s.mobile}>
-          <div className={`vf-m ${s.stageM}`} dangerouslySetInnerHTML={{ __html: MOBILE_HTML }} />
+        {/* Mobile: the heading above is shared; step bars and text are real text, the diagram scales to fit. */}
+        <div className={`vf-m ${s.mHead}`} aria-hidden="true">
+          <div className={s.bars}>{[1, 2, 3, 4].map((n) => <div key={n} className="seg"><i className={`g${n}`} /></div>)}</div>
+          <div className={s.stepText}>
+            {MOBILE_STEPS.map(([t, sub], i) => (
+              <div key={t} className={`st t${i + 1}`}><div className="t">{t}</div><div className="s">{sub}</div></div>
+            ))}
+          </div>
+        </div>
+        <div className={s.mobileWrap}>
+          <div ref={mobile} className={s.mobile}>
+            <div className={`vf-m ${s.stageM}`} dangerouslySetInnerHTML={{ __html: MOBILE_HTML }} />
+          </div>
         </div>
       </div>
     </section>
