@@ -28,24 +28,35 @@
   transform-origin: 0 0; transform: scale(var(--k)) translate(-520px, -270px);
 }
 
-.mobile { --k: 1; display: none; position: relative; aspect-ratio: 390 / 860; overflow: hidden; }
+/* Mobile (website QA): heading, step bars and step text are real, unscaled text; the 390×860 artboard
+   is cropped to the diagram (x14–376 / y252–836) and scaled to the width, or to the height left on short screens. */
+.mHead, .mobileWrap { display: none; }
+.bars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
+.stepText { display: grid; }
+.mHead .stepText :global(.st) { grid-area: 1 / 1; position: static; width: auto; }
+.mHead .stepText :global(.st .t) { font-size: 20px; }
+.mobile { --k: 1; position: relative; overflow: hidden; aspect-ratio: 362 / 584; width: min(100cqw, 100cqh * 362 / 584); }
 .stageM {
   position: absolute; top: 0; left: 0; width: 390px; height: 860px;
-  transform-origin: 0 0; transform: scale(var(--k));
+  transform-origin: 0 0; transform: scale(var(--k)) translate(-14px, -252px);
 }
 
 @media (max-width: 900px) {
-  .pin { padding: 64px 0 8px; } /* 56px nav + a little air */
-  .frame { display: none; }
-  /* Fit the tall 390×860 artboard into the screen height (useFit scales by the resulting width). */
-  .mobile { display: block; align-self: center; height: 100%; max-width: 100%; }
+  .pin { padding: 64px 20px 8px; justify-content: flex-start; } /* 56px nav + a little air */
+  .frame { width: 100%; margin: 0; }
+  .head { margin-bottom: 20px; }
+  .steps, .desktop { display: none; }
+  .mHead { display: block; margin-bottom: 16px; }
+  .mobileWrap { display: block; flex: 1; min-height: 0; container-type: size; }
 }
 
 /* No scroll-driving: hold the frame where the whole route is drawn and the withdraw step is active. */
 @media (prefers-reduced-motion: reduce) {
   .section { height: auto; }
   .pin { position: static; height: auto; padding-block: var(--pad-y); }
-  .stageD :global(*), .stageSteps :global(*), .stageM :global(*) {
+  .mobileWrap { flex: none; container-type: normal; }
+  .mobile { width: 100%; }
+  .stageD :global(*), .stageSteps :global(*), .stageM :global(*), .mHead :global(*) {
     animation-delay: -10.5s !important;
     animation-play-state: paused !important;
   }
