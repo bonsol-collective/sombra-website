@@ -8,7 +8,7 @@ import s from "./Nav.module.css";
 const LINKS = [
   { href: "/", label: "Product" },
   { href: "/trust", label: "Trust & Compliance" },
-  { href: "/company", label: "Company" },
+  { href: "/company", label: "About Us" },
 ];
 
 /**

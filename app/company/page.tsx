@@ -7,7 +7,7 @@ import { Values } from "@/components/company/Values";
 import { JoinUs } from "@/components/company/JoinUs";
 
 export const metadata: Metadata = {
-  title: "Company — Sombra",
+  title: "About Us — Sombra",
   description:
     "We exist to build financial privacy that is designed to last in a changing world. Meet the mission and values behind Sombra.",
   alternates: { canonical: "/company" },
