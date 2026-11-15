@@ -6,7 +6,7 @@
 }
 .text { display: flex; flex-direction: column; gap: 32px; max-width: 560px; }
 .title { font-size: 48px; line-height: 1; letter-spacing: -0.05em; font-weight: 400; }
-.sub { font-size: 20px; line-height: 1.45; letter-spacing: -0.03em; color: var(--color-muted); } /* 145% per Figma */
+.sub { font-size: 18px; line-height: 1.45; letter-spacing: -0.03em; color: var(--color-muted); } /* 18px / 145%: website QA + Figma */
 
 .media {
   position: relative; isolation: isolate; overflow: hidden;
@@ -26,7 +26,7 @@
 @media (max-width: 900px) {
   .split { grid-template-columns: 1fr; min-height: 0; }
   .copy { padding: 80px 20px 48px; gap: 48px; }
-  .title { font-size: 34px; }
+  .title { font-size: 30px; }
   .sub { font-size: 16px; }
   .media { min-height: 402px; padding: 56px 0; }
   .reverse .media { order: 0; }
