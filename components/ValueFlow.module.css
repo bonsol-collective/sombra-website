@@ -31,22 +31,26 @@
 /* Mobile (website QA): heading, step bars and step text are real, unscaled text; the 390×860 artboard
    is cropped to the diagram (x14–376 / y252–836) and scaled to the width, or to the height left on short screens. */
 .mHead, .mobileWrap { display: none; }
-.bars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
+.bars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
 .stepText { display: grid; }
 .mHead .stepText :global(.st) { grid-area: 1 / 1; position: static; width: auto; }
 .mHead .stepText :global(.st .t) { font-size: 20px; }
-.mobile { --k: 1; position: relative; overflow: hidden; aspect-ratio: 362 / 584; width: min(100cqw, 100cqh * 362 / 584); }
+/* Centred, so a diagram narrower than the screen keeps even side gaps. */
+.mobile { --k: 1; position: relative; overflow: hidden; aspect-ratio: 362 / 584; width: min(100cqw, 100cqh * 362 / 584); margin-inline: auto; }
 .stageM {
   position: absolute; top: 0; left: 0; width: 390px; height: 860px;
   transform-origin: 0 0; transform: scale(var(--k)) translate(-14px, -252px);
 }
 
 @media (max-width: 900px) {
-  .pin { padding: 64px 20px 8px; justify-content: flex-start; } /* 56px nav + a little air */
+  /* 56px nav + a little air. dvh: the pinned screen grows when the browser hides its address bar,
+     so the diagram can fill the width with the heading still on screen. */
+  .pin { height: 100dvh; padding: 64px 20px 8px; justify-content: flex-start; }
   .frame { width: 100%; margin: 0; }
-  .head { margin-bottom: 20px; }
+  .head { margin-bottom: 16px; }
+  .title br { display: none; } /* wraps to 2 lines instead of 3 on 360px phones */
   .steps, .desktop { display: none; }
-  .mHead { display: block; margin-bottom: 16px; }
+  .mHead { display: block; margin-bottom: 12px; }
   .mobileWrap { display: block; flex: 1; min-height: 0; container-type: size; }
 }
 

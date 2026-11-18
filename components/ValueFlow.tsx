@@ -77,7 +77,7 @@ export function ValueFlow() {
       <div className={s.pin}>
         <div className={s.frame}>
           <div className={s.head}>
-            <h2 className={`t-h2 ${s.title}`}>How value moves<br />through the shielded pool.</h2>
+            <h2 className={`t-h2 ${s.title}`}>How value moves <br />through the shielded pool.</h2>
             {/* Same artboard, cropped to the step timeline (both copies share the scroll timeline). */}
             <div ref={steps} className={s.steps} aria-hidden="true">
               <div className={`vf-d ${s.stageSteps}`} dangerouslySetInnerHTML={{ __html: DESKTOP_HTML }} />
