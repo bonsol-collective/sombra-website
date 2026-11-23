@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsButton } from "./CookieSettingsButton";
 import s from "./Footer.module.css";
 
 const COLUMNS = [
@@ -61,6 +62,7 @@ export function Footer() {
               {c.links.map((l) => (
                 <Link key={l.label} href={l.href}>{l.label}</Link>
               ))}
+              {c.title === "Company" && <CookieSettingsButton />}
             </div>
           ))}
         </nav>

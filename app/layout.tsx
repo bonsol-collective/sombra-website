@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
+import { ConsentBanner } from "@/components/ConsentBanner";
+import { googleTagEnabled } from "@/lib/googleTag";
 import "./globals.css";
 
 // APK Galeria (Autograph Type Design) — licensed by Sombra / Bonsol Labs.
@@ -141,6 +143,8 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
+        {/* Google Analytics only after Accept, and only on the production site (VERCEL_ENV at build time). */}
+        <ConsentBanner tagEnabled={googleTagEnabled(process.env.VERCEL_ENV)} />
       </body>
     </html>
   );

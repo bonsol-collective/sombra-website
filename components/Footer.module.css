@@ -38,6 +38,10 @@
 .column { display: flex; flex-direction: column; gap: 12px; }
 .colTitle { color: var(--color-paper); }
 .column a:hover { color: var(--color-paper); }
+/* "Cookie settings" is a button (it opens the banner) that looks like the links. */
+.column button { text-align: left; }
+.column button:hover { color: var(--color-paper); }
+.column button:focus-visible { outline: 2px solid var(--color-route); outline-offset: 2px; }
 
 .wordmark { width: calc(100% - 64px); max-width: 1376px; height: auto; display: block; opacity: 0.05; }
 
