@@ -5,12 +5,12 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy — Sombra",
   description:
-    "How Sombra handles user data. We don't collect personal data, optional analytics and crash reporting can be turned off in Settings, and your private keys never leave your device.",
+    "How Sombra handles user data. The Wallet collects no personal data, its optional analytics and crash reporting can be turned off in Settings, and your private keys never leave your device. This site uses Google Analytics only if you accept.",
   alternates: { canonical: "/privacy" },
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "June 29, 2026";
+const LAST_UPDATED = "November 24, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             <h2>Summary</h2>
             <p>
               Sombra is a self-custody, post-quantum privacy wallet for Solana.
-              We don&rsquo;t collect personal data, and your private keys never
+              The Wallet collects no personal data, and your private keys never
               leave your device. The Wallet does include optional, anonymous
               analytics and crash reporting that you can switch off at any time
               in Settings (see Section 5). Below is the full breakdown of what
@@ -39,7 +39,9 @@ export default function PrivacyPage() {
               temporarily read your decrypted transaction inputs (amounts, token
               types, and destinations) while a proof is being generated. See
               Section 4 for detail, and switch to Local prover mode if you
-              require zero trust.
+              require zero trust. This website (sombra.tech) is separate: it
+              uses Google Analytics only if you accept in the cookie banner, and
+              the demo form collects your contact details (see Section 8).
             </p>
           </section>
 
@@ -348,10 +350,31 @@ export default function PrivacyPage() {
               The marketing site uses Vercel hosting and Vercel Analytics for
               aggregate traffic measurement (page views, referrers,
               user-agent). Vercel Analytics is cookieless and does not build a
-              cross-site profile of you. The waitlist form, when used, sends
-              your email address to Formspree, which acts as a processor on
-              our behalf for the sole purpose of contacting you about beta
-              access. You can ask us to delete it at any time.
+              cross-site profile of you.
+            </p>
+            <p>
+              <strong>Google Analytics, only if you accept.</strong> On your
+              first visit a banner asks you. Until you press Accept, the site
+              loads nothing from Google for analytics; if you press Reject, it
+              never does. If you accept, Google Analytics sets the{" "}
+              <code>_ga</code> cookies (they last up to 2 years) and Google
+              receives your IP address, browser details and the pages you visit,
+              to measure how people use the site. Google processes this data on
+              our behalf. We do not use it for advertising: ad storage, ad
+              personalization and Google signals are off. Your choice is stored
+              in your browser for 6 months. You can change it at any time with
+              &ldquo;Cookie settings&rdquo; at the bottom of each page; a
+              Reject deletes the Google Analytics cookies. A browser or
+              extension that blocks trackers also stops it.
+            </p>
+            <p>
+              <strong>Demo requests.</strong> The &ldquo;Book a demo&rdquo; form
+              sends your first and last name, job title, work email, company and
+              message to a Google Sheet that Bonsol Labs controls, so that we
+              can answer you. When the form shows a reCAPTCHA check, Google
+              reCAPTCHA receives data about your browser and sets its own
+              cookie, to stop spam. You can ask us to delete your request at any
+              time.
             </p>
           </section>
 
@@ -391,9 +414,13 @@ export default function PrivacyPage() {
                 in Settings stops further collection from both streams.
               </li>
               <li>
-                <strong>Waitlist email</strong> — held by Formspree as our
-                processor solely to contact you about beta access, and deleted on
-                request or when the beta program ends.
+                <strong>Demo requests</strong> — kept in our Google Sheet only to
+                answer your request and follow up on it, and deleted on request.
+              </li>
+              <li>
+                <strong>Website analytics</strong> — if you accepted Google
+                Analytics, Google keeps the event data for the retention period
+                set in our Google Analytics account (2 months), then deletes it.
               </li>
             </ul>
           </section>
